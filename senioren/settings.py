@@ -37,15 +37,25 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS_DJANGO = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'user',
+    'django.contrib.staticfiles'
 ]
+
+INSTALLED_APPS_ROOT = [
+    'user',
+    'medicine',
+]
+
+INSTALLED_APPS_3RD_PARTY = [
+    'daterangefilter',
+]
+
+INSTALLED_APPS = INSTALLED_APPS_DJANGO + INSTALLED_APPS_3RD_PARTY + INSTALLED_APPS_ROOT
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
