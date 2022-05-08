@@ -1,0 +1,131 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-08 03:27-0400\n"
+"PO-Revision-Date: 2022-05-08 03:30-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: .\medicine\models.py:6
+msgid "Created at"
+msgstr "Created at"
+
+#: .\medicine\models.py:7
+msgid "Updated at"
+msgstr "Updated at"
+
+#: .\medicine\models.py:8 .\user\models.py:18
+msgid "Active"
+msgstr "Active"
+
+#: .\medicine\models.py:15 .\user\models.py:11
+msgid "Name"
+msgstr "Name"
+
+#: .\medicine\models.py:16
+msgid "Description"
+msgstr "Description"
+
+#: .\medicine\models.py:17
+msgid "Batch"
+msgstr "Batch"
+
+#: .\medicine\models.py:18
+msgid "Expiration date"
+msgstr "Expiration date"
+
+#: .\medicine\models.py:19
+msgid "Stock quantity"
+msgstr "Stock quantity"
+
+#: .\medicine\models.py:22
+msgid "Medicine"
+msgstr "Medicine"
+
+#: .\medicine\models.py:23
+msgid "Medicines"
+msgstr "Medicines"
+
+#: .\senioren\settings.py:130
+msgid "Portuguese"
+msgstr "Portuguese"
+
+#: .\senioren\settings.py:131
+msgid "English"
+msgstr "English"
+
+#: .\user\admin.py:41 .\user\forms\user_form.py:8
+msgid "Password"
+msgstr "Password"
+
+#: .\user\admin.py:43
+msgid ""
+"Raw passwords are not stored, so there is no way to see this user’s "
+"password, but you can change the password using <a href=\"{}\">this form</a>."
+msgstr ""
+"Raw passwords are not stored, so there is no way to see this user’s "
+"password, but you can change the password using this form."
+
+#: .\user\admin.py:68
+msgid "Personal info"
+msgstr "Personal info"
+
+#: .\user\admin.py:69
+msgid "Permissions"
+msgstr "Permissions"
+
+#: .\user\admin.py:72
+msgid "Important dates"
+msgstr "Important dates"
+
+#: .\user\forms\user_form.py:9
+msgid "Password Confirmation"
+msgstr "Password Confirmation"
+
+#: .\user\forms\user_form.py:15
+msgid "Password and Password Confirmation do not match!"
+msgstr "Password and Password Confirmation do not match!"
+
+#: .\user\models.py:12
+msgid "Email"
+msgstr "Email"
+
+#: .\user\models.py:14
+msgid "Staff status"
+msgstr "Staff status"
+
+#: .\user\models.py:15
+msgid "Designates whether the user can log into this admin site."
+msgstr "Designates whether the user can log into this admin site."
+
+#: .\user\models.py:21
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+
+#: .\user\models.py:25
+msgid "Date joined"
+msgstr "Date joined"
+
+#: .\user\models.py:36
+msgid "User"
+msgstr "User"
+
+#: .\user\models.py:37
+msgid "Users"
+msgstr "Users"
