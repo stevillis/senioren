@@ -2,7 +2,8 @@ from daterangefilter.filters import DateRangeFilter
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
-from medicine.models import MedicalEvaluation, Medicine, Patient, NursingProfessional
+from medicine.models import (MedicalEvaluation, Medication, Medicine,
+                             NursingProfessional, Patient)
 
 BASE_FIELDS = ['is_active', ]
 READ_ONLY_BASE_FIELDS = ['created_at', 'updated_at', ]
@@ -61,3 +62,13 @@ class NursingProfessionalAdmin(admin.ModelAdmin):
     list_display = ('name', 'coren',)
     # list_filter = [] # TODO: decide wich fields can be used here, if necessary
     search_fields = ('name', 'coren',)
+
+
+@admin.register(Medication)
+class MedicationAdmin(admin.ModelAdmin):
+    fields = ['schedule', 'observation', ] + BASE_FIELDS
+    list_display = ('schedule', 'observation',)
+    list_filter = [
+        ('schedule', DateRangeFilter)
+    ]
+    search_fields = ('observation',)
