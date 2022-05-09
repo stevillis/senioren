@@ -101,3 +101,15 @@ class NursingProfessional(BaseModel):
 
     def __str__(self):
         return self.name
+
+
+class Medication(BaseModel):
+    schedule = models.DateTimeField(_('Schedule'), null=False, blank=False, default=timezone.now)
+    observation = models.CharField(_('Observation'), max_length=200, null=False, blank=False)
+
+    class Meta:
+        verbose_name = _('Medication')
+        verbose_name_plural = _('Medications')
+
+    def __str__(self):
+        return str(self.schedule)
