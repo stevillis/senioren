@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-09 00:40-0400\n"
-"PO-Revision-Date: 2022-05-09 00:41-0400\n"
+"POT-Creation-Date: 2022-05-09 02:21-0400\n"
+"PO-Revision-Date: 2022-05-09 02:23-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -30,7 +30,7 @@ msgstr "Atualizado em"
 msgid "Active"
 msgstr "Ativo"
 
-#: .\medicine\models.py:16 .\user\models.py:11
+#: .\medicine\models.py:16 .\medicine\models.py:69 .\user\models.py:11
 msgid "Name"
 msgstr "Nome"
 
@@ -70,7 +70,7 @@ msgstr "Pressão"
 msgid "Glucose"
 msgstr "Glicemia"
 
-#: .\medicine\models.py:35
+#: .\medicine\models.py:35 .\medicine\models.py:79
 msgid "Observation"
 msgstr "Observação"
 
@@ -81,6 +81,74 @@ msgstr "Avaliação Médica"
 #: .\medicine\models.py:39
 msgid "Medical Evaluations"
 msgstr "Avaliações Médicas"
+
+#: .\medicine\models.py:47
+msgid "Married"
+msgstr "Casado(a)"
+
+#: .\medicine\models.py:48
+msgid "Widowed"
+msgstr "Viúvo(a)"
+
+#: .\medicine\models.py:49
+msgid "Separated"
+msgstr "Separado(a)"
+
+#: .\medicine\models.py:50
+msgid "Divorced"
+msgstr "Divorciado(a)"
+
+#: .\medicine\models.py:51
+msgid "Single"
+msgstr "Solteiro(a)"
+
+#: .\medicine\models.py:60
+msgid "Male"
+msgstr "Masculino"
+
+#: .\medicine\models.py:61
+msgid "Female"
+msgstr "Feminino"
+
+#: .\medicine\models.py:70
+msgid "Social Name"
+msgstr "Nome Social"
+
+#: .\medicine\models.py:71
+msgid "CPF"
+msgstr "CPF"
+
+#: .\medicine\models.py:72
+msgid "RG"
+msgstr "RG"
+
+#: .\medicine\models.py:73
+msgid "Birth Date"
+msgstr "Data de Nascimento"
+
+#: .\medicine\models.py:74
+msgid "Marital Status"
+msgstr "Estado Civil"
+
+#: .\medicine\models.py:76
+msgid "Place of Birth"
+msgstr "Naturalidade"
+
+#: .\medicine\models.py:77
+msgid "Gender"
+msgstr "Gênero"
+
+#: .\medicine\models.py:78
+msgid "Phone"
+msgstr "Telefone"
+
+#: .\medicine\models.py:82
+msgid "Patient"
+msgstr "Paciente"
+
+#: .\medicine\models.py:83
+msgid "Patients"
+msgstr "Pacientes"
 
 #: .\senioren\settings.py:130
 msgid "Portuguese"
