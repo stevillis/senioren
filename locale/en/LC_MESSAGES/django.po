@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-09 02:56-0400\n"
-"PO-Revision-Date: 2022-05-09 02:24-0400\n"
+"POT-Creation-Date: 2022-05-09 11:57-0400\n"
+"PO-Revision-Date: 2022-05-09 11:58-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -38,7 +38,8 @@ msgstr "Updated at"
 msgid "Active"
 msgstr "Active"
 
-#: .\medicine\models.py:16 .\medicine\models.py:54 .\user\models.py:11
+#: .\medicine\models.py:16 .\medicine\models.py:54 .\medicine\models.py:94
+#: .\user\models.py:11
 msgid "Name"
 msgstr "Name"
 
@@ -149,6 +150,18 @@ msgstr "Medical Evaluation"
 #: .\medicine\models.py:86
 msgid "Medical Evaluations"
 msgstr "Medical Evaluations"
+
+#: .\medicine\models.py:95
+msgid "COREN"
+msgstr "COREN"
+
+#: .\medicine\models.py:98
+msgid "Nursing Professional"
+msgstr "Nursing Professional"
+
+#: .\medicine\models.py:99
+msgid "Nursing Professionals"
+msgstr "Nursing Professionals"
 
 #: .\senioren\settings.py:130
 msgid "Portuguese"

@@ -88,3 +88,16 @@ class MedicalEvaluation(BaseModel):
 
     def __str__(self):
         return str(self.schedule)
+
+
+class NursingProfessional(BaseModel):
+    name = models.CharField(_('Name'), max_length=80, null=False, blank=False)
+    coren = models.CharField(_('COREN'), max_length=20, null=False, blank=False)
+
+    class Meta:
+        verbose_name = _('Nursing Professional')
+        verbose_name_plural = _('Nursing Professionals')
+        ordering = ('name',)
+
+    def __str__(self):
+        return self.name

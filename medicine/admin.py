@@ -2,7 +2,7 @@ from daterangefilter.filters import DateRangeFilter
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
-from medicine.models import MedicalEvaluation, Medicine, Patient
+from medicine.models import MedicalEvaluation, Medicine, Patient, NursingProfessional
 
 BASE_FIELDS = ['is_active', ]
 READ_ONLY_BASE_FIELDS = ['created_at', 'updated_at', ]
@@ -53,3 +53,11 @@ class PatientAdmin(admin.ModelAdmin):
         if obj.gender == '':  # set default value for unselected gender
             obj.gender = -1
         super().save_model(request, obj, form, change)
+
+
+@admin.register(NursingProfessional)
+class NursingProfessionalAdmin(admin.ModelAdmin):
+    fields = ['name', 'coren', ] + BASE_FIELDS
+    list_display = ('name', 'coren',)
+    # list_filter = [] # TODO: decide wich fields can be used here, if necessary
+    search_fields = ('name', 'coren',)
