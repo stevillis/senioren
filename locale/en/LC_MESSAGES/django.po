@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-09 11:57-0400\n"
-"PO-Revision-Date: 2022-05-09 11:58-0400\n"
+"POT-Creation-Date: 2022-05-09 12:15-0400\n"
+"PO-Revision-Date: 2022-05-09 12:15-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: .\medicine\admin.py:31 .\medicine\models.py:67
+#: .\medicine\admin.py:32 .\medicine\models.py:67
 msgid "Patient"
 msgstr "Patient"
 
-#: .\medicine\admin.py:35 .\medicine\models.py:56
+#: .\medicine\admin.py:36 .\medicine\models.py:56
 msgid "CPF"
 msgstr "CPF"
 
@@ -123,7 +123,7 @@ msgstr "Gender"
 msgid "Phone"
 msgstr "Phone"
 
-#: .\medicine\models.py:64 .\medicine\models.py:79
+#: .\medicine\models.py:64 .\medicine\models.py:79 .\medicine\models.py:108
 msgid "Observation"
 msgstr "Observation"
 
@@ -131,7 +131,7 @@ msgstr "Observation"
 msgid "Patients"
 msgstr "Patients"
 
-#: .\medicine\models.py:76
+#: .\medicine\models.py:76 .\medicine\models.py:107
 msgid "Schedule"
 msgstr "Schedule"
 
@@ -162,6 +162,14 @@ msgstr "Nursing Professional"
 #: .\medicine\models.py:99
 msgid "Nursing Professionals"
 msgstr "Nursing Professionals"
+
+#: .\medicine\models.py:111
+msgid "Medication"
+msgstr "Medication"
+
+#: .\medicine\models.py:112
+msgid "Medications"
+msgstr "Medications"
 
 #: .\senioren\settings.py:130
 msgid "Portuguese"
