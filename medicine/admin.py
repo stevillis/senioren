@@ -1,5 +1,6 @@
 from daterangefilter.filters import DateRangeFilter
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
 
 from medicine.models import MedicalEvaluation, Medicine, Patient
 
@@ -20,16 +21,24 @@ class MedicineAdmin(admin.ModelAdmin):
 
 @admin.register(MedicalEvaluation)
 class MedicalEvaluationAdmin(admin.ModelAdmin):
-    fields = ['schedule', 'heart_pressure', 'glucose', 'observation', ] + BASE_FIELDS
-    list_display = ('schedule', 'heart_pressure', 'glucose', 'observation',)
+    fields = ['patient', 'schedule', 'heart_pressure', 'glucose', 'observation', ] + BASE_FIELDS
+    list_display = ('get_patient_name', 'schedule', 'heart_pressure', 'glucose', 'observation',)
     list_filter = [
         ('schedule', DateRangeFilter)
     ]
-    # search_fields = [] # TODO: define searchable fields
+    search_fields = ('patient__name', 'patient__cpf',)
+
+    @admin.display(description=_('Patient'), ordering='patient__name')
+    def get_patient_name(self, obj):
+        return obj.patient.name
+
+    @admin.display(description=_('CPF'), ordering='patient__cpf')
+    def get_patient_cpf(self, obj):
+        return obj.patient.cpf
 
 
 @admin.register(Patient)
-class MedicineAdmin(admin.ModelAdmin):
+class PatientAdmin(admin.ModelAdmin):
     fields = ['name', 'social_name', 'cpf', 'rg', 'birth_date', 'marital_status', 'place_of_birth', 'gender', 'phone',
               'observation'] + BASE_FIELDS
     list_display = ('name', 'cpf', 'gender', 'marital_status', 'birth_date', 'phone',)
