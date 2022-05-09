@@ -1,7 +1,7 @@
 from daterangefilter.filters import DateRangeFilter
 from django.contrib import admin
 
-from medicine.models import Medicine
+from medicine.models import Medicine, MedicalEvaluation
 
 BASE_FIELDS = ['is_active', ]
 READ_ONLY_BASE_FIELDS = ['created_at', 'updated_at', ]
@@ -16,3 +16,13 @@ class MedicineAdmin(admin.ModelAdmin):
         ('expiration_date', DateRangeFilter)
     ]
     search_fields = ('name', 'description',)
+
+
+@admin.register(MedicalEvaluation)
+class MedicalEvaluationAdmin(admin.ModelAdmin):
+    fields = ['schedule', 'heart_pressure', 'glucose', 'observation', ] + BASE_FIELDS
+    list_display = ('schedule', 'heart_pressure', 'glucose', 'observation',)
+    list_filter = [
+        ('schedule', DateRangeFilter)
+    ]
+    # search_fields = [] # TODO: define searchable fields
