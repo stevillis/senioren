@@ -66,13 +66,17 @@ class NursingProfessionalAdmin(admin.ModelAdmin):
 
 @admin.register(Medication)
 class MedicationAdmin(admin.ModelAdmin):
-    fields = ['schedule', 'medicine', 'observation', ] + BASE_FIELDS
-    list_display = ('schedule', 'observation',)
+    fields = ['schedule', 'patient', 'medicine', 'observation', ] + BASE_FIELDS
+    list_display = ('get_patient_name', 'schedule', 'observation',)
     list_filter = [
         ('schedule', DateRangeFilter)
     ]
-    search_fields = ('medicine__name', 'observation',)
+    search_fields = ('patient__name', 'medicine__name', 'observation',)
 
     @admin.display(description=_('Medicine'), ordering='medicine__name')
     def get_medicine_name(self, obj):
         return obj.medicine.name
+
+    @admin.display(description=_('Patient'), ordering='patient__name')
+    def get_patient_name(self, obj):
+        return obj.patient.name

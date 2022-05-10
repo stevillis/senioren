@@ -108,6 +108,7 @@ class Medication(BaseModel):
     observation = models.CharField(_('Observation'), max_length=200, null=False, blank=True)
 
     medicine = models.ManyToManyField(Medicine)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _('Medication')
