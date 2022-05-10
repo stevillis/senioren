@@ -10,6 +10,7 @@ READ_ONLY_BASE_FIELDS = ['created_at', 'updated_at', ]
 
 
 def custom_titled_filter(title):
+    """Custom title for Django Admin filter"""
     class Wrapper(admin.FieldListFilter):
         def __new__(cls, *args, **kwargs):
             instance = admin.FieldListFilter.create(*args, **kwargs)
@@ -19,80 +20,198 @@ def custom_titled_filter(title):
     return Wrapper
 
 
+def set_created_by(request, obj):
+    """Set request user to created_by field"""
+    obj.created_by = request.user
+    return obj
+
+
+def set_updated_by(request, obj):
+    """Set request user to updated_by field"""
+    obj.updated_by = request.user
+    return obj
+
+
 @admin.register(Medicine)
 class MedicineAdmin(admin.ModelAdmin):
-    fields = ['name', 'description', 'batch', 'expiration_date', 'stock_qty', ] + BASE_FIELDS
-    list_display = ('name', 'description', 'batch', 'expiration_date', 'stock_qty',)
+    """Medicine Model for Django Admin"""
+    fields = [
+        'name',
+        'description',
+        'batch',
+        'expiration_date',
+        'stock_qty',
+    ] + BASE_FIELDS
+    list_display = (
+        'name',
+        'description',
+        'batch',
+        'expiration_date',
+        'stock_qty',
+    )
     list_filter = [
         'batch',
-        ('expiration_date', DateRangeFilter)
+        ('expiration_date', DateRangeFilter),
     ]
     search_fields = ('name', 'description',)
+
+    def save_model(self, request, obj, form, change):
+        obj = set_created_by(request, obj)
+        if change:
+            obj = set_updated_by(request, obj)
+        super().save_model(request, obj, form, change)
 
 
 @admin.register(MedicalEvaluation)
 class MedicalEvaluationAdmin(admin.ModelAdmin):
-    fields = ['nursing_professional', 'patient', 'schedule', 'heart_pressure', 'glucose', 'observation', ] + BASE_FIELDS
-    list_display = ('get_patient_name', 'schedule', 'heart_pressure', 'glucose', 'observation',)
+    """MedicalEvaluation Model for Django Admin"""
+    fields = [
+        'nursing_professional',
+        'patient',
+        'schedule',
+        'heart_pressure',
+        'glucose',
+        'observation', ] + BASE_FIELDS
+    list_display = (
+        'get_patient_name',
+        'schedule',
+        'heart_pressure',
+        'glucose',
+        'observation',
+    )
     list_filter = [
-        ('nursing_professional__name', custom_titled_filter(_('Nursing Professional'))),
-        ('schedule', DateRangeFilter)
+        (
+            'nursing_professional__name',
+            custom_titled_filter(_('Nursing Professional'))
+        ),
+        ('schedule', DateRangeFilter),
     ]
-    search_fields = ('nursing_professional__name', 'patient__name', 'patient__cpf',)
+    search_fields = (
+        'nursing_professional__name',
+        'patient__name',
+        'patient__cpf',
+    )
 
     @admin.display(description=_('Patient'), ordering='patient__name')
     def get_patient_name(self, obj):
+        """Get Patient name for list_display"""
         return obj.patient.name
 
     @admin.display(description=_('CPF'), ordering='patient__cpf')
     def get_patient_cpf(self, obj):
+        """Get Patient cpf for list_display"""
         return obj.patient.cpf
 
-    @admin.display(description=_('Nursing Professional'), ordering='nursing_professional__name')
+    @admin.display(description=_('Nursing Professional'),
+                   ordering='nursing_professional__name')
     def get_nursing_professional_name(self, obj):
+        """Get Nursing Professional name for list_display"""
         return obj.nursing_professional.name
+
+    def save_model(self, request, obj, form, change):
+        obj = set_created_by(request, obj)
+        if change:
+            obj = set_updated_by(request, obj)
+        super().save_model(request, obj, form, change)
 
 
 @admin.register(Patient)
 class PatientAdmin(admin.ModelAdmin):
-    fields = ['name', 'social_name', 'cpf', 'rg', 'birth_date', 'marital_status', 'place_of_birth', 'gender', 'phone',
-              'observation'] + BASE_FIELDS
-    list_display = ('name', 'cpf', 'gender', 'marital_status', 'birth_date', 'phone',)
+    """Patient Model for Django Admin"""
+    fields = [
+        'name',
+        'social_name',
+        'cpf',
+        'rg',
+        'birth_date',
+        'marital_status',
+        'place_of_birth',
+        'gender',
+        'phone',
+        'observation'
+    ] + BASE_FIELDS
+    list_display = (
+        'name',
+        'cpf',
+        'gender',
+        'marital_status',
+        'birth_date',
+        'phone',
+    )
     list_filter = [
         'gender',
         'marital_status',
-        ('birth_date', DateRangeFilter)
+        ('birth_date', DateRangeFilter),
     ]
     search_fields = ('name', 'cpf', 'rg')
 
     def save_model(self, request, obj, form, change):
         if obj.gender == '':  # set default value for unselected gender
             obj.gender = -1
+        obj = set_created_by(request, obj)
+        if change:
+            obj = set_updated_by(request, obj)
         super().save_model(request, obj, form, change)
 
 
 @admin.register(NursingProfessional)
 class NursingProfessionalAdmin(admin.ModelAdmin):
+    """Nursing Professional Model for Django Admin"""
     fields = ['name', 'coren', ] + BASE_FIELDS
     list_display = ('name', 'coren',)
     # list_filter = [] # TODO: decide wich fields can be used here, if necessary
     search_fields = ('name', 'coren',)
 
+    def save_model(self, request, obj, form, change):
+        obj = set_created_by(request, obj)
+        if change:
+            obj = set_updated_by(request, obj)
+        super().save_model(request, obj, form, change)
+
 
 @admin.register(Medication)
 class MedicationAdmin(admin.ModelAdmin):
-    fields = ['nursing_professional', 'patient', 'medicine', 'schedule', 'observation', ] + BASE_FIELDS
-    list_display = ('get_patient_name', 'get_nursing_professional_name', 'schedule', 'observation',)
+    """Medication Model for Django Admin"""
+    fields = [
+        'nursing_professional',
+        'patient',
+        'medicine',
+        'schedule',
+        'observation',
+    ] + BASE_FIELDS
+    list_display = (
+        'get_patient_name',
+        'get_nursing_professional_name',
+        'schedule',
+        'observation',
+    )
     list_filter = [
-        ('nursing_professional__name', custom_titled_filter(_('Nursing Professional'))),
+        (
+            'nursing_professional__name',
+            custom_titled_filter(_('Nursing Professional'))
+        ),
         ('schedule', DateRangeFilter)
     ]
-    search_fields = ('nursing_professional__name', 'patient__name', 'medicine__name', 'observation',)
+    search_fields = (
+        'nursing_professional__name',
+        'patient__name',
+        'medicine__name',
+        'observation',
+    )
 
     @admin.display(description=_('Patient'), ordering='patient__name')
     def get_patient_name(self, obj):
+        """Get Patient name for list_display"""
         return obj.patient.name
 
-    @admin.display(description=_('Nursing Professional'), ordering='nursing_professional__name')
+    @admin.display(description=_('Nursing Professional'),
+                   ordering='nursing_professional__name')
     def get_nursing_professional_name(self, obj):
+        """Get Nursing Professional name for list_display"""
         return obj.nursing_professional.name
+
+    def save_model(self, request, obj, form, change):
+        obj = set_created_by(request, obj)
+        if change:
+            obj = set_updated_by(request, obj)
+        super().save_model(request, obj, form, change)
