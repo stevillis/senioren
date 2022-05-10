@@ -105,7 +105,9 @@ class NursingProfessional(BaseModel):
 
 class Medication(BaseModel):
     schedule = models.DateTimeField(_('Schedule'), null=False, blank=False, default=timezone.now)
-    observation = models.CharField(_('Observation'), max_length=200, null=False, blank=False)
+    observation = models.CharField(_('Observation'), max_length=200, null=False, blank=True)
+
+    medicine = models.ManyToManyField(Medicine)
 
     class Meta:
         verbose_name = _('Medication')
