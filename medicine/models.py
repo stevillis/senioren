@@ -1,34 +1,89 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from user.models import CustomUser
 
 
 class BaseModel(models.Model):
-    created_at = models.DateTimeField(_('Created at'), auto_now_add=True)
-    updated_at = models.DateTimeField(_('Updated at'), auto_now=True)
-    is_active = models.BooleanField(_('Active'), default=True)
+    """Define common fields used by other Models by inheritance"""
+    created_at = models.DateTimeField(
+        verbose_name=_('Created at'),
+        auto_now_add=True
+    )
+    updated_at = models.DateTimeField(
+        verbose_name=_('Updated at'),
+        auto_now=True
+    )
+    created_by = models.ForeignKey(
+        CustomUser,
+        verbose_name=_('Created by'),
+        related_name='%(app_label)s_%(class)s_related_created_by',
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE
+    )
+    updated_by = models.ForeignKey(
+        CustomUser,
+        verbose_name=_('Updated by'),
+        related_name='%(app_label)s_%(class)s_related_updated_by',
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE
+    )
+    is_active = models.BooleanField(
+        verbose_name=_('Active'),
+        default=True
+    )
 
     class Meta:
+        """Metadata options"""
         abstract = True
 
 
 class Medicine(BaseModel):
-    name = models.CharField(_('Name'), max_length=80, null=False, blank=False)
-    description = models.CharField(_('Description'), max_length=100, null=False, blank=True)
-    batch = models.CharField(_('Batch'), max_length=20, null=False, blank=True)
-    expiration_date = models.DateField(_('Expiration date'), null=False, blank=False)
-    stock_qty = models.IntegerField(_('Stock quantity'), null=False, blank=False, default=0)
+    """Medicine Model"""
+    name = models.CharField(
+        verbose_name=_('Name'),
+        max_length=80,
+        null=False,
+        blank=False
+    )
+    description = models.CharField(
+        verbose_name=_('Description'),
+        max_length=100,
+        null=False,
+        blank=True
+    )
+    batch = models.CharField(
+        verbose_name=_('Batch'),
+        max_length=20,
+        null=False,
+        blank=True
+    )
+    expiration_date = models.DateField(
+        verbose_name=_('Expiration date'),
+        null=False,
+        blank=False
+    )
+    stock_qty = models.IntegerField(
+        verbose_name=_('Stock quantity'),
+        null=False,
+        blank=False,
+        default=0
+    )
 
     class Meta:
+        """Metadata options"""
         verbose_name = _('Medicine')
         verbose_name_plural = _('Medicines')
         ordering = ('name',)
 
-    def __str__(self):
+    def __str__(self):  # pylint: disable=invalid-str-returned
         return self.name
 
 
 class Patient(BaseModel):
+    """Patient Model"""
     MARITAL_STATUS_MARRIED_CHOICE = (1, _('Married'))
     MARITAL_STATUS_WIDOWED_CHOICE = (2, _('Widowed'))
     MARITAL_STATUS_SEPARATED_CHOICE = (3, _('Separated'))
@@ -51,52 +106,141 @@ class Patient(BaseModel):
         GENDER_OTHER_CHOICE,
     )
 
-    name = models.CharField(_('Name'), max_length=80, null=False, blank=False)
-    social_name = models.CharField(_('Social Name'), max_length=80, null=False, blank=True)
-    cpf = models.CharField(_('CPF'), max_length=11, null=False, blank=False)
-    rg = models.CharField(_('RG'), max_length=20, null=False, blank=False)
-    birth_date = models.DateField(_('Birth Date'), null=False, blank=False)
-    marital_status = models.IntegerField(_('Marital Status'), choices=MARITAL_STATUS_CHOICES, null=False,
-                                         blank=False)
-    place_of_birth = models.CharField(_('Place of Birth'), max_length=80, null=False, blank=True)
-    gender = models.IntegerField(_('Gender'), choices=GENDER_CHOICES, null=False, blank=True)
-    phone = models.CharField(_('Phone'), max_length=20, null=False, blank=True)
-    observation = models.CharField(_('Observation'), max_length=200, null=False, blank=True)
+    name = models.CharField(
+        verbose_name=_('Name'),
+        max_length=80,
+        null=False,
+        blank=False
+    )
+    social_name = models.CharField(
+        verbose_name=_('Social Name'),
+        max_length=80,
+        null=False,
+        blank=True
+    )
+    cpf = models.CharField(
+        verbose_name=_('CPF'),
+        max_length=11,
+        null=False,
+        blank=False
+    )
+    rg = models.CharField(
+        verbose_name=_('RG'),
+        max_length=20,
+        null=False,
+        blank=False
+    )
+    birth_date = models.DateField(
+        verbose_name=_('Birth Date'),
+        null=False,
+        blank=False
+    )
+    marital_status = models.IntegerField(
+        verbose_name=_('Marital Status'),
+        choices=MARITAL_STATUS_CHOICES,
+        null=False,
+        blank=False
+    )
+    place_of_birth = models.CharField(
+        verbose_name=_('Place of Birth'),
+        max_length=80,
+        null=False,
+        blank=True
+    )
+    gender = models.IntegerField(
+        verbose_name=_('Gender'),
+        choices=GENDER_CHOICES,
+        null=False,
+        blank=True
+    )
+    phone = models.CharField(
+        verbose_name=_('Phone'),
+        max_length=20,
+        null=False,
+        blank=True
+    )
+    observation = models.CharField(
+        verbose_name=_('Observation'),
+        max_length=200,
+        null=False,
+        blank=True
+    )
 
     class Meta:
+        """Metadata options"""
         verbose_name = _('Patient')
         verbose_name_plural = _('Patients')
         ordering = ('name',)
 
-    def __str__(self):
+    def __str__(self):  # pylint: disable=invalid-str-returned
         return self.name
 
 
 class NursingProfessional(BaseModel):
-    name = models.CharField(_('Name'), max_length=80, null=False, blank=False)
-    coren = models.CharField(_('COREN'), max_length=20, null=False, blank=False)
+    """NursingProfessional Model"""
+    name = models.CharField(
+        verbose_name=_('Name'),
+        max_length=80,
+        null=False,
+        blank=False
+    )
+    coren = models.CharField(
+        verbose_name=_('COREN'),
+        max_length=20,
+        null=False,
+        blank=False
+    )
 
     class Meta:
+        """Metadata options"""
         verbose_name = _('Nursing Professional')
         verbose_name_plural = _('Nursing Professionals')
         ordering = ('name',)
 
-    def __str__(self):
+    def __str__(self):  # pylint: disable=invalid-str-returned
         return self.name
 
 
 class MedicalEvaluation(BaseModel):
-    schedule = models.DateTimeField(_('Schedule'), null=False, blank=False, default=timezone.now)
-    heart_pressure = models.CharField(_('Heart pressure'), max_length=20, null=False, blank=False)
-    glucose = models.CharField(_('Glucose'), max_length=20, null=False, blank=False)
-    observation = models.CharField(_('Observation'), max_length=200, null=False, blank=True)
+    """MedicalEvaluation Model"""
+    schedule = models.DateTimeField(
+        verbose_name=_('Schedule'),
+        null=False,
+        blank=False,
+        default=timezone.now
+    )
+    heart_pressure = models.CharField(
+        verbose_name=_('Heart pressure'),
+        max_length=20,
+        null=False,
+        blank=False)
+    glucose = models.CharField(
+        verbose_name=_('Glucose'),
+        max_length=20,
+        null=False,
+        blank=False)
+    observation = models.CharField(
+        verbose_name=_('Observation'),
+        max_length=200,
+        null=False,
+        blank=True
+    )
 
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='medical_evaluations', null=False,
-                                blank=False)
-    nursing_professional = models.ForeignKey(verbose_name=_('Nursing Professional'), to=NursingProfessional,
-                                             on_delete=models.CASCADE)
+    patient = models.ForeignKey(
+        Patient,
+        on_delete=models.CASCADE,
+        related_name='medical_evaluations',
+        null=False,
+        blank=False
+    )
+    nursing_professional = models.ForeignKey(
+        verbose_name=_('Nursing Professional'),
+        to=NursingProfessional,
+        on_delete=models.CASCADE
+    )
 
     class Meta:
+        """Metadata options"""
         verbose_name = _('Medical Evaluation')
         verbose_name_plural = _('Medical Evaluations')
         ordering = ('-schedule',)
@@ -106,15 +250,37 @@ class MedicalEvaluation(BaseModel):
 
 
 class Medication(BaseModel):
-    schedule = models.DateTimeField(_('Schedule'), null=False, blank=False, default=timezone.now)
-    observation = models.CharField(_('Observation'), max_length=200, null=False, blank=True)
+    """Metadata options"""
+    schedule = models.DateTimeField(
+        verbose_name=_('Schedule'),
+        null=False,
+        blank=False,
+        default=timezone.now
+    )
+    observation = models.CharField(
+        verbose_name=_('Observation'),
+        max_length=200,
+        null=False,
+        blank=True
+    )
 
-    medicine = models.ManyToManyField(verbose_name=_('Medicines'), to=Medicine)
-    patient = models.ForeignKey(verbose_name=_('Patient'), to=Patient, on_delete=models.CASCADE)
-    nursing_professional = models.ForeignKey(verbose_name=_('Nursing Professional'), to=NursingProfessional,
-                                             on_delete=models.CASCADE)
+    medicine = models.ManyToManyField(
+        Medicine,
+        verbose_name=_('Medicines')
+    )
+    patient = models.ForeignKey(
+        Patient,
+        verbose_name=_('Patient'),
+        on_delete=models.CASCADE
+    )
+    nursing_professional = models.ForeignKey(
+        NursingProfessional,
+        verbose_name=_('Nursing Professional'),
+        on_delete=models.CASCADE
+    )
 
     class Meta:
+        """Metadata options"""
         verbose_name = _('Medication')
         verbose_name_plural = _('Medications')
 
