@@ -9,6 +9,16 @@ BASE_FIELDS = ['is_active', ]
 READ_ONLY_BASE_FIELDS = ['created_at', 'updated_at', ]
 
 
+def custom_titled_filter(title):
+    class Wrapper(admin.FieldListFilter):
+        def __new__(cls, *args, **kwargs):
+            instance = admin.FieldListFilter.create(*args, **kwargs)
+            instance.title = title
+            return instance
+
+    return Wrapper
+
+
 @admin.register(Medicine)
 class MedicineAdmin(admin.ModelAdmin):
     fields = ['name', 'description', 'batch', 'expiration_date', 'stock_qty', ] + BASE_FIELDS
@@ -22,12 +32,13 @@ class MedicineAdmin(admin.ModelAdmin):
 
 @admin.register(MedicalEvaluation)
 class MedicalEvaluationAdmin(admin.ModelAdmin):
-    fields = ['patient', 'schedule', 'heart_pressure', 'glucose', 'observation', ] + BASE_FIELDS
+    fields = ['nursing_professional', 'patient', 'schedule', 'heart_pressure', 'glucose', 'observation', ] + BASE_FIELDS
     list_display = ('get_patient_name', 'schedule', 'heart_pressure', 'glucose', 'observation',)
     list_filter = [
+        ('nursing_professional__name', custom_titled_filter(_('Nursing Professional'))),
         ('schedule', DateRangeFilter)
     ]
-    search_fields = ('patient__name', 'patient__cpf',)
+    search_fields = ('nursing_professional__name', 'patient__name', 'patient__cpf',)
 
     @admin.display(description=_('Patient'), ordering='patient__name')
     def get_patient_name(self, obj):
@@ -36,6 +47,10 @@ class MedicalEvaluationAdmin(admin.ModelAdmin):
     @admin.display(description=_('CPF'), ordering='patient__cpf')
     def get_patient_cpf(self, obj):
         return obj.patient.cpf
+
+    @admin.display(description=_('Nursing Professional'), ordering='nursing_professional__name')
+    def get_nursing_professional_name(self, obj):
+        return obj.nursing_professional.name
 
 
 @admin.register(Patient)
@@ -66,9 +81,18 @@ class NursingProfessionalAdmin(admin.ModelAdmin):
 
 @admin.register(Medication)
 class MedicationAdmin(admin.ModelAdmin):
-    fields = ['schedule', 'observation', ] + BASE_FIELDS
-    list_display = ('schedule', 'observation',)
+    fields = ['nursing_professional', 'patient', 'medicine', 'schedule', 'observation', ] + BASE_FIELDS
+    list_display = ('get_patient_name', 'get_nursing_professional_name', 'schedule', 'observation',)
     list_filter = [
+        ('nursing_professional__name', custom_titled_filter(_('Nursing Professional'))),
         ('schedule', DateRangeFilter)
     ]
-    search_fields = ('observation',)
+    search_fields = ('nursing_professional__name', 'patient__name', 'medicine__name', 'observation',)
+
+    @admin.display(description=_('Patient'), ordering='patient__name')
+    def get_patient_name(self, obj):
+        return obj.patient.name
+
+    @admin.display(description=_('Nursing Professional'), ordering='nursing_professional__name')
+    def get_nursing_professional_name(self, obj):
+        return obj.nursing_professional.name
