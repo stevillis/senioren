@@ -107,8 +107,10 @@ class Medication(BaseModel):
     schedule = models.DateTimeField(_('Schedule'), null=False, blank=False, default=timezone.now)
     observation = models.CharField(_('Observation'), max_length=200, null=False, blank=True)
 
-    medicine = models.ManyToManyField(Medicine)
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    medicine = models.ManyToManyField(verbose_name=_('Medicines'), to=Medicine)
+    patient = models.ForeignKey(verbose_name=_('Patient'), to=Patient, on_delete=models.CASCADE)
+    nursing_professional = models.ForeignKey(verbose_name=_('Nursing Professional'), to=NursingProfessional,
+                                             on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _('Medication')
