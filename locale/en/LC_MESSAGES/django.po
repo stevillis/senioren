@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-09 12:15-0400\n"
+"POT-Creation-Date: 2022-05-10 01:49-0400\n"
 "PO-Revision-Date: 2022-05-09 12:15-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,11 +18,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: .\medicine\admin.py:32 .\medicine\models.py:67
+#: .\medicine\admin.py:38 .\medicine\admin.py:51 .\medicine\admin.py:87
+#: .\medicine\admin.py:96 .\medicine\models.py:80 .\medicine\models.py:96
+#: .\medicine\models.py:114
+msgid "Nursing Professional"
+msgstr "Nursing Professional"
+
+#: .\medicine\admin.py:43 .\medicine\admin.py:92 .\medicine\models.py:67
+#: .\medicine\models.py:113
 msgid "Patient"
 msgstr "Patient"
 
-#: .\medicine\admin.py:36 .\medicine\models.py:56
+#: .\medicine\admin.py:47 .\medicine\models.py:56
 msgid "CPF"
 msgstr "CPF"
 
@@ -38,7 +45,7 @@ msgstr "Updated at"
 msgid "Active"
 msgstr "Active"
 
-#: .\medicine\models.py:16 .\medicine\models.py:54 .\medicine\models.py:94
+#: .\medicine\models.py:16 .\medicine\models.py:54 .\medicine\models.py:76
 #: .\user\models.py:11
 msgid "Name"
 msgstr "Name"
@@ -63,7 +70,7 @@ msgstr "Stock quantity"
 msgid "Medicine"
 msgstr "Medicine"
 
-#: .\medicine\models.py:24
+#: .\medicine\models.py:24 .\medicine\models.py:112
 msgid "Medicines"
 msgstr "Medicines"
 
@@ -123,7 +130,7 @@ msgstr "Gender"
 msgid "Phone"
 msgstr "Phone"
 
-#: .\medicine\models.py:64 .\medicine\models.py:79 .\medicine\models.py:108
+#: .\medicine\models.py:64 .\medicine\models.py:92 .\medicine\models.py:110
 msgid "Observation"
 msgstr "Observation"
 
@@ -131,43 +138,39 @@ msgstr "Observation"
 msgid "Patients"
 msgstr "Patients"
 
-#: .\medicine\models.py:76 .\medicine\models.py:107
-msgid "Schedule"
-msgstr "Schedule"
-
 #: .\medicine\models.py:77
-msgid "Heart pressure"
-msgstr "Heart pressure"
-
-#: .\medicine\models.py:78
-msgid "Glucose"
-msgstr "Glucose"
-
-#: .\medicine\models.py:85
-msgid "Medical Evaluation"
-msgstr "Medical Evaluation"
-
-#: .\medicine\models.py:86
-msgid "Medical Evaluations"
-msgstr "Medical Evaluations"
-
-#: .\medicine\models.py:95
 msgid "COREN"
 msgstr "COREN"
 
-#: .\medicine\models.py:98
-msgid "Nursing Professional"
-msgstr "Nursing Professional"
-
-#: .\medicine\models.py:99
+#: .\medicine\models.py:81
 msgid "Nursing Professionals"
 msgstr "Nursing Professionals"
 
-#: .\medicine\models.py:111
+#: .\medicine\models.py:89 .\medicine\models.py:109
+msgid "Schedule"
+msgstr "Schedule"
+
+#: .\medicine\models.py:90
+msgid "Heart pressure"
+msgstr "Heart pressure"
+
+#: .\medicine\models.py:91
+msgid "Glucose"
+msgstr "Glucose"
+
+#: .\medicine\models.py:100
+msgid "Medical Evaluation"
+msgstr "Medical Evaluation"
+
+#: .\medicine\models.py:101
+msgid "Medical Evaluations"
+msgstr "Medical Evaluations"
+
+#: .\medicine\models.py:118
 msgid "Medication"
 msgstr "Medication"
 
-#: .\medicine\models.py:112
+#: .\medicine\models.py:119
 msgid "Medications"
 msgstr "Medications"
 
@@ -242,3 +245,8 @@ msgstr "User"
 #: .\user\models.py:37
 msgid "Users"
 msgstr "Users"
+
+#, fuzzy
+#~| msgid "Nursing Professional"
+#~ msgid "NursingProfessional"
+#~ msgstr "Nursing Professional"

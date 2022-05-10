@@ -72,24 +72,6 @@ class Patient(BaseModel):
         return self.name
 
 
-class MedicalEvaluation(BaseModel):
-    schedule = models.DateTimeField(_('Schedule'), null=False, blank=False, default=timezone.now)
-    heart_pressure = models.CharField(_('Heart pressure'), max_length=20, null=False, blank=False)
-    glucose = models.CharField(_('Glucose'), max_length=20, null=False, blank=False)
-    observation = models.CharField(_('Observation'), max_length=200, null=False, blank=True)
-
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='medical_evaluations', null=False,
-                                blank=False)
-
-    class Meta:
-        verbose_name = _('Medical Evaluation')
-        verbose_name_plural = _('Medical Evaluations')
-        ordering = ('-schedule',)
-
-    def __str__(self):
-        return str(self.schedule)
-
-
 class NursingProfessional(BaseModel):
     name = models.CharField(_('Name'), max_length=80, null=False, blank=False)
     coren = models.CharField(_('COREN'), max_length=20, null=False, blank=False)
@@ -103,9 +85,34 @@ class NursingProfessional(BaseModel):
         return self.name
 
 
+class MedicalEvaluation(BaseModel):
+    schedule = models.DateTimeField(_('Schedule'), null=False, blank=False, default=timezone.now)
+    heart_pressure = models.CharField(_('Heart pressure'), max_length=20, null=False, blank=False)
+    glucose = models.CharField(_('Glucose'), max_length=20, null=False, blank=False)
+    observation = models.CharField(_('Observation'), max_length=200, null=False, blank=True)
+
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='medical_evaluations', null=False,
+                                blank=False)
+    nursing_professional = models.ForeignKey(verbose_name=_('Nursing Professional'), to=NursingProfessional,
+                                             on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = _('Medical Evaluation')
+        verbose_name_plural = _('Medical Evaluations')
+        ordering = ('-schedule',)
+
+    def __str__(self):
+        return str(self.schedule)
+
+
 class Medication(BaseModel):
     schedule = models.DateTimeField(_('Schedule'), null=False, blank=False, default=timezone.now)
-    observation = models.CharField(_('Observation'), max_length=200, null=False, blank=False)
+    observation = models.CharField(_('Observation'), max_length=200, null=False, blank=True)
+
+    medicine = models.ManyToManyField(verbose_name=_('Medicines'), to=Medicine)
+    patient = models.ForeignKey(verbose_name=_('Patient'), to=Patient, on_delete=models.CASCADE)
+    nursing_professional = models.ForeignKey(verbose_name=_('Nursing Professional'), to=NursingProfessional,
+                                             on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _('Medication')
