@@ -63,6 +63,7 @@ class MedicineAdmin(admin.ModelAdmin):
         'batch',
         'expiration_date',
         'stock_qty',
+        'is_active',
     )
     list_filter = [
         'batch',
@@ -81,6 +82,19 @@ class MedicineAdmin(admin.ModelAdmin):
             create_medicine_history(obj)
         else:
             create_medicine_history(obj, insert=True)
+
+    def _delete_model(self, request, obj):
+        obj.is_active = False
+        obj.deactivated_by = request.user
+        obj.save()
+        create_medicine_history(obj)
+
+    def delete_queryset(self, request, queryset):
+        for obj in queryset:
+            self._delete_model(request, obj)
+
+    def delete_model(self, request, obj):
+        self._delete_model(request, obj)
 
 
 @admin.register(MedicalEvaluation)
