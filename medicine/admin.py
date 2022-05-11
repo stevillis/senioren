@@ -3,7 +3,9 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
 from medicine.models import (MedicalEvaluation, Medication, Medicine,
-                             NursingProfessional, Patient)
+                             MedicineHistory, NursingProfessional, Patient)
+from medicine.services.history.medicine_history_service import \
+    create_medicine_history
 
 BASE_FIELDS = ['is_active', ]
 READ_ONLY_BASE_FIELDS = ['created_at', 'updated_at', ]
@@ -32,6 +34,19 @@ def set_updated_by(request, obj):
     return obj
 
 
+def remove_delete_actions(actions):
+    if actions.get('delete_selected'):
+        del actions['delete_selected']
+    if actions.get('delete_confirmation'):
+        del actions['delete_confirmation']
+    return actions
+
+
+"""
+----- Models -----
+"""
+
+
 @admin.register(Medicine)
 class MedicineAdmin(admin.ModelAdmin):
     """Medicine Model for Django Admin"""
@@ -51,6 +66,7 @@ class MedicineAdmin(admin.ModelAdmin):
     )
     list_filter = [
         'batch',
+        'is_active',
         ('expiration_date', DateRangeFilter),
     ]
     search_fields = ('name', 'description',)
@@ -60,6 +76,11 @@ class MedicineAdmin(admin.ModelAdmin):
         if change:
             obj = set_updated_by(request, obj)
         super().save_model(request, obj, form, change)
+
+        if change:
+            create_medicine_history(obj)
+        else:
+            create_medicine_history(obj, insert=True)
 
 
 @admin.register(MedicalEvaluation)
@@ -215,3 +236,58 @@ class MedicationAdmin(admin.ModelAdmin):
         if change:
             obj = set_updated_by(request, obj)
         super().save_model(request, obj, form, change)
+
+
+"""
+----- History Models -----
+"""
+
+
+@admin.register(MedicineHistory)
+class MedicineHistoryAdmin(admin.ModelAdmin):
+    """Medicine History Model for Django Admin"""
+    fields = [
+        'name',
+        'description',
+        'batch',
+        'expiration_date',
+        'stock_qty',
+        'created_at',
+        'created_by',
+        'updated_at',
+        'updated_by',
+    ] + BASE_FIELDS
+    list_display = (
+        'name',
+        'description',
+        'batch',
+        'expiration_date',
+        'stock_qty',
+    )
+    list_filter = [
+        'batch',
+        ('expiration_date', DateRangeFilter),
+    ]
+    search_fields = ('name', 'description',)
+
+    def save_model(self, request, obj, form, change):
+        obj = set_created_by(request, obj)
+        if change:
+            obj = set_updated_by(request, obj)
+        super().save_model(request, obj, form, change)
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+    def get_actions(self, request):
+        actions = super(MedicineHistoryAdmin, self).get_actions(request)
+        return remove_delete_actions(actions)
+
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+        return super().change_view(request, object_id, form_url, extra_context=dict(show_delete=False))
