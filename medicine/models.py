@@ -137,7 +137,7 @@ class Medicine(BaseModel):
         """Metadata options"""
         verbose_name = _('Medicine')
         verbose_name_plural = _('Medicines')
-        ordering = ('name',)
+        ordering = ('-is_active', 'name',)
 
     def __str__(self):  # pylint: disable=invalid-str-returned
         return self.name
