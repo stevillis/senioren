@@ -15,5 +15,6 @@ def create_medicine_history(medicine: Medicine, insert: bool = False) -> None:
         updated_at=medicine.updated_at,
         updated_by=medicine.updated_by,
         is_active=medicine.is_active,
+        deactivated_by=medicine.deactivated_by,
         medicine=medicine,
     )
