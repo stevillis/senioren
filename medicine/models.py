@@ -40,6 +40,50 @@ class BaseModel(models.Model):
         abstract = True
 
 
+class HistoryBaseModel(models.Model):
+    """Define common fields used by other History Models by inheritance"""
+    created_at = models.DateTimeField(
+        verbose_name=_('Created at'),
+        null=False,
+        blank=False,
+    )
+    updated_at = models.DateTimeField(
+        verbose_name=_('Updated at'),
+        null=False,
+        blank=False,
+    )
+    created_by = models.ForeignKey(
+        CustomUser,
+        verbose_name=_('Created by'),
+        on_delete=models.CASCADE,
+        related_name='%(app_label)s_%(class)s_related_created_by',
+        null=False,
+        blank=False,
+    )
+    updated_by = models.ForeignKey(
+        CustomUser,
+        verbose_name=_('Updated by'),
+        on_delete=models.CASCADE,
+        related_name='%(app_label)s_%(class)s_related_updated_by',
+        null=False,
+        blank=False,
+    )
+    is_active = models.BooleanField(
+        verbose_name=_('Active'),
+        null=False,
+        blank=False,
+    )
+
+    class Meta:
+        """Metadata options"""
+        abstract = True
+
+
+"""
+----- Models -----
+"""
+
+
 class Medicine(BaseModel):
     """Medicine Model"""
     name = models.CharField(
@@ -286,3 +330,57 @@ class Medication(BaseModel):
 
     def __str__(self):
         return str(self.schedule)
+
+
+"""
+----- History Models -----
+"""
+
+
+class MedicineHistory(HistoryBaseModel):
+    """Medicine Model"""
+    name = models.CharField(
+        verbose_name=_('Name'),
+        max_length=80,
+        null=True,
+        blank=True
+    )
+    description = models.CharField(
+        verbose_name=_('Description'),
+        max_length=100,
+        null=True,
+        blank=True
+    )
+    batch = models.CharField(
+        verbose_name=_('Batch'),
+        max_length=20,
+        null=True,
+        blank=True
+    )
+    expiration_date = models.DateField(
+        verbose_name=_('Expiration date'),
+        null=True,
+        blank=True
+    )
+    stock_qty = models.IntegerField(
+        verbose_name=_('Stock quantity'),
+        null=True,
+        blank=True,
+        default=0
+    )
+
+    medicine = models.ForeignKey(
+        Medicine,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
+    class Meta:
+        """Metadata options"""
+        verbose_name = _('Medicine History')
+        verbose_name_plural = _('Medicine Histories')
+        ordering = ('-id',)
+
+    def __str__(self):  # pylint: disable=invalid-str-returned
+        return self.name
