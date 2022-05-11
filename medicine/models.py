@@ -18,8 +18,8 @@ class BaseModel(models.Model):
         CustomUser,
         verbose_name=_('Created by'),
         related_name='%(app_label)s_%(class)s_related_created_by',
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
         on_delete=models.CASCADE
     )
     updated_by = models.ForeignKey(
@@ -33,6 +33,14 @@ class BaseModel(models.Model):
     is_active = models.BooleanField(
         verbose_name=_('Active'),
         default=True
+    )
+    deactivated_by = models.ForeignKey(
+        CustomUser,
+        verbose_name=_('Deactivated by'),
+        related_name='%(app_label)s_%(class)s_related_deactivated_by',
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE
     )
 
     class Meta:
@@ -49,29 +57,38 @@ class HistoryBaseModel(models.Model):
     )
     updated_at = models.DateTimeField(
         verbose_name=_('Updated at'),
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
     )
     created_by = models.ForeignKey(
         CustomUser,
         verbose_name=_('Created by'),
         on_delete=models.CASCADE,
         related_name='%(app_label)s_%(class)s_related_created_by',
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
     )
     updated_by = models.ForeignKey(
         CustomUser,
         verbose_name=_('Updated by'),
         on_delete=models.CASCADE,
         related_name='%(app_label)s_%(class)s_related_updated_by',
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
     )
     is_active = models.BooleanField(
         verbose_name=_('Active'),
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
+        default=True,
+    )
+    deactivated_by = models.ForeignKey(
+        CustomUser,
+        verbose_name=_('Deactivated by'),
+        related_name='%(app_label)s_%(class)s_related_deactivated_by',
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE
     )
 
     class Meta:
@@ -120,7 +137,7 @@ class Medicine(BaseModel):
         """Metadata options"""
         verbose_name = _('Medicine')
         verbose_name_plural = _('Medicines')
-        ordering = ('name',)
+        ordering = ('-is_active', 'name',)
 
     def __str__(self):  # pylint: disable=invalid-str-returned
         return self.name
