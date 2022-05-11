@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-10 12:15-0400\n"
-"PO-Revision-Date: 2022-05-10 12:15-0400\n"
+"POT-Creation-Date: 2022-05-11 00:32-0400\n"
+"PO-Revision-Date: 2022-05-11 00:33-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -18,179 +18,187 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: .\medicine\admin.py:85 .\medicine\admin.py:105 .\medicine\admin.py:191
-#: .\medicine\admin.py:207 .\medicine\models.py:196 .\medicine\models.py:237
-#: .\medicine\models.py:278
+#: .\medicine\admin.py:106 .\medicine\admin.py:126 .\medicine\admin.py:212
+#: .\medicine\admin.py:228 .\medicine\models.py:240 .\medicine\models.py:281
+#: .\medicine\models.py:322
 msgid "Nursing Professional"
 msgstr "Profissional de Enfermagem"
 
-#: .\medicine\admin.py:95 .\medicine\admin.py:202 .\medicine\models.py:171
-#: .\medicine\models.py:273
+#: .\medicine\admin.py:116 .\medicine\admin.py:223 .\medicine\models.py:215
+#: .\medicine\models.py:317
 msgid "Patient"
 msgstr "Paciente"
 
-#: .\medicine\admin.py:100 .\medicine\models.py:122
+#: .\medicine\admin.py:121 .\medicine\models.py:166
 msgid "CPF"
 msgstr "CPF"
 
-#: .\medicine\models.py:10
+#: .\medicine\models.py:10 .\medicine\models.py:46
 msgid "Created at"
 msgstr "Criado em"
 
-#: .\medicine\models.py:14
+#: .\medicine\models.py:14 .\medicine\models.py:51
 msgid "Updated at"
 msgstr "Atualizado em"
 
-#: .\medicine\models.py:19
+#: .\medicine\models.py:19 .\medicine\models.py:57
 msgid "Created by"
 msgstr "Criado por"
 
-#: .\medicine\models.py:27
+#: .\medicine\models.py:27 .\medicine\models.py:65
 msgid "Updated by"
 msgstr "Atualizado por"
 
-#: .\medicine\models.py:34 .\user\models.py:30
+#: .\medicine\models.py:34 .\medicine\models.py:72 .\user\models.py:30
 msgid "Active"
 msgstr "Ativo"
 
-#: .\medicine\models.py:46 .\medicine\models.py:110 .\medicine\models.py:182
-#: .\user\models.py:13
+#: .\medicine\models.py:90 .\medicine\models.py:154 .\medicine\models.py:226
+#: .\medicine\models.py:343 .\user\models.py:13
 msgid "Name"
 msgstr "Nome"
 
-#: .\medicine\models.py:52
+#: .\medicine\models.py:96 .\medicine\models.py:349
 msgid "Description"
 msgstr "Descrição"
 
-#: .\medicine\models.py:58
+#: .\medicine\models.py:102 .\medicine\models.py:355
 msgid "Batch"
 msgstr "Lote"
 
-#: .\medicine\models.py:64
+#: .\medicine\models.py:108 .\medicine\models.py:361
 msgid "Expiration date"
 msgstr "Data de vencimento"
 
-#: .\medicine\models.py:69
+#: .\medicine\models.py:113 .\medicine\models.py:366
 msgid "Stock quantity"
 msgstr "Quantidade em estoque"
 
-#: .\medicine\models.py:77
+#: .\medicine\models.py:121
 msgid "Medicine"
 msgstr "Medicamento"
 
-#: .\medicine\models.py:78 .\medicine\models.py:269
+#: .\medicine\models.py:122 .\medicine\models.py:313
 msgid "Medicines"
 msgstr "Medicamentos"
 
-#: .\medicine\models.py:87
+#: .\medicine\models.py:131
 msgid "Married"
 msgstr "Casado(a)"
 
-#: .\medicine\models.py:88
+#: .\medicine\models.py:132
 msgid "Widowed"
 msgstr "Viúvo(a)"
 
-#: .\medicine\models.py:89
+#: .\medicine\models.py:133
 msgid "Separated"
 msgstr "Separado(a)"
 
-#: .\medicine\models.py:90
+#: .\medicine\models.py:134
 msgid "Divorced"
 msgstr "Divorciado(a)"
 
-#: .\medicine\models.py:91
+#: .\medicine\models.py:135
 msgid "Single"
 msgstr "Solteiro(a)"
 
-#: .\medicine\models.py:100
+#: .\medicine\models.py:144
 msgid "Male"
 msgstr "Masculino"
 
-#: .\medicine\models.py:101
+#: .\medicine\models.py:145
 msgid "Female"
 msgstr "Feminino"
 
-#: .\medicine\models.py:116
+#: .\medicine\models.py:160
 msgid "Social Name"
 msgstr "Nome Social"
 
-#: .\medicine\models.py:128
+#: .\medicine\models.py:172
 msgid "RG"
 msgstr "RG"
 
-#: .\medicine\models.py:134
+#: .\medicine\models.py:178
 msgid "Birth Date"
 msgstr "Data de Nascimento"
 
-#: .\medicine\models.py:139
+#: .\medicine\models.py:183
 msgid "Marital Status"
 msgstr "Estado Civil"
 
-#: .\medicine\models.py:145
+#: .\medicine\models.py:189
 msgid "Place of Birth"
 msgstr "Naturalidade"
 
-#: .\medicine\models.py:151
+#: .\medicine\models.py:195
 msgid "Gender"
 msgstr "Gênero"
 
-#: .\medicine\models.py:157
+#: .\medicine\models.py:201
 msgid "Phone"
 msgstr "Telefone"
 
-#: .\medicine\models.py:163 .\medicine\models.py:223 .\medicine\models.py:261
+#: .\medicine\models.py:207 .\medicine\models.py:267 .\medicine\models.py:305
 msgid "Observation"
 msgstr "Observação"
 
-#: .\medicine\models.py:172
+#: .\medicine\models.py:216
 msgid "Patients"
 msgstr "Pacientes"
 
-#: .\medicine\models.py:188
+#: .\medicine\models.py:232
 msgid "COREN"
 msgstr "COREN"
 
-#: .\medicine\models.py:197
+#: .\medicine\models.py:241
 msgid "Nursing Professionals"
 msgstr "Profissionais de Enfermagem"
 
-#: .\medicine\models.py:207 .\medicine\models.py:255
+#: .\medicine\models.py:251 .\medicine\models.py:299
 msgid "Schedule"
 msgstr "Horário"
 
-#: .\medicine\models.py:213
+#: .\medicine\models.py:257
 msgid "Heart pressure"
 msgstr "Pressão"
 
-#: .\medicine\models.py:218
+#: .\medicine\models.py:262
 msgid "Glucose"
 msgstr "Glicemia"
 
-#: .\medicine\models.py:244
+#: .\medicine\models.py:288
 msgid "Medical Evaluation"
 msgstr "Avaliação Médica"
 
-#: .\medicine\models.py:245
+#: .\medicine\models.py:289
 msgid "Medical Evaluations"
 msgstr "Avaliações Médicas"
 
-#: .\medicine\models.py:284
+#: .\medicine\models.py:328
 msgid "Medication"
 msgstr "Medicação"
 
-#: .\medicine\models.py:285
+#: .\medicine\models.py:329
 msgid "Medications"
 msgstr "Medicações"
 
-#: .\senioren\settings.py:130
+#: .\medicine\models.py:381
+msgid "Medicine History"
+msgstr "Histórico de Medicamento"
+
+#: .\medicine\models.py:382
+msgid "Medicine Histories"
+msgstr "Históricos de Medicamento"
+
+#: .\senioren\settings.py:131
 msgid "Portuguese"
 msgstr "Português"
 
-#: .\senioren\settings.py:131
+#: .\senioren\settings.py:132
 msgid "English"
 msgstr "Inglês"
 
-#: .\user\admin.py:41 .\user\forms\user_form.py:8
+#: .\user\admin.py:41
 msgid "Password"
 msgstr "Senha"
 
@@ -213,14 +221,6 @@ msgstr "Permissões"
 #: .\user\admin.py:72
 msgid "Important dates"
 msgstr "Datas importantes"
-
-#: .\user\forms\user_form.py:9
-msgid "Password Confirmation"
-msgstr "Confirmação de Senha"
-
-#: .\user\forms\user_form.py:15
-msgid "Password and Password Confirmation do not match!"
-msgstr "Senha e Confirmação de Senha não combinam!"
 
 #: .\user\models.py:19
 msgid "Email"
@@ -253,6 +253,12 @@ msgstr "Usuário"
 #: .\user\models.py:53
 msgid "Users"
 msgstr "Usuários"
+
+#~ msgid "Password Confirmation"
+#~ msgstr "Confirmação de Senha"
+
+#~ msgid "Password and Password Confirmation do not match!"
+#~ msgstr "Senha e Confirmação de Senha não combinam!"
 
 #, fuzzy
 #~| msgid "Nursing Professional"
