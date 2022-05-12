@@ -75,7 +75,10 @@ ROOT_URLCONF = 'senioren.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'app/templates'],
+        'DIRS': [
+            BASE_DIR / 'templates',
+            BASE_DIR / 'app',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -151,7 +154,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    BASE_DIR / 'app/static',
+    BASE_DIR / 'static',
+    BASE_DIR / 'app',
 ]
 
 # Default primary key field type
