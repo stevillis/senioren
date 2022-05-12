@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-11 12:15-0400\n"
-"PO-Revision-Date: 2022-05-11 12:15-0400\n"
+"POT-Creation-Date: 2022-05-12 08:40-0400\n"
+"PO-Revision-Date: 2022-05-12 08:41-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: .\medicine\admin.py:242 .\medicine\models.py:257 .\medicine\models.py:298
 #: .\medicine\models.py:339
 msgid "Nursing Professional"
-msgstr "Profissional de Enfermagem"
+msgstr "Enfermeiro"
 
 #: .\medicine\admin.py:130 .\medicine\admin.py:237 .\medicine\models.py:232
 #: .\medicine\models.py:334
@@ -82,7 +82,7 @@ msgstr "Quantidade em estoque"
 msgid "Medicine"
 msgstr "Medicamento"
 
-#: .\medicine\models.py:139 .\medicine\models.py:330
+#: .\medicine\models.py:139 .\medicine\models.py:330 .\templates\base.html:102
 msgid "Medicines"
 msgstr "Medicamentos"
 
@@ -146,7 +146,7 @@ msgstr "Telefone"
 msgid "Observation"
 msgstr "Observação"
 
-#: .\medicine\models.py:233
+#: .\medicine\models.py:233 .\templates\base.html:110
 msgid "Patients"
 msgstr "Pacientes"
 
@@ -154,9 +154,9 @@ msgstr "Pacientes"
 msgid "COREN"
 msgstr "COREN"
 
-#: .\medicine\models.py:258
+#: .\medicine\models.py:258 .\templates\base.html:118
 msgid "Nursing Professionals"
-msgstr "Profissionais de Enfermagem"
+msgstr "Enfermeiros"
 
 #: .\medicine\models.py:268 .\medicine\models.py:316
 msgid "Schedule"
@@ -174,7 +174,7 @@ msgstr "Glicemia"
 msgid "Medical Evaluation"
 msgstr "Avaliação Médica"
 
-#: .\medicine\models.py:306
+#: .\medicine\models.py:306 .\templates\base.html:94
 msgid "Medical Evaluations"
 msgstr "Avaliações Médicas"
 
@@ -182,7 +182,7 @@ msgstr "Avaliações Médicas"
 msgid "Medication"
 msgstr "Medicação"
 
-#: .\medicine\models.py:346
+#: .\medicine\models.py:346 .\templates\base.html:86
 msgid "Medications"
 msgstr "Medicações"
 
@@ -194,13 +194,17 @@ msgstr "Histórico de Medicamento"
 msgid "Medicine Histories"
 msgstr "Históricos de Medicamento"
 
-#: .\senioren\settings.py:131
+#: .\senioren\settings.py:135
 msgid "Portuguese"
 msgstr "Português"
 
-#: .\senioren\settings.py:132
+#: .\senioren\settings.py:136
 msgid "English"
 msgstr "Inglês"
+
+#: .\templates\base.html:80
+msgid "Records"
+msgstr "Cadastros"
 
 #: .\user\admin.py:41
 msgid "Password"

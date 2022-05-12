@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-11 12:15-0400\n"
-"PO-Revision-Date: 2022-05-11 12:15-0400\n"
+"POT-Creation-Date: 2022-05-12 08:40-0400\n"
+"PO-Revision-Date: 2022-05-12 08:41-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -82,7 +82,7 @@ msgstr "Stock quantity"
 msgid "Medicine"
 msgstr "Medicine"
 
-#: .\medicine\models.py:139 .\medicine\models.py:330
+#: .\medicine\models.py:139 .\medicine\models.py:330 .\templates\base.html:102
 msgid "Medicines"
 msgstr "Medicines"
 
@@ -146,7 +146,7 @@ msgstr "Phone"
 msgid "Observation"
 msgstr "Observation"
 
-#: .\medicine\models.py:233
+#: .\medicine\models.py:233 .\templates\base.html:110
 msgid "Patients"
 msgstr "Patients"
 
@@ -154,7 +154,7 @@ msgstr "Patients"
 msgid "COREN"
 msgstr "COREN"
 
-#: .\medicine\models.py:258
+#: .\medicine\models.py:258 .\templates\base.html:118
 msgid "Nursing Professionals"
 msgstr "Nursing Professionals"
 
@@ -174,7 +174,7 @@ msgstr "Glucose"
 msgid "Medical Evaluation"
 msgstr "Medical Evaluation"
 
-#: .\medicine\models.py:306
+#: .\medicine\models.py:306 .\templates\base.html:94
 msgid "Medical Evaluations"
 msgstr "Medical Evaluations"
 
@@ -182,7 +182,7 @@ msgstr "Medical Evaluations"
 msgid "Medication"
 msgstr "Medication"
 
-#: .\medicine\models.py:346
+#: .\medicine\models.py:346 .\templates\base.html:86
 msgid "Medications"
 msgstr "Medications"
 
@@ -194,13 +194,17 @@ msgstr "Medicine History"
 msgid "Medicine Histories"
 msgstr "Medicine Histories"
 
-#: .\senioren\settings.py:131
+#: .\senioren\settings.py:135
 msgid "Portuguese"
 msgstr "Portuguese"
 
-#: .\senioren\settings.py:132
+#: .\senioren\settings.py:136
 msgid "English"
 msgstr "English"
+
+#: .\templates\base.html:80
+msgid "Records"
+msgstr "Records"
 
 #: .\user\admin.py:41
 msgid "Password"
