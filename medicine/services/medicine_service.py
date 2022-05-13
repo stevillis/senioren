@@ -27,7 +27,7 @@ def get_medicine_by_id(pk):
     return get_object_by_id_or_404(Medicine, pk)
 
 
-def record_medicine(medicine):
+def create_medicine(medicine):
     created_medicine = Medicine.objects.create(
         name=medicine.name,
         description=medicine.description,
@@ -36,7 +36,6 @@ def record_medicine(medicine):
         stock_qty=medicine.stock_qty,
         created_by=medicine.created_by,
         is_active=medicine.is_active,
-        deactivated_at=medicine.deactivated_at,
     )
     create_medicine_history(created_medicine, insert=True)
 
@@ -52,8 +51,8 @@ def edit_medicine(old_medicine, new_medicine):
     create_medicine_history(old_medicine)
 
 
-def deactivate_medicine(medicine):
+def deactivate_medicine(medicine, user):
     medicine.is_active = False
-    medicine.deactivated_at = timezone.now()
+    medicine.deactivated_by = user
     medicine.save(force_update=True)
     create_medicine_history(medicine)

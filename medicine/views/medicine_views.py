@@ -1,5 +1,10 @@
+from typing import Tuple
+
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
+from medicine.forms.medicine_forms import MedicineForm
+from medicine.entities import medicine
 from medicine.models import Medicine
 from medicine.services import medicine_service
 
@@ -13,88 +18,14 @@ def list_medicines(request: HttpRequest) -> HttpResponse:
     return render(request, "list_medicines.html", context)
 
 
-"""
-@login_required(login_url='/login')
-def cadastrar_campus(request: HttpRequest) -> HttpResponse:
-    can_insert = has_permission(request.user, INSERIR_CADASTRO_CAMPUS)
-    if request.method == "POST" and can_insert:
-        form = CampusForm(request.POST)
-        if form.is_valid():
-            nome = form.cleaned_data["nome"]
-            campus_novo = campus.Campus(
-                nome=nome,
-                created=None,
-                updated=None,
-                createdby=request.user,
-                updatedby=None,
-                isactive=ESTA_ATIVO,
-                inativado_em=None,
-            )
-            campus_service.cadastrar_campus(campus_novo)
-            return redirect("registro:listar_campi")
-    else:
-        form = CampusForm()
-    context = {
-        'form': form,
-        'isEdit': False,
-        'erro': None if can_insert else 'Usuário sem permissão para Inserir Campus',
-    }
-    return render(request, "campi/form_campus.html", context)
+def get_cleaned_data(form: MedicineForm) -> Tuple:
+    name = form.cleaned_data["name"]
+    description = form.cleaned_data["description"]
+    batch = form.cleaned_data["batch"]
+    expiration_date = form.cleaned_data["expiration_date"]
+    stock_qty = form.cleaned_data["stock_qty"]
 
-
-@login_required(login_url='/login')
-def get_campus_by_id(request: HttpRequest, pk: str) -> HttpResponse:
-    can_view = has_permission(request.user, VISUALIZAR_CADASTRO_CAMPUS)
-    campus_encontrado = campus_service.get_campus_by_id(pk)
-    context = {
-        'campus': campus_encontrado,
-        'erro': None if can_view else 'Usuário sem permissão para Visualizar Campus',
-    }
-    return render(request, "campi/visualizar_campus.html", context)
-
-
-@login_required(login_url='/login')
-def editar_campus(request: HttpRequest, pk: str) -> HttpResponse:
-    can_change = has_permission(request.user, EDITAR_CADASTRO_CAMPUS)
-    campus_antigo = campus_service.get_campus_by_id(pk)
-    form = CampusForm(request.POST or None, instance=campus_antigo)
-    if request.method == "POST" and can_change:
-        if form.is_valid():
-            nome = form.cleaned_data["nome"]
-            campus_novo = campus.Campus(
-                nome=nome,
-                created=campus_antigo.created,
-                updated=None,
-                createdby=campus_antigo.createdby,
-                updatedby=request.user,
-                isactive=campus_antigo.isactive,
-                inativado_em=campus_antigo.inativado_em,
-            )
-            campus_service.editar_campus(campus_antigo, campus_novo)
-            return redirect("registro:listar_campi")
-    context = {
-        'form': form,
-        'isEdit': True,
-        'erro': None if can_change else 'Usuário sem permissão para Editar Campus',
-    }
-    return render(request, "campi/form_campus.html", context)
-
-
-@login_required(login_url='/login')
-def inativar_campus(request: HttpRequest, pk: str) -> HttpResponse:
-    can_deactivate = has_permission(request.user, INATIVAR_CADASTRO_CAMPUS)
-    campus_encontrado = campus_service.get_campus_by_id(pk)
-    if request.method == "POST" and can_deactivate:
-        campus_encontrado.updatedby = request.user
-        campus_service.inativar_campus(campus_encontrado)
-        return redirect("registro:listar_campi")
-    context = {
-        'campus': campus_encontrado,
-        'erro': None if can_deactivate else 'Usuário sem permissão para Inativar Campus',
-    }
-    return render(request, "campi/inativar_campus.html", context)
-
-"""
+    return name, description, batch, expiration_date, stock_qty
 
 
 def medicine_detail(request: HttpRequest, pk: int) -> HttpResponse:
@@ -105,9 +36,33 @@ def medicine_detail(request: HttpRequest, pk: int) -> HttpResponse:
     return render(request, "medicine_detail.html", context)
 
 
-def create_medicine(request):
-    # TODO
-    pass
+def create_medicine(request: HttpRequest) -> HttpResponse:
+    if request.method == "POST":
+        form = MedicineForm(request.POST)
+        if form.is_valid():
+            name, description, batch, expiration_date, stock_qty = get_cleaned_data(form)
+            new_medicine = medicine.Medicine(
+                name=name,
+                description=description,
+                batch=batch,
+                expiration_date=expiration_date,
+                stock_qty=stock_qty,
+                created_at=None,
+                updated_at=None,
+                created_by=request.user,
+                updated_by=None,
+                is_active=True,
+                deactivated_by=None,
+            )
+            medicine_service.create_medicine(new_medicine)
+            return redirect("medicine:list")
+    else:
+        form = MedicineForm()
+    context = {
+        'form': form,
+        'is_edit': False,
+    }
+    return render(request, "form_medicine.html", context)
 
 
 def update_medicine(request):
