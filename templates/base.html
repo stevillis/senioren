@@ -1,211 +1,198 @@
-{% load static %} {% load i18n %}
+{% load static %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta
-      name="description"
-      content="Senioren - Sistema de Administração de Medicamentos"
-    />
-    <meta name="author" content="Stévillis Monteiro de Sousa" />
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content="Senioren - Sistema de Administração de Medicamentos"/>
+    <meta name="author" content="Stévillis Monteiro de Sousa"/>
 
-    <title>{% block title %}{% endblock title %}</title>
+    <title>
+        {% block title %}
+
+        {% endblock title %}
+    </title>
 
     <!-- favicon -->
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="{% static 'img/brand/favicon.ico' %}"
-    />
+    <link rel="icon" type="image/x-icon" href="{% static 'img/brand/favicon.ico' %}"/>
 
     <!-- Custom fonts for this template-->
-    <link
-      href="{% static 'vendor/fontawesome-free/css/all.min.css' %}"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-      rel="stylesheet"
-    />
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet"/>
 
     <!-- Custom styles for this template-->
-    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet" />
-  </head>
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet"/>
 
-  <body id="page-top">
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-      <!-- Sidebar -->
-      <ul
-        class="navbar-nav bg-primary sidebar sidebar-dark accordion"
-        id="accordionSidebar"
-      >
+    <!-- Datatables -->
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+
+
+    <!-- App Styles -->
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/app.css' %}"/>
+</head>
+
+<body id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->
-        <a
-          class="sidebar-brand d-flex align-items-center justify-content-center"
-          href="{% url 'app:index' %}"
-        >
-          <div class="sidebar-brand-icon">
-            <img
-              src="{% static 'img/brand/apple-touch-icon.png' %}"
-              alt="Senioren brand"
-              width="64"
-              height="64"
-            />
-          </div>
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'app:index' %}">
+            <div class="sidebar-brand-icon">
+                <img src="{% static 'img/brand/apple-touch-icon.png' %}" alt="Senioren brand" width="64" height="64"/>
+            </div>
         </a>
 
         <!-- Divider -->
-        <hr class="sidebar-divider my-0" />
+        <hr class="sidebar-divider my-0"/>
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'app:index' %}">
-            <i class="fas fa-fw fa-house-user"></i>
-            <span>Dashboard</span></a
-          >
+            <a class="nav-link" href="{% url 'app:index' %}">
+                <i class="fas fa-fw fa-house-user"></i>
+                <span>Dashboard</span>
+            </a>
         </li>
 
         <!-- Divider -->
-        <hr class="sidebar-divider" />
+        <hr class="sidebar-divider"/>
 
         <!-- Heading -->
         <div class="sidebar-heading">{% trans 'Records' %}</div>
 
         <!-- Nav Item - Medications -->
         <li class="nav-item text-center">
-          <a class="nav-link collapsed" href="#">
-            <i class="fas fa-fw fa-file-medical"></i>
-            <span>{% trans 'Medications' %}</span>
-          </a>
+            <a class="nav-link collapsed" href="#">
+                <i class="fas fa-fw fa-file-medical"></i>
+                <span>{% trans 'Medications' %}</span>
+            </a>
         </li>
 
         <!-- Nav Item - Medical Evaluations -->
         <li class="nav-item text-center">
-          <a class="nav-link collapsed" href="#">
-            <i class="fas fa-fw fa-clinic-medical"></i>
-            <span>{% trans 'Medical Evaluations' %}</span>
-          </a>
+            <a class="nav-link collapsed" href="#">
+                <i class="fas fa-fw fa-clinic-medical"></i>
+                <span>{% trans 'Medical Evaluations' %}</span>
+            </a>
         </li>
 
         <!-- Nav Item - Medicines -->
         <li class="nav-item text-center">
-          <a class="nav-link collapsed" href="#">
-            <i class="fas fa-fw fa-pills"></i>
-            <span>{% trans 'Medicines' %}</span>
-          </a>
+            <a class="nav-link collapsed" href="{% url 'medicine:list' %}">
+                <i class="fas fa-fw fa-pills"></i>
+                <span>{% trans 'Medicines' %}</span>
+            </a>
         </li>
 
         <!-- Nav Item - Patients -->
         <li class="nav-item text-center">
-          <a class="nav-link collapsed" href="#">
-            <i class="fas fa-fw fa-hospital-user"></i>
-            <span>{% trans 'Patients' %}</span>
-          </a>
+            <a class="nav-link collapsed" href="#">
+                <i class="fas fa-fw fa-hospital-user"></i>
+                <span>{% trans 'Patients' %}</span>
+            </a>
         </li>
 
         <!-- Nav Item - Nursing Professionals -->
         <li class="nav-item text-center">
-          <a class="nav-link collapsed" href="#">
-            <i class="fas fa-fw fa-user-nurse"></i>
-            <span>{% trans 'Nursing Professionals' %}</span>
-          </a>
+            <a class="nav-link collapsed" href="#">
+                <i class="fas fa-fw fa-user-nurse"></i>
+                <span>{% trans 'Nursing Professionals' %}</span>
+            </a>
         </li>
 
         <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block" />
+        <hr class="sidebar-divider d-none d-md-block"/>
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
-          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
-      </ul>
-      <!-- End of Sidebar -->
+    </ul>
+    <!-- End of Sidebar -->
 
-      <!-- Content Wrapper -->
-      <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
         <!-- Main Content -->
         <div id="content">
-          <!-- Topbar -->
-          <nav
-            class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
-          >
-            <!-- Sidebar Toggle (Topbar) -->
-            <button
-              id="sidebarToggleTop"
-              class="btn btn-link d-md-none rounded-circle mr-3"
-            >
-              <i class="fa fa-bars"></i>
-            </button>
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
 
-            <!-- Topbar Navbar -->
-            {% if user.is_superuser %}
-            <ul class="navbar-nav ml-auto">
-              <!-- Nav Item - Messages -->
-              <li class="nav-item dropdown no-arrow mx-1">
-                <a
-                  href="{% url 'admin:index' %}"
-                  class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-                >
-                  Admin
-                </a>
-              </li>
-            </ul>
-            {% endif %}
-          </nav>
-          <!-- End of Topbar -->
+                <!-- Topbar Navbar -->
+                {% if user.is_superuser %}
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a href="{% url 'admin:index' %}"
+                               class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                Admin
+                            </a>
+                        </li>
+                    </ul>
+                {% endif %}
+            </nav>
+            <!-- End of Topbar -->
 
-          <!-- Begin Page Content -->
-          <div class="container-fluid">
-            <!-- Page Heading -->
-            <div
-              class="d-sm-flex align-items-center justify-content-between mb-4"
-            >
-              <h1 class="h3 mb-0 text-gray-800">
-                {% block content_title %} {% endblock content_title %}
-              </h1>
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">
+                        {% block content_title %} {% endblock content_title %}
+                    </h1>
+                </div>
+
+                {% block content %} {% endblock content %}
             </div>
-
-            {% block content %} {% endblock content %}
-          </div>
-          <!-- /.container-fluid -->
+            <!-- /.container-fluid -->
         </div>
         <!-- End of Main Content -->
 
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Senioren - criado por Stévillis Sousa, 2022</span>
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Senioren - {% trans 'made by' %} Stévillis Sousa, 2022</span>
+                </div>
             </div>
-          </div>
         </footer>
         <!-- End of Footer -->
-      </div>
-      <!-- End of Content Wrapper -->
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+<!-- Core plugin JavaScript-->
+<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
-  </body>
+<!-- Custom scripts for all pages-->
+<script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+
+<!-- Datatables -->
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+
+<!-- Custom script -->
+<script type="text/javascript" src="{% static 'app/js/app.js' %}"></script>
+
+{% block custom_script %}
+
+{% endblock custom_script %}
+</body>
 </html>
