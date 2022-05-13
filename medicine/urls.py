@@ -1,5 +1,6 @@
 from django.urls import path
 
+from .views.index_views import index
 from .views.medicine_views import (create_medicine, deactivate_medicine,
                                    list_medicines, medicine_detail,
                                    update_medicine)

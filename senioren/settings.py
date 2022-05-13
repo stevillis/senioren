@@ -50,7 +50,6 @@ INSTALLED_APPS_DJANGO = [
 INSTALLED_APPS_ROOT = [
     'user',
     'medicine',
-    'app',
 ]
 
 INSTALLED_APPS_3RD_PARTY = [
@@ -79,7 +78,6 @@ TEMPLATES = [
         'DIRS': [
             BASE_DIR / 'templates',
             BASE_DIR / 'medicine',
-            BASE_DIR / 'app',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -157,7 +155,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
-    BASE_DIR / 'app',
 ]
 
 # Default primary key field type

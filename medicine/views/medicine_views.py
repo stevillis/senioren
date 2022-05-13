@@ -1,10 +1,9 @@
 from typing import Tuple
 
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, redirect
-
-from medicine.forms.medicine_forms import MedicineForm
+from django.shortcuts import redirect, render
 from medicine.entities import medicine
+from medicine.forms.medicine_forms import MedicineForm
 from medicine.models import Medicine
 from medicine.services import medicine_service
 
@@ -15,7 +14,7 @@ def list_medicines(request: HttpRequest) -> HttpResponse:
         'model': Medicine,
         'medicines': medicines
     }
-    return render(request, "list_medicines.html", context)
+    return render(request, "templates/medicine/list_medicines.html", context)
 
 
 def get_cleaned_data(form: MedicineForm) -> Tuple:
@@ -33,14 +32,15 @@ def medicine_detail(request: HttpRequest, pk: int) -> HttpResponse:
     context = {
         'medicine': found_medicine,
     }
-    return render(request, "medicine_detail.html", context)
+    return render(request, "templates/medicine/medicine_detail.html", context)
 
 
 def create_medicine(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         form = MedicineForm(request.POST)
         if form.is_valid():
-            name, description, batch, expiration_date, stock_qty = get_cleaned_data(form)
+            name, description, batch, expiration_date, stock_qty = get_cleaned_data(
+                form)
             new_medicine = medicine.Medicine(
                 name=name,
                 description=description,
@@ -62,7 +62,7 @@ def create_medicine(request: HttpRequest) -> HttpResponse:
         'form': form,
         'is_edit': False,
     }
-    return render(request, "form_medicine.html", context)
+    return render(request, "templates/medicine/form_medicine.html", context)
 
 
 def update_medicine(request):
