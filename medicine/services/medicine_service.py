@@ -23,8 +23,8 @@ def list_medicines(request):
     return filtered_medicines
 
 
-def get_medicine_by_id(pk, encrypted=True):
-    return get_object_by_id_or_404(Medicine, pk, ecrypted=encrypted)
+def get_medicine_by_id(pk):
+    return get_object_by_id_or_404(Medicine, pk)
 
 
 def record_medicine(medicine):

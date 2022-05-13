@@ -67,7 +67,7 @@
                 </td>
                 <td>{{ medicine.description }}</td>
                 <td>{{ medicine.batch }}</td>
-                <td>{{ medicine.expiration_date }}</td>
+                <td>{{ medicine.expiration_date|date:"d/m/Y" }}</td>
                 <td>{{ medicine.stock_qty }}</td>
                 <td>
                     <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"

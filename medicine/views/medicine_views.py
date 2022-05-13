@@ -97,9 +97,12 @@ def inativar_campus(request: HttpRequest, pk: str) -> HttpResponse:
 """
 
 
-def medicine_detail(request):
-    # TODO
-    pass
+def medicine_detail(request: HttpRequest, pk: int) -> HttpResponse:
+    found_medicine = medicine_service.get_medicine_by_id(pk)
+    context = {
+        'medicine': found_medicine,
+    }
+    return render(request, "medicine_detail.html", context)
 
 
 def create_medicine(request):

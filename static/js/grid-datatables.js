@@ -84,11 +84,43 @@ function initDataTable(grids) {
 
             switch (gridName) {
                 case 'gridMedicine':
-                    $(`#${gridName}`).DataTable( {
+                    $(`#${gridName}`).DataTable({
                         columnDefs: [
                             {
                                 orderable: orderable,
                                 targets: actionColumns,
+                            },
+                            {
+                                width: '15%',
+                                targets: 0, // Name
+                            },
+                            {
+                                width: '30%',
+                                targets: 1, // Description
+                            },
+                            {
+                                width: '10%',
+                                targets: 2, // Batch
+                            },
+                            {
+                                width: '5%',
+                                targets: 3, // Expiration Date
+                            },
+                            {
+                                width: '0%',
+                                targets: 4, // Stock Quantity
+                            },
+                            {
+                                width: '0%',
+                                targets: 5, // Edit
+                            },
+                            {
+                                width: '0%',
+                                targets: 6, // Deactivate
+                            },
+                            {
+                                width: '0%',
+                                targets: 7, // History
                             },
                         ],
                         language: {
