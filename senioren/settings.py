@@ -55,6 +55,7 @@ INSTALLED_APPS_ROOT = [
 
 INSTALLED_APPS_3RD_PARTY = [
     'daterangefilter',
+    'django_filters',
 ]
 
 INSTALLED_APPS = INSTALLED_APPS_DJANGO + \
@@ -77,6 +78,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR / 'templates',
+            BASE_DIR / 'medicine',
             BASE_DIR / 'app',
         ],
         'APP_DIRS': True,
