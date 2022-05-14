@@ -67,7 +67,8 @@ def create_medicine(request: HttpRequest) -> HttpResponse:
 
 def update_medicine(request: HttpRequest, pk: int) -> HttpResponse:
     old_medicine = medicine_service.get_medicine_by_id(pk)
-    old_medicine.expiration_date = old_medicine.expiration_date.strftime("%Y-%m-%d")
+    old_medicine.expiration_date = old_medicine.expiration_date.strftime(
+        "%Y-%m-%d")
     form = MedicineForm(request.POST or None, instance=old_medicine)
     if request.method == 'POST':
         if form.is_valid():
@@ -95,6 +96,14 @@ def update_medicine(request: HttpRequest, pk: int) -> HttpResponse:
     return render(request, 'templates/medicine/form_medicine.html', context)
 
 
-def deactivate_medicine(request):
-    # TODO
-    pass
+def deactivate_medicine(request: HttpRequest, pk: int) -> HttpResponse:
+    found_medicine = medicine_service.get_medicine_by_id(pk)
+    if request.method == "POST":
+        user = request.user
+        found_medicine.updated_by = user
+        medicine_service.deactivate_medicine(found_medicine, user)
+        return redirect("medicine:list")
+    context = {
+        'medicine': found_medicine,
+    }
+    return render(request, "templates/medicine/deactivate_medicine.html", context)

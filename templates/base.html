@@ -29,10 +29,6 @@
 
     <!-- Datatables -->
     <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
-
-
-    <!-- App Styles -->
-    <link rel="stylesheet" type="text/css" href="{% static 'app/css/app.css' %}"/>
 </head>
 
 <body id="page-top">
@@ -131,7 +127,7 @@
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a href="{% url 'admin:index' %}"
-                               class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                               class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                 Admin
                             </a>
                         </li>
@@ -187,9 +183,6 @@
 <!-- Datatables -->
 <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
 <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
-
-<!-- Custom script -->
-<script type="text/javascript" src="{% static 'app/js/app.js' %}"></script>
 
 {% block custom_script %}
 
