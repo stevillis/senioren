@@ -3,6 +3,8 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from user.models import CustomUser
 
+from medicine.managers import ActiveManager
+
 
 class BaseModel(models.Model):
     """Define common fields used by other Models by inheritance"""
@@ -132,6 +134,9 @@ class Medicine(BaseModel):
         blank=False,
         default=0
     )
+
+    objects = models.Manager()
+    active_manager = ActiveManager()
 
     class Meta:
         """Metadata options"""

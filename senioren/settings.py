@@ -50,19 +50,21 @@ INSTALLED_APPS_DJANGO = [
 INSTALLED_APPS_ROOT = [
     'user',
     'medicine',
-    'app',
 ]
 
 INSTALLED_APPS_3RD_PARTY = [
     'daterangefilter',
+    'django_filters',
+    "corsheaders",
 ]
 
 INSTALLED_APPS = INSTALLED_APPS_DJANGO + \
-    INSTALLED_APPS_3RD_PARTY + INSTALLED_APPS_ROOT
+                 INSTALLED_APPS_3RD_PARTY + INSTALLED_APPS_ROOT
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -75,7 +77,10 @@ ROOT_URLCONF = 'senioren.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'app/templates'],
+        'DIRS': [
+            BASE_DIR / 'templates',
+            BASE_DIR / 'medicine',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,7 +139,7 @@ LANGUAGES = (
 )
 
 LOCALE_PATHS = (
-    os.path.join(BASE_DIR, 'locale'),
+    os.path.join(BASE_DIR, '/medicine/locale'),
 )
 
 TIME_ZONE = 'America/Cuiaba'
@@ -143,7 +148,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -151,7 +156,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    BASE_DIR / 'app/static',
+    BASE_DIR / 'static',
 ]
 
 # Default primary key field type
@@ -160,5 +165,7 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user.CustomUser'
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 django_heroku.settings(locals())
