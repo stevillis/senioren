@@ -1,7 +1,9 @@
-from typing import Tuple
+from typing import Tuple, List
 
-from django.http import HttpRequest, HttpResponse
+from django.db.models import QuerySet
+from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
+from django_serverside_datatable.views import ServerSideDatatableView
 from medicine.entities import medicine
 from medicine.forms.medicine_forms import MedicineForm
 from medicine.models import Medicine
@@ -67,8 +69,7 @@ def create_medicine(request: HttpRequest) -> HttpResponse:
 
 def update_medicine(request: HttpRequest, pk: int) -> HttpResponse:
     old_medicine = medicine_service.get_medicine_by_id(pk)
-    old_medicine.expiration_date = old_medicine.expiration_date.strftime(
-        "%Y-%m-%d")
+    old_medicine.expiration_date = old_medicine.expiration_date.strftime("%Y-%m-%d")
     form = MedicineForm(request.POST or None, instance=old_medicine)
     if request.method == 'POST':
         if form.is_valid():
@@ -107,3 +108,16 @@ def deactivate_medicine(request: HttpRequest, pk: int) -> HttpResponse:
         'medicine': found_medicine,
     }
     return render(request, "templates/medicine/deactivate_medicine.html", context)
+
+
+class MedicineListView(ServerSideDatatableView):
+    queryset = medicine_service.get_all_medicines()
+    model = Medicine
+    columns = [
+        'id',
+        'name',
+        'description',
+        'batch',
+        'expiration_date',
+        'stock_qty',
+    ]

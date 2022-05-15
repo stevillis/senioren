@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-
+from django.views.i18n import JavaScriptCatalog
 from medicine.views.index_views import index
 
 urlpatterns = [
     path('', index, name='index'),
     path('admin/', admin.site.urls, name='admin'),
     path('medicines/', include('medicine.urls', namespace='medicine')),
+    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
 ]
