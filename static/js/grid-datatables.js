@@ -88,9 +88,10 @@ function initDataTable(grids) {
       switch (gridName) {
         case "gridMedicine":
           $(document).ready(function () {
+            const host = document.location.origin;
             $(`#${gridName}`).DataTable({
               serverSide: true,
-              sAjaxSource: "http://127.0.0.1:8000/medicines/medicine/data/",
+              sAjaxSource: `${host}/medicines/medicine/data/`,
               order: [
                   [1, 'asc'],
               ],
