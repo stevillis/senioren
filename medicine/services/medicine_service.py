@@ -41,11 +41,11 @@ def create_medicine(medicine):
 
 
 def edit_medicine(old_medicine, new_medicine):
-    old_medicine.name = new_medicine.name,
-    old_medicine.description = new_medicine.description,
-    old_medicine.batch = new_medicine.batch,
-    old_medicine.expiration_date = new_medicine.expiration_date,
-    old_medicine.stock_qty = new_medicine.stock_qty,
+    old_medicine.name = new_medicine.name
+    old_medicine.description = new_medicine.description
+    old_medicine.batch = new_medicine.batch
+    old_medicine.expiration_date = new_medicine.expiration_date
+    old_medicine.stock_qty = new_medicine.stock_qty
     old_medicine.updated_by = new_medicine.updated_by
     old_medicine.save(force_update=True)
     create_medicine_history(old_medicine)
