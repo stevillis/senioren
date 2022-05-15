@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Medicine Register' %}
+{% endblock title %}
+
+{% block content_title %}
+    {% if is_edit %}{% trans 'Edit' %}{% else %}{% trans 'Register' %}{% endif %} {% trans 'Medicine' %}
+{% endblock content_title %}
+
+{% block content %}
+    <form method="post" autocomplete="off" id="form-crud"
+          class="d-flex flex-column justify-content-center align-items-center box-shadow-whisper rounded rounded-3 mb-4">
+        {% csrf_token %}
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.name.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.name.id_for_label }}">
+                {{ form.name.label }} {% if form.name.field.required %}<span>*</span> {% endif %}
+            </label>
+            {% if form.name.errors %}
+                {{ form.name | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.name.errors|striptags }}</small>
+            {% else %}
+                {{ form.name | add_class:'form-control' }}
+            {% endif %}
+        </div>
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.description.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.description.id_for_label }}">
+                {{ form.description.label }} {% if form.description.field.required %}<span>*</span> {% endif %}
+            </label>
+            {% if form.description.errors %}
+                {{ form.description | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.description.errors|striptags }}</small>
+            {% else %}
+                {{ form.description | add_class:'form-control' }}
+            {% endif %}
+        </div>
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.batch.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.batch.id_for_label }}">
+                {{ form.batch.label }} {% if form.batch.field.required %}<span>*</span> {% endif %}
+            </label>
+            {% if form.batch.errors %}
+                {{ form.batch | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.batch.errors|striptags }}</small>
+            {% else %}
+                {{ form.batch | add_class:'form-control' }}
+            {% endif %}
+        </div>
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.expiration_date.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.expiration_date.id_for_label }}">
+                {{ form.expiration_date.label }} {% if form.expiration_date.field.required %}<span>*</span> {% endif %}
+            </label>
+            {% if form.expiration_date.errors %}
+                {{ form.expiration_date | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.expiration_date.errors|striptags }}</small>
+            {% else %}
+                {{ form.expiration_date | add_class:'form-control' }}
+            {% endif %}
+        </div>
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.stock_qty.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.stock_qty.id_for_label }}">
+                {{ form.stock_qty.label }} {% if form.stock_qty.field.required %}<span>*</span> {% endif %}
+            </label>
+            {% if form.stock_qty.errors %}
+                {{ form.stock_qty | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.stock_qty.errors|striptags }}</small>
+            {% else %}
+                {{ form.stock_qty | add_class:'form-control' }}
+            {% endif %}
+        </div>
+
+        <div class="my-4 text-center">
+            <ul class="list-inline m-0">
+                <li class="list-inline-item">
+                    <a href="{% url 'medicine:list' %}">
+                        {% include 'utils/forms/form_cancel_btn.html' %}
+                    </a>
+                </li>
+                {% include 'utils/forms/form_save_btn.html' %}
+            </ul>
+        </div>
+    </form>
+{% endblock content %}
+

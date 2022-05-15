@@ -66,7 +66,6 @@ class MedicineAdmin(admin.ModelAdmin):
         'is_active',
     )
     list_filter = [
-        'batch',
         'is_active',
         ('expiration_date', DateRangeFilter),
     ]
@@ -279,7 +278,6 @@ class MedicineHistoryAdmin(admin.ModelAdmin):
         'stock_qty',
     )
     list_filter = [
-        'batch',
         ('expiration_date', DateRangeFilter),
     ]
     search_fields = ('name', 'description',)
