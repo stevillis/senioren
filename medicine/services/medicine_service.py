@@ -1,5 +1,4 @@
 import medicine.filters as filters
-from django.utils import timezone
 
 from ..models import Medicine
 from .history.medicine_history_service import create_medicine_history
@@ -40,7 +39,7 @@ def create_medicine(medicine):
     create_medicine_history(created_medicine, insert=True)
 
 
-def edit_medicine(old_medicine, new_medicine):
+def update_medicine(old_medicine, new_medicine):
     old_medicine.name = new_medicine.name
     old_medicine.description = new_medicine.description
     old_medicine.batch = new_medicine.batch

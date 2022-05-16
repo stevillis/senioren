@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Patient Register' %}
+{% endblock title %}
+
+{% block content_title %}
+    {% if is_edit %}{% trans 'Edit' %}{% else %}{% trans 'Register' %}{% endif %} {% trans 'Patient' %}
+{% endblock content_title %}
+
+{% block content %}
+    <form method="post" autocomplete="off" id="form-crud"
+          class="d-flex flex-column justify-content-center align-items-center box-shadow-whisper rounded rounded-3 mb-4">
+        {% csrf_token %}
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.name.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.name.id_for_label }}">
+                {{ form.name.label }} {% if form.name.field.required %}<span>*</span> {% endif %}
+            </label>
+            {% if form.name.errors %}
+                {{ form.name | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.name.errors|striptags }}</small>
+            {% else %}
+                {{ form.name | add_class:'form-control' }}
+            {% endif %}
+        </div>
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.social_name.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.social_name.id_for_label }}">
+                {{ form.social_name.label }} {% if form.social_name.field.required %}<span>*</span> {% endif %}
+            </label>
+            {% if form.social_name.errors %}
+                {{ form.social_name | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.social_name.errors|striptags }}</small>
+            {% else %}
+                {{ form.social_name | add_class:'form-control' }}
+            {% endif %}
+        </div>
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.cpf.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.cpf.id_for_label }}">
+                {{ form.cpf.label }} {% if form.cpf.field.required %}<span>*</span> {% endif %}
+            </label>
+            {% if form.cpf.errors %}
+                {{ form.cpf | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.cpf.errors|striptags }}</small>
+            {% else %}
+                {{ form.cpf | add_class:'form-control' }}
+            {% endif %}
+        </div>
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.rg.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.rg.id_for_label }}">
+                {{ form.rg.label }} {% if form.rg.field.required %}<span>*</span> {% endif %}
+            </label>
+            {% if form.rg.errors %}
+                {{ form.rg | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.rg.errors|striptags }}</small>
+            {% else %}
+                {{ form.rg | add_class:'form-control' }}
+            {% endif %}
+        </div>
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.birth_date.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.birth_date.id_for_label }}">
+                {{ form.birth_date.label }} {% if form.birth_date.field.required %}<span>*</span> {% endif %}
+            </label>
+            {% if form.birth_date.errors %}
+                {{ form.birth_date | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.birth_date.errors|striptags }}</small>
+            {% else %}
+                {{ form.birth_date | add_class:'form-control' }}
+            {% endif %}
+        </div>
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.marital_status.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.marital_status.id_for_label }}">
+                {{ form.marital_status.label }} {% if form.marital_status.field.required %}<span>*</span> {% endif %}
+            </label>
+            {% if form.marital_status.errors %}
+                {{ form.marital_status | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.marital_status.errors|striptags }}</small>
+            {% else %}
+                {{ form.marital_status | add_class:'form-control' }}
+            {% endif %}
+        </div>
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.place_of_birth.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.place_of_birth.id_for_label }}">
+                {{ form.place_of_birth.label }} {% if form.place_of_birth.field.required %}<span>*</span> {% endif %}
+            </label>
+            {% if form.place_of_birth.errors %}
+                {{ form.place_of_birth | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.place_of_birth.errors|striptags }}</small>
+            {% else %}
+                {{ form.place_of_birth | add_class:'form-control' }}
+            {% endif %}
+        </div>
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.gender.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.gender.id_for_label }}">
+                {{ form.gender.label }} {% if form.gender.field.required %}<span>*</span> {% endif %}
+            </label>
+            {% if form.gender.errors %}
+                {{ form.gender | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.gender.errors|striptags }}</small>
+            {% else %}
+                {{ form.gender | add_class:'form-control' }}
+            {% endif %}
+        </div>
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.phone.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.phone.id_for_label }}">
+                {{ form.phone.label }} {% if form.phone.field.required %}<span>*</span> {% endif %}
+            </label>
+            {% if form.phone.errors %}
+                {{ form.phone | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.phone.errors|striptags }}</small>
+            {% else %}
+                {{ form.phone | add_class:'form-control' }}
+            {% endif %}
+        </div>
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.observation.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.observation.id_for_label }}">
+                {{ form.observation.label }} {% if form.observation.field.required %}<span>*</span> {% endif %}
+            </label>
+            {% if form.observation.errors %}
+                {{ form.observation | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.observation.errors|striptags }}</small>
+            {% else %}
+                {{ form.observation | add_class:'form-control' }}
+            {% endif %}
+        </div>
+
+        <div class="my-4 text-center">
+            <ul class="list-inline m-0">
+                <li class="list-inline-item">
+                    <a href="{% url 'medicine:patient-list' %}">
+                        {% include 'utils/forms/form_cancel_btn.html' %}
+                    </a>
+                </li>
+                {% include 'utils/forms/form_save_btn.html' %}
+            </ul>
+        </div>
+    </form>
+{% endblock content %}
+

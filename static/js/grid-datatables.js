@@ -62,6 +62,9 @@ function handleTableResizeEvent(tableName) {
     case "gridMedicine":
       addOrRemoveScroll(gridWrapper, 600);
       break;
+    case "gridPatient":
+      addOrRemoveScroll(gridWrapper, 600);
+      break;
   }
 }
 
@@ -92,9 +95,7 @@ function initDataTable(grids) {
             $(`#${gridName}`).DataTable({
               serverSide: true,
               sAjaxSource: `${host}/medicines/medicine/data/`,
-              order: [
-                  [1, 'asc'],
-              ],
+              order: [[1, "asc"]],
               columns: [
                 {
                   name: "name",
@@ -127,7 +128,7 @@ function initDataTable(grids) {
                       <td>
                         <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
                           title="${editMsg}">
-                            <a href="/medicines/medicine/update/${ row[0]}/" class="btn btn-warning btn-xs"
+                            <a href="/medicines/medicine/update/${row[0]}/" class="btn btn-warning btn-xs"
                               data-title="${editMsg}" aria-label="${editMsg}">
                                 <span class="fa fa-edit"></span>
                             </a>
@@ -144,7 +145,97 @@ function initDataTable(grids) {
                       <td>
                         <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
                           title="${deactivateMsg}">
-                            <a href="/medicines/medicine/deactivate/${ row[0]}/" class="btn btn-danger btn-xs"
+                            <a href="/medicines/medicine/deactivate/${row[0]}/" class="btn btn-danger btn-xs"
+                              data-title="${deactivateMsg}" aria-label="${deactivateMsg}">
+                                <span class="fa fa-trash"></span>
+                            </a>
+                        </p>
+                    </td>
+                    `;
+                  },
+                },
+                {
+                  searchable: false,
+                  render: function (data, type, row, meta) {
+                    const historyMsg = gettext("History");
+                    return `
+                      <td>
+                        <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
+                          title="${historyMsg}">
+                            <a href="#" class="btn btn-info btn-xs"
+                              data-title="${historyMsg}" aria-label="${historyMsg}">
+                                <span class="fa fa-history"></span>
+                            </a>
+                        </p>
+                    </td>
+                    `;
+                  },
+                },
+              ],
+              language: {
+                url: pathName,
+              },
+              searching: true,
+              responsive: true,
+            });
+          });
+          addTableResizeEvent(gridName);
+          break;
+        case "gridPatient":
+          $(document).ready(function () {
+            const host = document.location.origin;
+            $(`#${gridName}`).DataTable({
+              serverSide: true,
+              sAjaxSource: `${host}/medicines/patient/data/`,
+              order: [[1, "asc"]],
+              columns: [
+                {
+                  name: "name",
+                  data: 1,
+                  render: function (data, type, row, meta) {
+                    return `<a href="/medicines/patient/detail/${row[0]}/">${data}</a>`;
+                  },
+                },
+                { name: "cpf", data: 2 },
+                {
+                  name: "birth_date",
+                  data: 3,
+                  searchable: false,
+                  render: function (data, type, row, meta) {
+                    const date = `${row[3]}T00:00:00`;
+                    return `${formatDate(new Date(date))}`;
+                  },
+                },
+                {
+                  name: "phone",
+                  data: 4,
+                },
+                {
+                  searchable: false,
+                  render: function (data, type, row, meta) {
+                    const editMsg = gettext("Edit");
+                    return `
+                      <td>
+                        <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
+                          title="${editMsg}">
+                            <a href="/medicines/patient/update/${row[0]}/" class="btn btn-warning btn-xs"
+                              data-title="${editMsg}" aria-label="${editMsg}">
+                                <span class="fa fa-edit"></span>
+                            </a>
+                        </p>
+                    </td>
+                    `;
+                  },
+                },
+                {
+                  searchable: false,
+                  render: function (data, type, row, meta) {
+                    const deactivateMsg = gettext("Deactivate");
+                    return `
+                      <td>
+                        <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
+                          title="${deactivateMsg}">
+                            <a href="/medicines/patient/deactivate/${row[0]}/" class="btn btn-danger btn-xs"
                               data-title="${deactivateMsg}" aria-label="${deactivateMsg}">
                                 <span class="fa fa-trash"></span>
                             </a>
@@ -186,7 +277,7 @@ function initDataTable(grids) {
 }
 
 window.addEventListener("DOMContentLoaded", (event) => {
-  const grids = ["gridMedicine"];
+  const grids = ["gridMedicine", "gridPatient"];
 
   initDataTable(grids);
 });
