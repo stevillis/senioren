@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-14 03:53-0400\n"
-"PO-Revision-Date: 2022-05-14 03:04-0400\n"
+"POT-Creation-Date: 2022-05-16 00:23-0400\n"
+"PO-Revision-Date: 2022-05-16 00:25-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -18,181 +18,190 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: .\medicine\admin.py:119 .\medicine\admin.py:139 .\medicine\admin.py:225
-#: .\medicine\admin.py:241 .\medicine\models.py:262 .\medicine\models.py:303
-#: .\medicine\models.py:344
+#: .\medicine\admin.py:120 .\medicine\admin.py:140 .\medicine\admin.py:227
+#: .\medicine\admin.py:243 .\medicine\models.py:276 .\medicine\models.py:317
+#: .\medicine\models.py:358
 msgid "Nursing Professional"
 msgstr "Nursing Professional"
 
-#: .\medicine\admin.py:129 .\medicine\admin.py:236 .\medicine\models.py:237
-#: .\medicine\models.py:339
+#: .\medicine\admin.py:130 .\medicine\admin.py:238 .\medicine\models.py:251
+#: .\medicine\models.py:353 .\medicine\templates\patient\form_patient.html:11
 msgid "Patient"
 msgstr "Patient"
 
-#: .\medicine\admin.py:134 .\medicine\models.py:188
+#: .\medicine\admin.py:135 .\medicine\models.py:191 .\medicine\models.py:443
 msgid "CPF"
 msgstr "CPF"
 
-#: .\medicine\models.py:12 .\medicine\models.py:56
-msgid "Created at"
-msgstr "Created at"
-
-#: .\medicine\models.py:16 .\medicine\models.py:61
-msgid "Updated at"
-msgstr "Updated at"
-
-#: .\medicine\models.py:21 .\medicine\models.py:67
-msgid "Created by"
-msgstr "Created by"
-
-#: .\medicine\models.py:29 .\medicine\models.py:75
-msgid "Updated by"
-msgstr "Updated by"
-
-#: .\medicine\models.py:36 .\medicine\models.py:82 .\user\models.py:30
-msgid "Active"
-msgstr "Active"
-
-#: .\medicine\models.py:41 .\medicine\models.py:89
-msgid "Deactivated by"
-msgstr "Deactivated by"
-
-#: .\medicine\models.py:109 .\medicine\models.py:176 .\medicine\models.py:248
-#: .\medicine\models.py:365 .\user\models.py:13
-msgid "Name"
-msgstr "Name"
-
-#: .\medicine\models.py:115 .\medicine\models.py:371
-msgid "Description"
-msgstr "Description"
-
-#: .\medicine\models.py:121 .\medicine\models.py:377
-msgid "Batch"
-msgstr "Batch"
-
-#: .\medicine\models.py:127 .\medicine\models.py:383
-msgid "Expiration date"
-msgstr "Expiration date"
-
-#: .\medicine\models.py:132 .\medicine\models.py:388
-msgid "Stock quantity"
-msgstr "Stock quantity"
-
-#: .\medicine\models.py:143 .\medicine\templates\medicine\form_medicine.html:11
-msgid "Medicine"
-msgstr "Medicine"
-
-#: .\medicine\models.py:144 .\medicine\models.py:335 .\templates\base.html:83
-msgid "Medicines"
-msgstr "Medicines"
-
-#: .\medicine\models.py:153
+#: .\medicine\models.py:8
 msgid "Married"
 msgstr "Married"
 
-#: .\medicine\models.py:154
+#: .\medicine\models.py:9
 msgid "Widowed"
 msgstr "Widowed"
 
-#: .\medicine\models.py:155
+#: .\medicine\models.py:10
 msgid "Separated"
 msgstr "Separated"
 
-#: .\medicine\models.py:156
+#: .\medicine\models.py:11
 msgid "Divorced"
 msgstr "Divorced"
 
-#: .\medicine\models.py:157
+#: .\medicine\models.py:12
 msgid "Single"
 msgstr "Single"
 
-#: .\medicine\models.py:166
+#: .\medicine\models.py:21
 msgid "Male"
 msgstr "Male"
 
-#: .\medicine\models.py:167
+#: .\medicine\models.py:22
 msgid "Female"
 msgstr "Female"
 
-#: .\medicine\models.py:182
+#: .\medicine\models.py:34 .\medicine\models.py:78
+msgid "Created at"
+msgstr "Created at"
+
+#: .\medicine\models.py:38 .\medicine\models.py:83
+msgid "Updated at"
+msgstr "Updated at"
+
+#: .\medicine\models.py:43 .\medicine\models.py:89
+msgid "Created by"
+msgstr "Created by"
+
+#: .\medicine\models.py:51 .\medicine\models.py:97
+msgid "Updated by"
+msgstr "Updated by"
+
+#: .\medicine\models.py:58 .\medicine\models.py:104
+msgid "Active"
+msgstr "Active"
+
+#: .\medicine\models.py:63 .\medicine\models.py:111
+msgid "Deactivated by"
+msgstr "Deactivated by"
+
+#: .\medicine\models.py:131 .\medicine\models.py:177 .\medicine\models.py:262
+#: .\medicine\models.py:379 .\medicine\models.py:429
+msgid "Name"
+msgstr "Name"
+
+#: .\medicine\models.py:137 .\medicine\models.py:385
+msgid "Description"
+msgstr "Description"
+
+#: .\medicine\models.py:143 .\medicine\models.py:391
+msgid "Batch"
+msgstr "Batch"
+
+#: .\medicine\models.py:149 .\medicine\models.py:397
+msgid "Expiration date"
+msgstr "Expiration date"
+
+#: .\medicine\models.py:154 .\medicine\models.py:402
+msgid "Stock quantity"
+msgstr "Stock quantity"
+
+#: .\medicine\models.py:165 .\medicine\templates\medicine\form_medicine.html:11
+msgid "Medicine"
+msgstr "Medicine"
+
+#: .\medicine\models.py:166 .\medicine\models.py:349
+msgid "Medicines"
+msgstr "Medicines"
+
+#: .\medicine\models.py:184 .\medicine\models.py:436
 msgid "Social Name"
 msgstr "Social Name"
 
-#: .\medicine\models.py:194
+#: .\medicine\models.py:198 .\medicine\models.py:450
 msgid "RG"
 msgstr "RG"
 
-#: .\medicine\models.py:200
+#: .\medicine\models.py:205 .\medicine\models.py:457
 msgid "Birth Date"
 msgstr "Birth Date"
 
-#: .\medicine\models.py:205
+#: .\medicine\models.py:211 .\medicine\models.py:463
 msgid "Marital Status"
 msgstr "Marital Status"
 
-#: .\medicine\models.py:211
+#: .\medicine\models.py:218 .\medicine\models.py:470
 msgid "Place of Birth"
 msgstr "Place of Birth"
 
-#: .\medicine\models.py:217
+#: .\medicine\models.py:226 .\medicine\models.py:478
 msgid "Gender"
 msgstr "Gender"
 
-#: .\medicine\models.py:223
+#: .\medicine\models.py:233 .\medicine\models.py:485
 msgid "Phone"
 msgstr "Phone"
 
-#: .\medicine\models.py:229 .\medicine\models.py:289 .\medicine\models.py:327
+#: .\medicine\models.py:240 .\medicine\models.py:303 .\medicine\models.py:341
+#: .\medicine\models.py:492
 msgid "Observation"
 msgstr "Observation"
 
-#: .\medicine\models.py:238 .\templates\base.html:91
+#: .\medicine\models.py:252
 msgid "Patients"
 msgstr "Patients"
 
-#: .\medicine\models.py:254
+#: .\medicine\models.py:268
 msgid "COREN"
 msgstr "COREN"
 
-#: .\medicine\models.py:263 .\templates\base.html:99
+#: .\medicine\models.py:277
 msgid "Nursing Professionals"
 msgstr "Nursing Professionals"
 
-#: .\medicine\models.py:273 .\medicine\models.py:321
+#: .\medicine\models.py:287 .\medicine\models.py:335
 msgid "Schedule"
 msgstr "Schedule"
 
-#: .\medicine\models.py:279
+#: .\medicine\models.py:293
 msgid "Heart pressure"
 msgstr "Heart pressure"
 
-#: .\medicine\models.py:284
+#: .\medicine\models.py:298
 msgid "Glucose"
 msgstr "Glucose"
 
-#: .\medicine\models.py:310
+#: .\medicine\models.py:324
 msgid "Medical Evaluation"
 msgstr "Medical Evaluation"
 
-#: .\medicine\models.py:311 .\templates\base.html:75
+#: .\medicine\models.py:325
 msgid "Medical Evaluations"
 msgstr "Medical Evaluations"
 
-#: .\medicine\models.py:350
+#: .\medicine\models.py:364
 msgid "Medication"
 msgstr "Medication"
 
-#: .\medicine\models.py:351 .\templates\base.html:67
+#: .\medicine\models.py:365
 msgid "Medications"
 msgstr "Medications"
 
-#: .\medicine\models.py:403
+#: .\medicine\models.py:417
 msgid "Medicine History"
 msgstr "Medicine History"
 
-#: .\medicine\models.py:404
+#: .\medicine\models.py:418
 msgid "Medicine Histories"
 msgstr "Medicine Histories"
+
+#: .\medicine\models.py:507
+msgid "Patient History"
+msgstr "Patient History"
+
+#: .\medicine\models.py:508
+msgid "Patient Histories"
+msgstr "Patient Histories"
 
 #: .\medicine\services\util_service.py:14
 msgid "not found"
@@ -205,29 +214,29 @@ msgstr "Deactivate Medicine"
 
 #: .\medicine\templates\medicine\deactivate_medicine.html:19
 #: .\medicine\templates\medicine\medicine_detail.html:19
+#: .\medicine\templates\patient\deactivate_patient.html:19
+#: .\medicine\templates\patient\patient_detail.html:19
 msgid "Code"
 msgstr "Code"
 
 #: .\medicine\templates\medicine\form_medicine.html:7
-#: .\medicine\templates\medicine\list_medicines.html:7
-#: .\medicine\templates\medicine\list_medicines.html:11
+#: .\medicine\templates\medicine\list_medicines.html:8
+#: .\medicine\templates\medicine\list_medicines.html:12
 msgid "Medicine Register"
 msgstr "Medicine Register"
 
 #: .\medicine\templates\medicine\form_medicine.html:11
-#: .\templates\utils\tables\thead_actions.html:3
+#: .\medicine\templates\patient\form_patient.html:11
 msgid "Edit"
 msgstr "Edit"
 
 #: .\medicine\templates\medicine\form_medicine.html:11
+#: .\medicine\templates\patient\form_patient.html:11
 msgid "Register"
 msgstr "Register"
 
-#: .\medicine\templates\medicine\list_medicines.html:18
-msgid "Filters"
-msgstr "Filters"
-
-#: .\medicine\templates\medicine\list_medicines.html:114
+#: .\medicine\templates\medicine\list_medicines.html:17
+#: .\medicine\templates\patient\list_patients.html:17
 msgid "Insert"
 msgstr "Insert"
 
@@ -236,102 +245,84 @@ msgstr "Insert"
 msgid "Medicine Detail"
 msgstr "Medicine Detail"
 
-#: .\senioren\settings.py:137
-msgid "Portuguese"
-msgstr "Portuguese"
+#: .\medicine\templates\patient\deactivate_patient.html:6
+#: .\medicine\templates\patient\deactivate_patient.html:10
+msgid "Deactivate Patient"
+msgstr "Deactivate Patient"
 
-#: .\senioren\settings.py:138
-msgid "English"
-msgstr "English"
+#: .\medicine\templates\patient\form_patient.html:7
+#: .\medicine\templates\patient\list_patients.html:8
+#: .\medicine\templates\patient\list_patients.html:12
+msgid "Patient Register"
+msgstr "Patient Register"
 
-#: .\templates\base.html:61
-msgid "Records"
-msgstr "Records"
+#: .\medicine\templates\patient\patient_detail.html:6
+#: .\medicine\templates\patient\patient_detail.html:10
+msgid "Patient Detail"
+msgstr "Patient Detail"
 
-#: .\templates\base.html:158
-msgid "made by"
-msgstr "made by"
+#~ msgid "Filters"
+#~ msgstr "Filters"
 
-#: .\templates\utils\forms\form_back_btn.html:3
-#: .\templates\utils\forms\form_back_btn.html:4
-msgid "Back"
-msgstr "Back"
+#~ msgid "Portuguese"
+#~ msgstr "Portuguese"
 
-#: .\templates\utils\forms\form_cancel_btn.html:4
-#: .\templates\utils\forms\form_cancel_btn.html:5
-msgid "Cancel"
-msgstr "Cancel"
+#~ msgid "English"
+#~ msgstr "English"
 
-#: .\templates\utils\forms\form_deactivate_btn.html:5
-#: .\templates\utils\forms\form_deactivate_btn.html:6
-#: .\templates\utils\tables\thead_actions.html:4
-msgid "Deactivate"
-msgstr "Deactivate"
+#~ msgid "Records"
+#~ msgstr "Records"
 
-#: .\templates\utils\forms\form_save_btn.html:5
-#: .\templates\utils\forms\form_save_btn.html:6
-msgid "Save"
-msgstr "Save"
+#~ msgid "made by"
+#~ msgstr "made by"
 
-#: .\templates\utils\tables\thead_actions.html:5
-msgid "History"
-msgstr "History"
+#~ msgid "Back"
+#~ msgstr "Back"
 
-#: .\user\admin.py:41
-msgid "Password"
-msgstr "Password"
+#~ msgid "Cancel"
+#~ msgstr "Cancel"
 
-#: .\user\admin.py:43
-msgid ""
-"Raw passwords are not stored, so there is no way to see this user’s "
-"password, but you can change the password using <a href=\"{}\">this form</a>."
-msgstr ""
-"Raw passwords are not stored, so there is no way to see this user’s "
-"password, but you can change the password using this form."
+#~ msgid "Save"
+#~ msgstr "Save"
 
-#: .\user\admin.py:68
-msgid "Personal info"
-msgstr "Personal info"
+#~ msgid "History"
+#~ msgstr "History"
 
-#: .\user\admin.py:69
-msgid "Permissions"
-msgstr "Permissions"
+#~ msgid "Password"
+#~ msgstr "Password"
 
-#: .\user\admin.py:72
-msgid "Important dates"
-msgstr "Important dates"
+#~ msgid "Raw passwords are not stored, so there is no way to see this user’s password, but you can change the password using <a href=\"{}\">this form</a>."
+#~ msgstr "Raw passwords are not stored, so there is no way to see this user’s password, but you can change the password using this form."
 
-#: .\user\models.py:19
-msgid "Email"
-msgstr "Email"
+#~ msgid "Personal info"
+#~ msgstr "Personal info"
 
-#: .\user\models.py:25
-msgid "Staff status"
-msgstr "Staff status"
+#~ msgid "Permissions"
+#~ msgstr "Permissions"
 
-#: .\user\models.py:27
-msgid "Designates whether the user can log into this admin site."
-msgstr "Designates whether the user can log into this admin site."
+#~ msgid "Important dates"
+#~ msgstr "Important dates"
 
-#: .\user\models.py:33
-msgid ""
-"Designates whether this user should be treated as active. Unselect this "
-"instead of deleting accounts."
-msgstr ""
-"Designates whether this user should be treated as active. Unselect this "
-"instead of deleting accounts."
+#~ msgid "Email"
+#~ msgstr "Email"
 
-#: .\user\models.py:38
-msgid "Date joined"
-msgstr "Date joined"
+#~ msgid "Staff status"
+#~ msgstr "Staff status"
 
-#: .\user\models.py:52
-msgid "User"
-msgstr "User"
+#~ msgid "Designates whether the user can log into this admin site."
+#~ msgstr "Designates whether the user can log into this admin site."
 
-#: .\user\models.py:53
-msgid "Users"
-msgstr "Users"
+#~ msgid "Designates whether this user should be treated as active. Unselect this instead of deleting accounts."
+#~ msgstr "Designates whether this user should be treated as active. Unselect this instead of deleting accounts."
+
+#~ msgid "Date joined"
+#~ msgstr "Date joined"
+
+#~ msgid "User"
+#~ msgstr "User"
+
+#~ msgid "Users"
+#~ msgstr "Users"
 
 #~ msgid "Password Confirmation"
 #~ msgstr "Password Confirmation"
