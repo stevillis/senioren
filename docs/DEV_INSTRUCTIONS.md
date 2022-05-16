@@ -27,11 +27,14 @@ python manage.py runserver
 1. Gererate translations
 - Python
     ```shell
-    python .\manage.py makemessages -l pt_BR -l en -i *.txt
+    python manage.py makemessages -l pt_BR -l en -i *.txt
     ```
 - JavaScript
     ```shell
-    python .\manage.py makemessages -d djangojs -l pt_BR en -i *.txt
+    python manage.py makemessages -d djangojs -l pt_BR
+    ```
+    ```shell
+    python manage.py makemessages -d djangojs -l en
     ```
 
 2. Edit the .po files with Poedit
