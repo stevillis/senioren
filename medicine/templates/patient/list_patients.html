@@ -5,26 +5,25 @@
 {% load static %}
 
 {% block title %}
-    {% trans 'Medicine Register' %}
+    {% trans 'Patient Register' %}
 {% endblock title %}
 
 {% block content_title %}
-    {% trans 'Medicine Register' %}
+    {% trans 'Patient Register' %}
 {% endblock content_title %}
 
 {% block content %}
     <div class="my-4">
-        <a class="btn btn-small btn-primary" href="{% url 'medicine:medicine-create' %}">{% trans 'Insert' %}</a>
+        <a class="btn btn-small btn-primary" href="{% url 'medicine:patient-create' %}">{% trans 'Insert' %}</a>
     </div>
 
-    <table id="gridMedicine" class="table table-striped table-bordered" style="width: 100%">
+    <table id="gridPatient" class="table table-striped table-bordered" style="width: 100%">
         <thead>
         <tr>
             <th>{{ model|get_verbose_name:'name' }}</th>
-            <th>{{ model|get_verbose_name:'description' }}</th>
-            <th>{{ model|get_verbose_name:'batch' }}</th>
-            <th>{{ model|get_verbose_name:'expiration_date' }}</th>
-            <th>{{ model|get_verbose_name:'stock_qty' }}</th>
+            <th>{{ model|get_verbose_name:'cpf' }}</th>
+            <th>{{ model|get_verbose_name:'birth_date' }}</th>
+            <th>{{ model|get_verbose_name:'phone' }}</th>
             {% include 'utils/tables/thead_actions.html' %}
         </tr>
         </thead>

@@ -78,7 +78,7 @@
 
         <!-- Nav Item - Medicines -->
         <li class="nav-item text-center">
-            <a class="nav-link collapsed" href="{% url 'medicine:list' %}">
+            <a class="nav-link collapsed" href="{% url 'medicine:medicine-list' %}">
                 <i class="fas fa-fw fa-pills"></i>
                 <span>{% trans 'Medicines' %}</span>
             </a>
@@ -86,7 +86,7 @@
 
         <!-- Nav Item - Patients -->
         <li class="nav-item text-center">
-            <a class="nav-link collapsed" href="#">
+            <a class="nav-link collapsed" href="{% url 'medicine:patient-list' %}">
                 <i class="fas fa-fw fa-hospital-user"></i>
                 <span>{% trans 'Patients' %}</span>
             </a>
@@ -187,6 +187,9 @@
 
 <!-- Internationalization: in JavaScript code -->
 <script src="{% url 'javascript-catalog' %}"></script>
+
+<!-- jQuery Mask Plugin -->
+<script src="{% static 'vendor/jQueryMaskPlugin/jquery.mask.min.js' %}"></script>
 
 {% block custom_script %}
 

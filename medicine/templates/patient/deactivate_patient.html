@@ -3,11 +3,11 @@
 {% load custom_tags %}
 
 {% block title %}
-    {% trans 'Deactivate Medicine' %}
+    {% trans 'Deactivate Patient' %}
 {% endblock title %}
 
 {% block content_title %}
-    {% trans 'Deactivate Medicine' %}
+    {% trans 'Deactivate Patient' %}
 {% endblock content_title %}
 
 {% block content %}
@@ -18,87 +18,127 @@
                         <span class="font-weight-bold">
                             {% trans 'Code' %}:
                         </span>
-                    {{ medicine.id }}
+                    {{ patient.id }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5 class="card-title">
                         <span class="font-weight-bold">
-                            {{ medicine|get_verbose_name:'name' }}:
+                            {{ patient|get_verbose_name:'name' }}:
                         </span>
-                    {{ medicine.name }}
+                    {{ patient.name }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5 class="card-title">
                         <span class="font-weight-bold">
-                            {{ medicine|get_verbose_name:'description' }}:
+                            {{ patient|get_verbose_name:'social_name' }}:
                         </span>
-                    {{ medicine.description }}
+                    {{ patient.social_name }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5 class="card-title">
                         <span class="font-weight-bold">
-                            {{ medicine|get_verbose_name:'batch' }}:
+                            {{ patient|get_verbose_name:'cpf' }}:
                         </span>
-                    {{ medicine.batch }}
+                    {{ patient.cpf }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5 class="card-title">
                         <span class="font-weight-bold">
-                            {{ medicine|get_verbose_name:'expiration_date' }}:
+                            {{ patient|get_verbose_name:'rg' }}:
                         </span>
-                    {{ medicine.expiration_date|date:"d/m/Y" }}
+                    {{ patient.rg }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5 class="card-title">
                         <span class="font-weight-bold">
-                            {{ medicine|get_verbose_name:'stock_qty' }}:
+                            {{ patient|get_verbose_name:'birth_date' }}:
                         </span>
-                    {{ medicine.stock_qty }}
+                    {{ patient.birth_date }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5 class="card-title">
+                        <span class="font-weight-bold">
+                            {{ patient|get_verbose_name:'marital_status' }}:
+                        </span>
+                    {{ patient.marital_status }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5 class="card-title">
+                        <span class="font-weight-bold">
+                            {{ patient|get_verbose_name:'place_of_birth' }}:
+                        </span>
+                    {{ patient.place_of_birth }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5 class="card-title">
+                        <span class="font-weight-bold">
+                            {{ patient|get_verbose_name:'gender' }}:
+                        </span>
+                    {{ patient.gender }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5 class="card-title">
+                        <span class="font-weight-bold">
+                            {{ patient|get_verbose_name:'phone' }}:
+                        </span>
+                    {{ patient.phone }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5 class="card-title">
+                        <span class="font-weight-bold">
+                            {{ patient|get_verbose_name:'observation' }}:
+                        </span>
+                    {{ patient.observation }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5>
                         <span class="font-weight-bold">
-                            {{ medicine|get_verbose_name:'created_by' }}:
+                            {{ patient|get_verbose_name:'created_by' }}:
                         </span>
-                    {{ medicine.created_by|default_if_none:"" }}
+                    {{ patient.created_by|default_if_none:"" }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5>
                         <span class="font-weight-bold">
-                            {{ medicine|get_verbose_name:'created_at' }}:
+                            {{ patient|get_verbose_name:'created_at' }}:
                         </span>
-                    {{ medicine.created_at|date:"d/m/Y" }} {{ medicine.created_at|time:"H:i:s" }}
+                    {{ patient.created_at|date:"d/m/Y" }} {{ patient.created_at|time:"H:i:s" }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5>
                     <span class="font-weight-bold">
-                        {{ medicine|get_verbose_name:'updated_by' }}:
+                        {{ patient|get_verbose_name:'updated_by' }}:
                     </span>
-                    {{ medicine.updated_by|default_if_none:"" }}
+                    {{ patient.updated_by|default_if_none:"" }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5>
                     <span class="font-weight-bold">
-                        {{ medicine|get_verbose_name:'updated_at' }}:
+                        {{ patient|get_verbose_name:'updated_at' }}:
                     </span>
-                    {{ medicine.updated_at|date:"d/m/Y" }} {{ medicine.updated_at|time:"H:i:s" }}
+                    {{ patient.updated_at|date:"d/m/Y" }} {{ patient.updated_at|time:"H:i:s" }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5>
                     <span class="font-weight-bold">
-                        {{ medicine|get_verbose_name:'is_active' }}:
+                        {{ patient|get_verbose_name:'is_active' }}:
                     </span>
-                    {% if medicine.is_active %}
+                    {% if patient.is_active %}
                         {% include 'utils/icons/icon_check_circle.html' %}
                     {% else %}
                         {% include 'utils/icons/icon_times_circle.html' %}
@@ -112,7 +152,7 @@
         <div class="my-4 text-center">
             <ul class="list-inline m-0">
                 <li class="list-inline-item">
-                    <a href="{% url 'medicine:medicine-list' %}">
+                    <a href="{% url 'medicine:patient-list' %}">
                         {% include 'utils/forms/form_cancel_btn.html' %}
                     </a>
                 </li>
