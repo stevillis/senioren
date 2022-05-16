@@ -5,6 +5,28 @@ from user.models import CustomUser
 
 from medicine.managers import ActiveManager
 
+MARITAL_STATUS_MARRIED_CHOICE = (1, _('Married'))
+MARITAL_STATUS_WIDOWED_CHOICE = (2, _('Widowed'))
+MARITAL_STATUS_SEPARATED_CHOICE = (3, _('Separated'))
+MARITAL_STATUS_DIVORCED_CHOICE = (4, _('Divorced'))
+MARITAL_STATUS_SINGLE_CHOICE = (5, _('Single'))
+MARITAL_STATUS_CHOICES = (
+    MARITAL_STATUS_MARRIED_CHOICE,
+    MARITAL_STATUS_WIDOWED_CHOICE,
+    MARITAL_STATUS_SEPARATED_CHOICE,
+    MARITAL_STATUS_DIVORCED_CHOICE,
+    MARITAL_STATUS_SINGLE_CHOICE,
+)
+
+GENDER_MALE_CHOICE = ('M', _('Male'))
+GENDER_FEMALE_CHOICE = ('F', _('Female'))
+GENDER_OTHER_CHOICE = ('', '')
+GENDER_CHOICES = (
+    GENDER_OTHER_CHOICE,
+    GENDER_MALE_CHOICE,
+    GENDER_FEMALE_CHOICE,
+)
+
 
 class BaseModel(models.Model):
     """Define common fields used by other Models by inheritance"""
@@ -150,27 +172,6 @@ class Medicine(BaseModel):
 
 class Patient(BaseModel):
     """Patient Model"""
-    MARITAL_STATUS_MARRIED_CHOICE = (1, _('Married'))
-    MARITAL_STATUS_WIDOWED_CHOICE = (2, _('Widowed'))
-    MARITAL_STATUS_SEPARATED_CHOICE = (3, _('Separated'))
-    MARITAL_STATUS_DIVORCED_CHOICE = (4, _('Divorced'))
-    MARITAL_STATUS_SINGLE_CHOICE = (5, _('Single'))
-    MARITAL_STATUS_CHOICES = (
-        MARITAL_STATUS_MARRIED_CHOICE,
-        MARITAL_STATUS_WIDOWED_CHOICE,
-        MARITAL_STATUS_SEPARATED_CHOICE,
-        MARITAL_STATUS_DIVORCED_CHOICE,
-        MARITAL_STATUS_SINGLE_CHOICE,
-    )
-
-    GENDER_MALE_CHOICE = (1, _('Male'))
-    GENDER_FEMALE_CHOICE = (2, _('Female'))
-    GENDER_OTHER_CHOICE = (0, '')
-    GENDER_CHOICES = (
-        GENDER_MALE_CHOICE,
-        GENDER_FEMALE_CHOICE,
-        GENDER_OTHER_CHOICE,
-    )
 
     name = models.CharField(
         verbose_name=_('Name'),
@@ -178,59 +179,72 @@ class Patient(BaseModel):
         null=False,
         blank=False
     )
+
     social_name = models.CharField(
         verbose_name=_('Social Name'),
         max_length=80,
         null=False,
         blank=True
     )
+
     cpf = models.CharField(
         verbose_name=_('CPF'),
         max_length=11,
         null=False,
         blank=False
     )
+
     rg = models.CharField(
         verbose_name=_('RG'),
         max_length=20,
         null=False,
         blank=False
     )
+
     birth_date = models.DateField(
         verbose_name=_('Birth Date'),
         null=False,
         blank=False
     )
+
     marital_status = models.IntegerField(
         verbose_name=_('Marital Status'),
         choices=MARITAL_STATUS_CHOICES,
         null=False,
         blank=False
     )
+
     place_of_birth = models.CharField(
         verbose_name=_('Place of Birth'),
         max_length=80,
         null=False,
         blank=True
     )
-    gender = models.IntegerField(
+
+    gender = models.CharField(
+        max_length=2,
         verbose_name=_('Gender'),
         choices=GENDER_CHOICES,
         null=False,
         blank=True
     )
+
     phone = models.CharField(
         verbose_name=_('Phone'),
         max_length=20,
         null=False,
         blank=True
     )
+
     observation = models.CharField(
         verbose_name=_('Observation'),
         max_length=200,
         null=False,
         blank=True
     )
+
+    objects = models.Manager()
+    active_manager = ActiveManager()
 
     class Meta:
         """Metadata options"""
@@ -402,6 +416,96 @@ class MedicineHistory(HistoryBaseModel):
         """Metadata options"""
         verbose_name = _('Medicine History')
         verbose_name_plural = _('Medicine Histories')
+        ordering = ('-id',)
+
+    def __str__(self):  # pylint: disable=invalid-str-returned
+        return self.name
+
+
+class PatientHistory(HistoryBaseModel):
+    """Patient Model"""
+
+    name = models.CharField(
+        verbose_name=_('Name'),
+        max_length=80,
+        null=True,
+        blank=True
+    )
+
+    social_name = models.CharField(
+        verbose_name=_('Social Name'),
+        max_length=80,
+        null=True,
+        blank=True
+    )
+
+    cpf = models.CharField(
+        verbose_name=_('CPF'),
+        max_length=11,
+        null=True,
+        blank=True
+    )
+
+    rg = models.CharField(
+        verbose_name=_('RG'),
+        max_length=20,
+        null=True,
+        blank=True
+    )
+
+    birth_date = models.DateField(
+        verbose_name=_('Birth Date'),
+        null=True,
+        blank=True
+    )
+
+    marital_status = models.IntegerField(
+        verbose_name=_('Marital Status'),
+        choices=MARITAL_STATUS_CHOICES,
+        null=True,
+        blank=True
+    )
+
+    place_of_birth = models.CharField(
+        verbose_name=_('Place of Birth'),
+        max_length=80,
+        null=True,
+        blank=True
+    )
+
+    gender = models.CharField(
+        max_length=2,
+        verbose_name=_('Gender'),
+        choices=GENDER_CHOICES,
+        null=True,
+        blank=True
+    )
+
+    phone = models.CharField(
+        verbose_name=_('Phone'),
+        max_length=20,
+        null=True,
+        blank=True
+    )
+
+    observation = models.CharField(
+        verbose_name=_('Observation'),
+        max_length=200,
+        null=True,
+        blank=True
+    )
+
+    patient = models.ForeignKey(
+        Patient,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
+    class Meta:
+        """Metadata options"""
+        verbose_name = _('Patient History')
+        verbose_name_plural = _('Patient Histories')
         ordering = ('-id',)
 
     def __str__(self):  # pylint: disable=invalid-str-returned
