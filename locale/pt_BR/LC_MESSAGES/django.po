@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-14 03:53-0400\n"
+"POT-Creation-Date: 2022-05-16 00:23-0400\n"
 "PO-Revision-Date: 2022-05-14 03:03-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,224 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
-
-#: .\medicine\admin.py:119 .\medicine\admin.py:139 .\medicine\admin.py:225
-#: .\medicine\admin.py:241 .\medicine\models.py:262 .\medicine\models.py:303
-#: .\medicine\models.py:344
-msgid "Nursing Professional"
-msgstr "Enfermeiro"
-
-#: .\medicine\admin.py:129 .\medicine\admin.py:236 .\medicine\models.py:237
-#: .\medicine\models.py:339
-msgid "Patient"
-msgstr "Paciente"
-
-#: .\medicine\admin.py:134 .\medicine\models.py:188
-msgid "CPF"
-msgstr "CPF"
-
-#: .\medicine\models.py:12 .\medicine\models.py:56
-msgid "Created at"
-msgstr "Criado em"
-
-#: .\medicine\models.py:16 .\medicine\models.py:61
-msgid "Updated at"
-msgstr "Atualizado em"
-
-#: .\medicine\models.py:21 .\medicine\models.py:67
-msgid "Created by"
-msgstr "Criado por"
-
-#: .\medicine\models.py:29 .\medicine\models.py:75
-msgid "Updated by"
-msgstr "Atualizado por"
-
-#: .\medicine\models.py:36 .\medicine\models.py:82 .\user\models.py:30
-msgid "Active"
-msgstr "Ativo"
-
-#: .\medicine\models.py:41 .\medicine\models.py:89
-msgid "Deactivated by"
-msgstr "Desativado por"
-
-#: .\medicine\models.py:109 .\medicine\models.py:176 .\medicine\models.py:248
-#: .\medicine\models.py:365 .\user\models.py:13
-msgid "Name"
-msgstr "Nome"
-
-#: .\medicine\models.py:115 .\medicine\models.py:371
-msgid "Description"
-msgstr "Descrição"
-
-#: .\medicine\models.py:121 .\medicine\models.py:377
-msgid "Batch"
-msgstr "Lote"
-
-#: .\medicine\models.py:127 .\medicine\models.py:383
-msgid "Expiration date"
-msgstr "Data de vencimento"
-
-#: .\medicine\models.py:132 .\medicine\models.py:388
-msgid "Stock quantity"
-msgstr "Quantidade em estoque"
-
-#: .\medicine\models.py:143 .\medicine\templates\medicine\form_medicine.html:11
-msgid "Medicine"
-msgstr "Medicamento"
-
-#: .\medicine\models.py:144 .\medicine\models.py:335 .\templates\base.html:83
-msgid "Medicines"
-msgstr "Medicamentos"
-
-#: .\medicine\models.py:153
-msgid "Married"
-msgstr "Casado(a)"
-
-#: .\medicine\models.py:154
-msgid "Widowed"
-msgstr "Viúvo(a)"
-
-#: .\medicine\models.py:155
-msgid "Separated"
-msgstr "Separado(a)"
-
-#: .\medicine\models.py:156
-msgid "Divorced"
-msgstr "Divorciado(a)"
-
-#: .\medicine\models.py:157
-msgid "Single"
-msgstr "Solteiro(a)"
-
-#: .\medicine\models.py:166
-msgid "Male"
-msgstr "Masculino"
-
-#: .\medicine\models.py:167
-msgid "Female"
-msgstr "Feminino"
-
-#: .\medicine\models.py:182
-msgid "Social Name"
-msgstr "Nome Social"
-
-#: .\medicine\models.py:194
-msgid "RG"
-msgstr "RG"
-
-#: .\medicine\models.py:200
-msgid "Birth Date"
-msgstr "Data de Nascimento"
-
-#: .\medicine\models.py:205
-msgid "Marital Status"
-msgstr "Estado Civil"
-
-#: .\medicine\models.py:211
-msgid "Place of Birth"
-msgstr "Naturalidade"
-
-#: .\medicine\models.py:217
-msgid "Gender"
-msgstr "Gênero"
-
-#: .\medicine\models.py:223
-msgid "Phone"
-msgstr "Telefone"
-
-#: .\medicine\models.py:229 .\medicine\models.py:289 .\medicine\models.py:327
-msgid "Observation"
-msgstr "Observação"
-
-#: .\medicine\models.py:238 .\templates\base.html:91
-msgid "Patients"
-msgstr "Pacientes"
-
-#: .\medicine\models.py:254
-msgid "COREN"
-msgstr "COREN"
-
-#: .\medicine\models.py:263 .\templates\base.html:99
-msgid "Nursing Professionals"
-msgstr "Enfermeiros"
-
-#: .\medicine\models.py:273 .\medicine\models.py:321
-msgid "Schedule"
-msgstr "Horário"
-
-#: .\medicine\models.py:279
-msgid "Heart pressure"
-msgstr "Pressão"
-
-#: .\medicine\models.py:284
-msgid "Glucose"
-msgstr "Glicemia"
-
-#: .\medicine\models.py:310
-msgid "Medical Evaluation"
-msgstr "Avaliação Médica"
-
-#: .\medicine\models.py:311 .\templates\base.html:75
-msgid "Medical Evaluations"
-msgstr "Avaliações Médicas"
-
-#: .\medicine\models.py:350
-msgid "Medication"
-msgstr "Medicação"
-
-#: .\medicine\models.py:351 .\templates\base.html:67
-msgid "Medications"
-msgstr "Medicações"
-
-#: .\medicine\models.py:403
-msgid "Medicine History"
-msgstr "Histórico de Medicamento"
-
-#: .\medicine\models.py:404
-msgid "Medicine Histories"
-msgstr "Históricos de Medicamento"
-
-#: .\medicine\services\util_service.py:14
-msgid "not found"
-msgstr "não encontrado"
-
-#: .\medicine\templates\medicine\deactivate_medicine.html:6
-#: .\medicine\templates\medicine\deactivate_medicine.html:10
-msgid "Deactivate Medicine"
-msgstr "Desativar Medicamento"
-
-#: .\medicine\templates\medicine\deactivate_medicine.html:19
-#: .\medicine\templates\medicine\medicine_detail.html:19
-msgid "Code"
-msgstr "Código"
-
-#: .\medicine\templates\medicine\form_medicine.html:7
-#: .\medicine\templates\medicine\list_medicines.html:7
-#: .\medicine\templates\medicine\list_medicines.html:11
-msgid "Medicine Register"
-msgstr "Registro de Medicamento"
-
-#: .\medicine\templates\medicine\form_medicine.html:11
-#: .\templates\utils\tables\thead_actions.html:3
-msgid "Edit"
-msgstr "Editar"
-
-#: .\medicine\templates\medicine\form_medicine.html:11
-msgid "Register"
-msgstr "Cadastrar"
-
-#: .\medicine\templates\medicine\list_medicines.html:18
-msgid "Filters"
-msgstr "Filtros"
-
-#: .\medicine\templates\medicine\list_medicines.html:114
-msgid "Insert"
-msgstr "Cadastrar"
-
-#: .\medicine\templates\medicine\medicine_detail.html:6
-#: .\medicine\templates\medicine\medicine_detail.html:10
-msgid "Medicine Detail"
-msgstr "Visualizar Medicamento"
 
 #: .\senioren\settings.py:137
 msgid "Portuguese"
@@ -247,6 +29,26 @@ msgstr "Inglês"
 #: .\templates\base.html:61
 msgid "Records"
 msgstr "Cadastros"
+
+#: .\templates\base.html:67
+msgid "Medications"
+msgstr "Medicações"
+
+#: .\templates\base.html:75
+msgid "Medical Evaluations"
+msgstr "Avaliações Médicas"
+
+#: .\templates\base.html:83
+msgid "Medicines"
+msgstr "Medicamentos"
+
+#: .\templates\base.html:91
+msgid "Patients"
+msgstr "Pacientes"
+
+#: .\templates\base.html:99
+msgid "Nursing Professionals"
+msgstr "Enfermeiros"
 
 #: .\templates\base.html:158
 msgid "made by"
@@ -272,6 +74,10 @@ msgstr "Desativar"
 #: .\templates\utils\forms\form_save_btn.html:6
 msgid "Save"
 msgstr "Salvar"
+
+#: .\templates\utils\tables\thead_actions.html:3
+msgid "Edit"
+msgstr "Editar"
 
 #: .\templates\utils\tables\thead_actions.html:5
 msgid "History"
@@ -301,6 +107,10 @@ msgstr "Permissões"
 msgid "Important dates"
 msgstr "Datas importantes"
 
+#: .\user\models.py:13
+msgid "Name"
+msgstr "Nome"
+
 #: .\user\models.py:19
 msgid "Email"
 msgstr "Email"
@@ -312,6 +122,10 @@ msgstr "Membro da equipe"
 #: .\user\models.py:27
 msgid "Designates whether the user can log into this admin site."
 msgstr "Indica que usuário consegue acessar este site de administração."
+
+#: .\user\models.py:30
+msgid "Active"
+msgstr "Ativo"
 
 #: .\user\models.py:33
 msgid ""
@@ -332,6 +146,138 @@ msgstr "Usuário"
 #: .\user\models.py:53
 msgid "Users"
 msgstr "Usuários"
+
+#~ msgid "Nursing Professional"
+#~ msgstr "Enfermeiro"
+
+#~ msgid "Patient"
+#~ msgstr "Paciente"
+
+#~ msgid "CPF"
+#~ msgstr "CPF"
+
+#~ msgid "Created at"
+#~ msgstr "Criado em"
+
+#~ msgid "Updated at"
+#~ msgstr "Atualizado em"
+
+#~ msgid "Created by"
+#~ msgstr "Criado por"
+
+#~ msgid "Updated by"
+#~ msgstr "Atualizado por"
+
+#~ msgid "Deactivated by"
+#~ msgstr "Desativado por"
+
+#~ msgid "Description"
+#~ msgstr "Descrição"
+
+#~ msgid "Batch"
+#~ msgstr "Lote"
+
+#~ msgid "Expiration date"
+#~ msgstr "Data de vencimento"
+
+#~ msgid "Stock quantity"
+#~ msgstr "Quantidade em estoque"
+
+#~ msgid "Medicine"
+#~ msgstr "Medicamento"
+
+#~ msgid "Married"
+#~ msgstr "Casado(a)"
+
+#~ msgid "Widowed"
+#~ msgstr "Viúvo(a)"
+
+#~ msgid "Separated"
+#~ msgstr "Separado(a)"
+
+#~ msgid "Divorced"
+#~ msgstr "Divorciado(a)"
+
+#~ msgid "Single"
+#~ msgstr "Solteiro(a)"
+
+#~ msgid "Male"
+#~ msgstr "Masculino"
+
+#~ msgid "Female"
+#~ msgstr "Feminino"
+
+#~ msgid "Social Name"
+#~ msgstr "Nome Social"
+
+#~ msgid "RG"
+#~ msgstr "RG"
+
+#~ msgid "Birth Date"
+#~ msgstr "Data de Nascimento"
+
+#~ msgid "Marital Status"
+#~ msgstr "Estado Civil"
+
+#~ msgid "Place of Birth"
+#~ msgstr "Naturalidade"
+
+#~ msgid "Gender"
+#~ msgstr "Gênero"
+
+#~ msgid "Phone"
+#~ msgstr "Telefone"
+
+#~ msgid "Observation"
+#~ msgstr "Observação"
+
+#~ msgid "COREN"
+#~ msgstr "COREN"
+
+#~ msgid "Schedule"
+#~ msgstr "Horário"
+
+#~ msgid "Heart pressure"
+#~ msgstr "Pressão"
+
+#~ msgid "Glucose"
+#~ msgstr "Glicemia"
+
+#~ msgid "Medical Evaluation"
+#~ msgstr "Avaliação Médica"
+
+#~ msgid "Medication"
+#~ msgstr "Medicação"
+
+#~ msgid "Medicine History"
+#~ msgstr "Histórico de Medicamento"
+
+#~ msgid "Medicine Histories"
+#~ msgstr "Históricos de Medicamento"
+
+#~ msgid "not found"
+#~ msgstr "não encontrado"
+
+#~ msgid "Deactivate Medicine"
+#~ msgstr "Desativar Medicamento"
+
+#~ msgid "Code"
+#~ msgstr "Código"
+
+#~ msgid "Medicine Register"
+#~ msgstr "Registro de Medicamento"
+
+#~ msgid "Register"
+#~ msgstr "Cadastrar"
+
+#~ msgid "Filters"
+#~ msgstr "Filtros"
+
+#~ msgid "Insert"
+#~ msgstr "Cadastrar"
+
+#~ msgid "Medicine Detail"
+#~ msgstr "Visualizar Medicamento"
 
 #~ msgid "Password Confirmation"
 #~ msgstr "Confirmação de Senha"
