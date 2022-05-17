@@ -271,6 +271,9 @@ class NursingProfessional(BaseModel):
         blank=False
     )
 
+    objects = models.Manager()
+    active_manager = ActiveManager()
+
     class Meta:
         """Metadata options"""
         verbose_name = _('Nursing Professional')
@@ -374,7 +377,7 @@ class Medication(BaseModel):
 
 
 class MedicineHistory(HistoryBaseModel):
-    """Medicine Model"""
+    """Medicine History Model"""
     name = models.CharField(
         verbose_name=_('Name'),
         max_length=80,
@@ -423,7 +426,7 @@ class MedicineHistory(HistoryBaseModel):
 
 
 class PatientHistory(HistoryBaseModel):
-    """Patient Model"""
+    """Patient History Model"""
 
     name = models.CharField(
         verbose_name=_('Name'),
@@ -506,6 +509,39 @@ class PatientHistory(HistoryBaseModel):
         """Metadata options"""
         verbose_name = _('Patient History')
         verbose_name_plural = _('Patient Histories')
+        ordering = ('-id',)
+
+    def __str__(self):  # pylint: disable=invalid-str-returned
+        return self.name
+
+
+class NursingProfessionalHistory(HistoryBaseModel):
+    """Nursing Professional Model"""
+    name = models.CharField(
+        verbose_name=_('Name'),
+        max_length=80,
+        null=True,
+        blank=True
+    )
+
+    coren = models.CharField(
+        verbose_name=_('COREN'),
+        max_length=20,
+        null=True,
+        blank=True
+    )
+
+    nursing_professional = models.ForeignKey(
+        NursingProfessional,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
+    class Meta:
+        """Metadata options"""
+        verbose_name = _('Nursing Professional History')
+        verbose_name_plural = _('Nursing Professional Histories')
         ordering = ('-id',)
 
     def __str__(self):  # pylint: disable=invalid-str-returned
