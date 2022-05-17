@@ -22,7 +22,9 @@ msgstr ""
 msgid "Edit"
 msgstr "Editar"
 
-#: .\static\js\grid-datatables.js:196
+#: .\static\js\grid-datatables.js:143
+#: .\static\js\grid-datatables.js:233
+#: .\static\js\grid-datatables.js:310
 msgid "Deactivate"
 msgstr "Desativar"
 
