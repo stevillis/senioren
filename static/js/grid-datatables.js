@@ -271,13 +271,90 @@ function initDataTable(grids) {
           });
           addTableResizeEvent(gridName);
           break;
+        case "gridNursingProfessional":
+          $(document).ready(function () {
+            const host = document.location.origin;
+            $(`#${gridName}`).DataTable({
+              serverSide: true,
+              sAjaxSource: `${host}/medicines/nursing-professional/data/`,
+              order: [[1, "asc"]],
+              columns: [
+                {
+                  name: "name",
+                  data: 1,
+                  render: function (data, type, row, meta) {
+                    return `<a href="/medicines/nursing-professional/detail/${row[0]}/">${data}</a>`;
+                  },
+                },
+                { name: "coren", data: 2 },
+                {
+                  searchable: false,
+                  render: function (data, type, row, meta) {
+                    const editMsg = gettext("Edit");
+                    return `
+                      <td>
+                        <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
+                          title="${editMsg}">
+                            <a href="/medicines/nursing-professional/update/${row[0]}/" class="btn btn-warning btn-xs"
+                              data-title="${editMsg}" aria-label="${editMsg}">
+                                <span class="fa fa-edit"></span>
+                            </a>
+                        </p>
+                    </td>
+                    `;
+                  },
+                },
+                {
+                  searchable: false,
+                  render: function (data, type, row, meta) {
+                    const deactivateMsg = gettext("Deactivate");
+                    return `
+                      <td>
+                        <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
+                          title="${deactivateMsg}">
+                            <a href="/medicines/nursing-professional/deactivate/${row[0]}/" class="btn btn-danger btn-xs"
+                              data-title="${deactivateMsg}" aria-label="${deactivateMsg}">
+                                <span class="fa fa-trash"></span>
+                            </a>
+                        </p>
+                    </td>
+                    `;
+                  },
+                },
+                {
+                  searchable: false,
+                  render: function (data, type, row, meta) {
+                    const historyMsg = gettext("History");
+                    return `
+                      <td>
+                        <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
+                          title="${historyMsg}">
+                            <a href="#" class="btn btn-info btn-xs"
+                              data-title="${historyMsg}" aria-label="${historyMsg}">
+                                <span class="fa fa-history"></span>
+                            </a>
+                        </p>
+                    </td>
+                    `;
+                  },
+                },
+              ],
+              language: {
+                url: pathName,
+              },
+              searching: true,
+              responsive: true,
+            });
+          });
+          addTableResizeEvent(gridName);
+          break;
       }
     }
   });
 }
 
 window.addEventListener("DOMContentLoaded", (event) => {
-  const grids = ["gridMedicine", "gridPatient"];
+  const grids = ["gridMedicine", "gridPatient", "gridNursingProfessional"];
 
   initDataTable(grids);
 });

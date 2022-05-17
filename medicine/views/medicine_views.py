@@ -101,7 +101,7 @@ def update_medicine(request: WSGIRequest, pk: int) -> HttpResponse:
 
 def deactivate_medicine(request: WSGIRequest, pk: int) -> HttpResponse:
     found_medicine = medicine_service.get_medicine_by_id(pk)
-    if request.method == "POST":
+    if request.method == 'POST':
         user = request.user
         found_medicine.updated_by = user
         medicine_service.deactivate_medicine(found_medicine, user)

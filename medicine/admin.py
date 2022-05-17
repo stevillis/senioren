@@ -3,7 +3,8 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
 from medicine.models import (MedicalEvaluation, Medication, Medicine,
-                             MedicineHistory, NursingProfessional, Patient,
+                             MedicineHistory, NursingProfessional,
+                             NursingProfessionalHistory, Patient,
                              PatientHistory)
 from medicine.services.history.medicine_history_service import \
     create_medicine_history
@@ -14,6 +15,7 @@ READ_ONLY_BASE_FIELDS = ['created_at', 'updated_at', ]
 
 def custom_titled_filter(title):
     """Custom title for Django Admin filter"""
+
     class Wrapper(admin.FieldListFilter):
         def __new__(cls, *args, **kwargs):
             instance = admin.FieldListFilter.create(*args, **kwargs)
@@ -356,6 +358,48 @@ class PatientHistoryAdmin(admin.ModelAdmin):
 
     def get_actions(self, request):
         actions = super(PatientHistoryAdmin, self).get_actions(request)
+        return remove_delete_actions(actions)
+
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+        return super().change_view(request, object_id, form_url, extra_context=dict(show_delete=False))
+
+
+@admin.register(NursingProfessionalHistory)
+class NursingProfessionalHistoryAdmin(admin.ModelAdmin):
+    """Nursing Professional History Model for Django Admin"""
+    fields = [
+        'name',
+        'coren',
+        'created_at',
+        'created_by',
+        'updated_at',
+        'updated_by',
+    ] + BASE_FIELDS
+    list_display = (
+        'name',
+        'coren',
+    )
+    list_filter = []
+    search_fields = ('name', 'coren',)
+
+    def save_model(self, request, obj, form, change):
+        obj = set_created_by(request, obj)
+        if change:
+            obj = set_updated_by(request, obj)
+        super().save_model(request, obj, form, change)
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+    def get_actions(self, request):
+        actions = super(NursingProfessionalHistoryAdmin,
+                        self).get_actions(request)
         return remove_delete_actions(actions)
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
