@@ -312,7 +312,6 @@ class MedicalEvaluation(BaseModel):
     patient = models.ForeignKey(
         Patient,
         on_delete=models.CASCADE,
-        related_name='medical_evaluations',
         null=False,
         blank=False
     )
@@ -546,3 +545,58 @@ class NursingProfessionalHistory(HistoryBaseModel):
 
     def __str__(self):  # pylint: disable=invalid-str-returned
         return self.name
+
+
+class MedicalEvaluationHistory(HistoryBaseModel):
+    """MedicalEvaluationHistory Model"""
+    schedule = models.DateTimeField(
+        verbose_name=_('Schedule'),
+        null=True,
+        blank=True,
+        default=timezone.now
+    )
+    heart_pressure = models.CharField(
+        verbose_name=_('Heart pressure'),
+        max_length=20,
+        null=True,
+        blank=True)
+    glucose = models.CharField(
+        verbose_name=_('Glucose'),
+        max_length=20,
+        null=True,
+        blank=True)
+    observation = models.CharField(
+        verbose_name=_('Observation'),
+        max_length=200,
+        null=True,
+        blank=True
+    )
+
+    patient = models.ForeignKey(
+        Patient,
+        on_delete=models.CASCADE,
+        related_name='medical_evaluations',
+        null=True,
+        blank=True
+    )
+
+    nursing_professional = models.ForeignKey(
+        verbose_name=_('Nursing Professional'),
+        to=NursingProfessional,
+        on_delete=models.CASCADE
+    )
+
+    medical_evaluation = models.ForeignKey(
+        verbose_name=_('Medical Evaluation'),
+        to=MedicalEvaluation,
+        on_delete=models.CASCADE
+    )
+
+    class Meta:
+        """Metadata options"""
+        verbose_name = _('Medical Evaluation History')
+        verbose_name_plural = _('Medical Evaluations Histories')
+        ordering = ('-schedule',)
+
+    def __str__(self):
+        return str(self.schedule)
