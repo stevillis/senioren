@@ -60,9 +60,9 @@ function handleTableResizeEvent(tableName) {
   const gridWrapper = getGridWrapper(tableName);
   switch (tableName) {
     case "gridMedicine":
-      addOrRemoveScroll(gridWrapper, 600);
-      break;
     case "gridPatient":
+    case "gridNursingProfessional":
+    case "gridMedicalEvaluation":
       addOrRemoveScroll(gridWrapper, 600);
       break;
   }
@@ -78,6 +78,17 @@ function formatDate(date) {
     padTo2Digits(date.getMonth() + 1),
     date.getFullYear(),
   ].join("/");
+}
+
+function formatDateTime(date) {
+  const day = padTo2Digits(date.getDate());
+  const month = padTo2Digits(date.getMonth() + 1);
+  const year = date.getFullYear();
+  const hours = padTo2Digits(date.getHours());
+  const minutes = padTo2Digits(date.getMinutes());
+  const seconds = padTo2Digits(date.getSeconds());
+
+  return `${[day, month, year].join("/")} ${hours}:${minutes}:${seconds}`;
 }
 
 function initDataTable(grids) {
@@ -122,6 +133,7 @@ function initDataTable(grids) {
                 },
                 {
                   searchable: false,
+                  orderable: false,
                   render: function (data, type, row, meta) {
                     const editMsg = gettext("Edit");
                     return `
@@ -139,6 +151,7 @@ function initDataTable(grids) {
                 },
                 {
                   searchable: false,
+                  orderable: false,
                   render: function (data, type, row, meta) {
                     const deactivateMsg = gettext("Deactivate");
                     return `
@@ -156,6 +169,7 @@ function initDataTable(grids) {
                 },
                 {
                   searchable: false,
+                  orderable: false,
                   render: function (data, type, row, meta) {
                     const historyMsg = gettext("History");
                     return `
@@ -212,6 +226,7 @@ function initDataTable(grids) {
                 },
                 {
                   searchable: false,
+                  orderable: false,
                   render: function (data, type, row, meta) {
                     const editMsg = gettext("Edit");
                     return `
@@ -229,6 +244,7 @@ function initDataTable(grids) {
                 },
                 {
                   searchable: false,
+                  orderable: false,
                   render: function (data, type, row, meta) {
                     const deactivateMsg = gettext("Deactivate");
                     return `
@@ -246,6 +262,7 @@ function initDataTable(grids) {
                 },
                 {
                   searchable: false,
+                  orderable: false,
                   render: function (data, type, row, meta) {
                     const historyMsg = gettext("History");
                     return `
@@ -289,6 +306,7 @@ function initDataTable(grids) {
                 { name: "coren", data: 2 },
                 {
                   searchable: false,
+                  orderable: false,
                   render: function (data, type, row, meta) {
                     const editMsg = gettext("Edit");
                     return `
@@ -306,6 +324,7 @@ function initDataTable(grids) {
                 },
                 {
                   searchable: false,
+                  orderable: false,
                   render: function (data, type, row, meta) {
                     const deactivateMsg = gettext("Deactivate");
                     return `
@@ -323,6 +342,98 @@ function initDataTable(grids) {
                 },
                 {
                   searchable: false,
+                  orderable: false,
+                  render: function (data, type, row, meta) {
+                    const historyMsg = gettext("History");
+                    return `
+                      <td>
+                        <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
+                          title="${historyMsg}">
+                            <a href="#" class="btn btn-info btn-xs"
+                              data-title="${historyMsg}" aria-label="${historyMsg}">
+                                <span class="fa fa-history"></span>
+                            </a>
+                        </p>
+                    </td>
+                    `;
+                  },
+                },
+              ],
+              language: {
+                url: pathName,
+              },
+              searching: true,
+              responsive: true,
+            });
+          });
+          addTableResizeEvent(gridName);
+          break;
+        case "gridMedicalEvaluation":
+          $(document).ready(function () {
+            const host = document.location.origin;
+            $(`#${gridName}`).DataTable({
+              serverSide: true,
+              sAjaxSource: `${host}/medicines/medical-evaluation/data/`,
+              order: [[1, "asc"]],
+              columns: [
+                {
+                  name: "patient",
+                  data: 5,
+                  render: function (data, type, row, meta) {
+                    return `<a href="/medicines/medical-evaluation/detail/${row[0]}/">${data}</a>`;
+                  },
+                },
+                {
+                  name: "schedule",
+                  data: 1,
+                  render: function (data, type, row, meta) {
+                    const date = `${row[1]}`;
+                    return `${formatDateTime(new Date(date))}`;
+                  },
+                },
+                { name: "hurt_pressure", data: 2 },
+                { name: "glucose", data: 3 },
+                { name: "observation", data: 4 },
+                { name: "nursing_professional", data: 6 },
+                {
+                  searchable: false,
+                  orderable: false,
+                  render: function (data, type, row, meta) {
+                    const editMsg = gettext("Edit");
+                    return `
+                      <td>
+                        <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
+                          title="${editMsg}">
+                            <a href="/medicines/medical-evaluation/update/${row[0]}/" class="btn btn-warning btn-xs"
+                              data-title="${editMsg}" aria-label="${editMsg}">
+                                <span class="fa fa-edit"></span>
+                            </a>
+                        </p>
+                    </td>
+                    `;
+                  },
+                },
+                {
+                  searchable: false,
+                  orderable: false,
+                  render: function (data, type, row, meta) {
+                    const deactivateMsg = gettext("Deactivate");
+                    return `
+                      <td>
+                        <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
+                          title="${deactivateMsg}">
+                            <a href="/medicines/medical-evaluation/deactivate/${row[0]}/" class="btn btn-danger btn-xs"
+                              data-title="${deactivateMsg}" aria-label="${deactivateMsg}">
+                                <span class="fa fa-trash"></span>
+                            </a>
+                        </p>
+                    </td>
+                    `;
+                  },
+                },
+                {
+                  searchable: false,
+                  orderable: false,
                   render: function (data, type, row, meta) {
                     const historyMsg = gettext("History");
                     return `
@@ -354,7 +465,12 @@ function initDataTable(grids) {
 }
 
 window.addEventListener("DOMContentLoaded", (event) => {
-  const grids = ["gridMedicine", "gridPatient", "gridNursingProfessional"];
+  const grids = [
+    "gridMedicine",
+    "gridPatient",
+    "gridNursingProfessional",
+    "gridMedicalEvaluation",
+  ];
 
   initDataTable(grids);
 });

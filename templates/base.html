@@ -29,6 +29,10 @@
 
     <!-- Datatables -->
     <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+
+    {% block custom_css %}
+
+    {% endblock custom_css %}
 </head>
 
 <body id="page-top">
@@ -70,7 +74,7 @@
 
         <!-- Nav Item - Medical Evaluations -->
         <li class="nav-item text-center">
-            <a class="nav-link collapsed" href="#">
+            <a class="nav-link collapsed" href="{% url 'medicine:medical-evaluation-list' %}">
                 <i class="fas fa-fw fa-clinic-medical"></i>
                 <span>{% trans 'Medical Evaluations' %}</span>
             </a>
