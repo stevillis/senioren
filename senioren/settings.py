@@ -55,11 +55,19 @@ INSTALLED_APPS_ROOT = [
 INSTALLED_APPS_3RD_PARTY = [
     'daterangefilter',
     'django_filters',
-    "corsheaders",
+    'corsheaders',
+    'tempus_dominus',
 ]
 
-INSTALLED_APPS = INSTALLED_APPS_DJANGO + \
-    INSTALLED_APPS_3RD_PARTY + INSTALLED_APPS_ROOT
+INSTALLED_APPS_3RD_PARTY_BEFORE_DJANGO_APPS = [
+    'dal',
+    'dal_select2',
+]
+
+INSTALLED_APPS = INSTALLED_APPS_3RD_PARTY_BEFORE_DJANGO_APPS + \
+    INSTALLED_APPS_DJANGO + \
+    INSTALLED_APPS_3RD_PARTY + \
+    INSTALLED_APPS_ROOT
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -167,5 +175,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'user.CustomUser'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+TEMPUS_DOMINUS_DATETIME_FORMAT = 'DD-MM-YYYY HH:mm:ss'
 
 django_heroku.settings(locals())

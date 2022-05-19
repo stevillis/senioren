@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load custom_tags %}
+
+{% block title %}
+    {% trans 'Deactivate Medical Evaluation' %}
+{% endblock title %}
+
+{% block content_title %}
+    {% trans 'Deactivate Medical Evaluation' %}
+{% endblock content_title %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <div class="row mb-3">
+                <h5 class="card-title">
+                        <span class="font-weight-bold">
+                            {% trans 'Code' %}:
+                        </span>
+                    {{ medical_evaluation.id }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5 class="card-title">
+                        <span class="font-weight-bold">
+                            {{ medical_evaluation|get_verbose_name:'schedule' }}:
+                        </span>
+                    {{ medical_evaluation.schedule|date:"d/m/Y" }} {{ medical_evaluation.schedule|time:"H:i:s" }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5 class="card-title">
+                        <span class="font-weight-bold">
+                            {{ medical_evaluation|get_verbose_name:'heart_pressure' }}:
+                        </span>
+                    {{ medical_evaluation.heart_pressure }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5 class="card-title">
+                        <span class="font-weight-bold">
+                            {{ medical_evaluation|get_verbose_name:'glucose' }}:
+                        </span>
+                    {{ medical_evaluation.glucose }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5 class="card-title">
+                        <span class="font-weight-bold">
+                            {{ medical_evaluation|get_verbose_name:'observation' }}:
+                        </span>
+                    {{ medical_evaluation.observation }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5 class="card-title">
+                        <span class="font-weight-bold">
+                            {{ medical_evaluation|get_verbose_name:'patient' }}:
+                        </span>
+                    {{ medical_evaluation.patient }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5 class="card-title">
+                        <span class="font-weight-bold">
+                            {{ medical_evaluation|get_verbose_name:'nursing_professional' }}:
+                        </span>
+                    {{ medical_evaluation.nursing_professional }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5>
+                        <span class="font-weight-bold">
+                            {{ medical_evaluation|get_verbose_name:'created_by' }}:
+                        </span>
+                    {{ medical_evaluation.created_by|default_if_none:"" }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5>
+                        <span class="font-weight-bold">
+                            {{ medical_evaluation|get_verbose_name:'created_at' }}:
+                        </span>
+                    {{ medical_evaluation.created_at|date:"d/m/Y" }} {{ medical_evaluation.created_at|time:"H:i:s" }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5>
+                    <span class="font-weight-bold">
+                        {{ medical_evaluation|get_verbose_name:'updated_by' }}:
+                    </span>
+                    {{ medical_evaluation.updated_by|default_if_none:"" }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5>
+                    <span class="font-weight-bold">
+                        {{ medical_evaluation|get_verbose_name:'updated_at' }}:
+                    </span>
+                    {{ medical_evaluation.updated_at|date:"d/m/Y" }} {{ medical_evaluation.updated_at|time:"H:i:s" }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5>
+                    <span class="font-weight-bold">
+                        {{ medical_evaluation|get_verbose_name:'is_active' }}:
+                    </span>
+                    {% if medical_evaluation.is_active %}
+                        {% include 'utils/icons/icon_check_circle.html' %}
+                    {% else %}
+                        {% include 'utils/icons/icon_times_circle.html' %}
+                    {% endif %}
+                </h5>
+            </div>
+        </div>
+    </div>
+    <form method="post" autocomplete="off">
+        {% csrf_token %}
+        <div class="my-4 text-center">
+            <ul class="list-inline m-0">
+                <li class="list-inline-item">
+                    <a href="{% url 'medicine:medical-evaluation-list' %}">
+                        {% include 'utils/forms/form_cancel_btn.html' %}
+                    </a>
+                </li>
+                {% include 'utils/forms/form_deactivate_btn.html' %}
+            </ul>
+        </div>
+    </form>
+{% endblock content %}

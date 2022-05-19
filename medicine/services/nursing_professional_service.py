@@ -4,7 +4,7 @@ from .history.nursing_professional_history_service import \
 from .util_service import get_object_by_id_or_404
 
 
-def get_patient_none():
+def get_nursing_professional_none():
     return NursingProfessional.objects.none()
 
 
@@ -28,7 +28,8 @@ def create_nursing_professional(nursing_professional):
         is_active=nursing_professional.is_active,
     )
     create_nursing_professional_history(
-        created_nursing_professional, insert=True)
+        created_nursing_professional, insert=True
+    )
 
 
 def update_nursing_professional(old_nursing_professional, new_nursing_professional):
