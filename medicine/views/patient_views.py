@@ -1,5 +1,6 @@
 from typing import Tuple
 
+from dal import autocomplete
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -168,3 +169,15 @@ class PatientListView(ServerSideDatatableView):
         'birth_date',
         'phone',
     ]
+
+
+class PatientAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        if not self.request.user.is_authenticated:
+            return patient_service.get_patient_none()
+
+        qs = patient_service.get_all_patients()
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs

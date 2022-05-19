@@ -2,12 +2,18 @@ from daterangefilter.filters import DateRangeFilter
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
-from medicine.models import (MedicalEvaluation, Medication, Medicine,
-                             MedicineHistory, NursingProfessional,
-                             NursingProfessionalHistory, Patient,
-                             PatientHistory, MedicalEvaluationHistory)
+from medicine.models import (MedicalEvaluation, MedicalEvaluationHistory,
+                             Medication, Medicine, MedicineHistory,
+                             NursingProfessional, NursingProfessionalHistory,
+                             Patient, PatientHistory)
+from medicine.services.history.medical_evaluation_history_service import \
+    create_medical_evaluation_history
 from medicine.services.history.medicine_history_service import \
     create_medicine_history
+from medicine.services.history.nursing_professional_history_service import \
+    create_nursing_professional_history
+from medicine.services.history.patient_history_service import \
+    create_patient_history
 
 BASE_FIELDS = ['is_active', ]
 READ_ONLY_BASE_FIELDS = ['created_at', 'updated_at', ]
@@ -53,13 +59,15 @@ def remove_delete_actions(actions):
 @admin.register(Medicine)
 class MedicineAdmin(admin.ModelAdmin):
     """Medicine Model for Django Admin"""
+
     fields = [
-                 'name',
-                 'description',
-                 'batch',
-                 'expiration_date',
-                 'stock_qty',
-             ] + BASE_FIELDS
+        'name',
+        'description',
+        'batch',
+        'expiration_date',
+        'stock_qty',
+    ] + BASE_FIELDS
+
     list_display = (
         'name',
         'description',
@@ -68,10 +76,12 @@ class MedicineAdmin(admin.ModelAdmin):
         'stock_qty',
         'is_active',
     )
+
     list_filter = [
         'is_active',
         ('expiration_date', DateRangeFilter),
     ]
+
     search_fields = ('name', 'description',)
 
     def save_model(self, request, obj, form, change):
@@ -102,13 +112,16 @@ class MedicineAdmin(admin.ModelAdmin):
 @admin.register(MedicalEvaluation)
 class MedicalEvaluationAdmin(admin.ModelAdmin):
     """MedicalEvaluation Model for Django Admin"""
+
     fields = [
-                 'nursing_professional',
-                 'patient',
-                 'schedule',
-                 'heart_pressure',
-                 'glucose',
-                 'observation', ] + BASE_FIELDS
+        'nursing_professional',
+        'patient',
+        'schedule',
+        'heart_pressure',
+        'glucose',
+        'observation',
+    ] + BASE_FIELDS
+
     list_display = (
         'get_patient_name',
         'schedule',
@@ -116,6 +129,7 @@ class MedicalEvaluationAdmin(admin.ModelAdmin):
         'glucose',
         'observation',
     )
+
     list_filter = [
         (
             'nursing_professional__name',
@@ -123,6 +137,7 @@ class MedicalEvaluationAdmin(admin.ModelAdmin):
         ),
         ('schedule', DateRangeFilter),
     ]
+
     search_fields = (
         'nursing_professional__name',
         'patient__name',
@@ -151,22 +166,29 @@ class MedicalEvaluationAdmin(admin.ModelAdmin):
             obj = set_updated_by(request, obj)
         super().save_model(request, obj, form, change)
 
+        if change:
+            create_medical_evaluation_history(obj)
+        else:
+            create_medical_evaluation_history(obj, insert=True)
+
 
 @admin.register(Patient)
 class PatientAdmin(admin.ModelAdmin):
     """Patient Model for Django Admin"""
+
     fields = [
-                 'name',
-                 'social_name',
-                 'cpf',
-                 'rg',
-                 'birth_date',
-                 'marital_status',
-                 'place_of_birth',
-                 'gender',
-                 'phone',
-                 'observation'
-             ] + BASE_FIELDS
+        'name',
+        'social_name',
+        'cpf',
+        'rg',
+        'birth_date',
+        'marital_status',
+        'place_of_birth',
+        'gender',
+        'phone',
+        'observation'
+    ] + BASE_FIELDS
+
     list_display = (
         'name',
         'cpf',
@@ -176,11 +198,13 @@ class PatientAdmin(admin.ModelAdmin):
         'phone',
         'is_active',
     )
+
     list_filter = [
         'gender',
         'marital_status',
         ('birth_date', DateRangeFilter),
     ]
+
     search_fields = ('name', 'cpf', 'rg')
 
     def save_model(self, request, obj, form, change):
@@ -191,13 +215,21 @@ class PatientAdmin(admin.ModelAdmin):
             obj = set_updated_by(request, obj)
         super().save_model(request, obj, form, change)
 
+        if change:
+            create_patient_history(obj)
+        else:
+            create_patient_history(obj, insert=True)
+
 
 @admin.register(NursingProfessional)
 class NursingProfessionalAdmin(admin.ModelAdmin):
     """Nursing Professional Model for Django Admin"""
     fields = ['name', 'coren', ] + BASE_FIELDS
+
     list_display = ('name', 'coren',)
+
     # list_filter = [] # TODO: decide wich fields can be used here, if necessary
+
     search_fields = ('name', 'coren',)
 
     def save_model(self, request, obj, form, change):
@@ -206,23 +238,31 @@ class NursingProfessionalAdmin(admin.ModelAdmin):
             obj = set_updated_by(request, obj)
         super().save_model(request, obj, form, change)
 
+        if change:
+            create_nursing_professional_history(obj)
+        else:
+            create_nursing_professional_history(obj, insert=True)
+
 
 @admin.register(Medication)
 class MedicationAdmin(admin.ModelAdmin):
     """Medication Model for Django Admin"""
+
     fields = [
-                 'nursing_professional',
-                 'patient',
-                 'medicine',
-                 'schedule',
-                 'observation',
-             ] + BASE_FIELDS
+        'nursing_professional',
+        'patient',
+        'medicine',
+        'schedule',
+        'observation',
+    ] + BASE_FIELDS
+
     list_display = (
         'get_patient_name',
         'get_nursing_professional_name',
         'schedule',
         'observation',
     )
+
     list_filter = [
         (
             'nursing_professional__name',
@@ -230,6 +270,7 @@ class MedicationAdmin(admin.ModelAdmin):
         ),
         ('schedule', DateRangeFilter)
     ]
+
     search_fields = (
         'nursing_professional__name',
         'patient__name',
@@ -263,17 +304,19 @@ class MedicationAdmin(admin.ModelAdmin):
 @admin.register(MedicineHistory)
 class MedicineHistoryAdmin(admin.ModelAdmin):
     """Medicine History Model for Django Admin"""
+
     fields = [
-                 'name',
-                 'description',
-                 'batch',
-                 'expiration_date',
-                 'stock_qty',
-                 'created_at',
-                 'created_by',
-                 'updated_at',
-                 'updated_by',
-             ] + BASE_FIELDS
+        'name',
+        'description',
+        'batch',
+        'expiration_date',
+        'stock_qty',
+        'created_at',
+        'created_by',
+        'updated_at',
+        'updated_by',
+    ] + BASE_FIELDS
+
     list_display = (
         'name',
         'description',
@@ -281,9 +324,11 @@ class MedicineHistoryAdmin(admin.ModelAdmin):
         'expiration_date',
         'stock_qty',
     )
+
     list_filter = [
         ('expiration_date', DateRangeFilter),
     ]
+
     search_fields = ('name', 'description',)
 
     def save_model(self, request, obj, form, change):
@@ -312,33 +357,37 @@ class MedicineHistoryAdmin(admin.ModelAdmin):
 @admin.register(PatientHistory)
 class PatientHistoryAdmin(admin.ModelAdmin):
     """Patient History Model for Django Admin"""
+
     fields = [
-                 'name',
-                 'social_name',
-                 'cpf',
-                 'rg',
-                 'birth_date',
-                 'marital_status',
-                 'place_of_birth',
-                 'gender',
-                 'phone',
-                 'observation',
-                 'created_at',
-                 'created_by',
-                 'updated_at',
-                 'updated_by',
-             ] + BASE_FIELDS
+        'name',
+        'social_name',
+        'cpf',
+        'rg',
+        'birth_date',
+        'marital_status',
+        'place_of_birth',
+        'gender',
+        'phone',
+        'observation',
+        'created_at',
+        'created_by',
+        'updated_at',
+        'updated_by',
+    ] + BASE_FIELDS
+
     list_display = (
         'name',
         'cpf',
         'birth_date',
         'phone',
     )
+
     list_filter = [
         'gender',
         'marital_status',
         ('birth_date', DateRangeFilter),
     ]
+
     search_fields = ('name', 'cpf', 'phone',)
 
     def save_model(self, request, obj, form, change):
@@ -367,19 +416,23 @@ class PatientHistoryAdmin(admin.ModelAdmin):
 @admin.register(NursingProfessionalHistory)
 class NursingProfessionalHistoryAdmin(admin.ModelAdmin):
     """Nursing Professional History Model for Django Admin"""
+
     fields = [
-                 'name',
-                 'coren',
-                 'created_at',
-                 'created_by',
-                 'updated_at',
-                 'updated_by',
-             ] + BASE_FIELDS
+        'name',
+        'coren',
+        'created_at',
+        'created_by',
+        'updated_at',
+        'updated_by',
+    ] + BASE_FIELDS
+
     list_display = (
         'name',
         'coren',
     )
+
     list_filter = []
+
     search_fields = ('name', 'coren',)
 
     def save_model(self, request, obj, form, change):
@@ -409,13 +462,14 @@ class NursingProfessionalHistoryAdmin(admin.ModelAdmin):
 @admin.register(MedicalEvaluationHistory)
 class MedicalEvaluationHistoryAdmin(admin.ModelAdmin):
     """Medical Evaluation History Model for Django Admin"""
+
     fields = [
-                 'nursing_professional',
-                 'patient',
-                 'medicine',
-                 'schedule',
-                 'observation',
-             ] + BASE_FIELDS
+        'nursing_professional',
+        'patient',
+        'medicine',
+        'schedule',
+        'observation',
+    ] + BASE_FIELDS
 
     list_display = (
         'get_patient_name',
@@ -423,6 +477,7 @@ class MedicalEvaluationHistoryAdmin(admin.ModelAdmin):
         'schedule',
         'observation',
     )
+
     list_filter = [
         (
             'nursing_professional__name',
@@ -430,6 +485,7 @@ class MedicalEvaluationHistoryAdmin(admin.ModelAdmin):
         ),
         ('schedule', DateRangeFilter)
     ]
+
     search_fields = (
         'nursing_professional__name',
         'patient__name',

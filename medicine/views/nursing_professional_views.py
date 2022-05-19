@@ -1,5 +1,6 @@
 from typing import Tuple
 
+from dal import autocomplete
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -116,3 +117,15 @@ class NursingProfessionalListView(ServerSideDatatableView):
         'name',
         'coren',
     ]
+
+
+class NursingProfessionalAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        if not self.request.user.is_authenticated:
+            return nursing_professional_service.get_nursing_professional_none()
+
+        qs = nursing_professional_service.get_all_nursing_professionals()
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs
