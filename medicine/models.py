@@ -392,6 +392,9 @@ class Medication(BaseModel):
         on_delete=models.CASCADE
     )
 
+    objects = models.Manager()
+    active_manager = ActiveManager()
+
     class Meta:
         """Metadata options"""
         verbose_name = _('Medication')
@@ -641,6 +644,55 @@ class MedicalEvaluationHistory(HistoryBaseModel):
         verbose_name = _('Medical Evaluation History')
         verbose_name_plural = _('Medical Evaluations Histories')
         ordering = ('-id',)
+
+    def __str__(self):
+        return str(self.schedule)
+
+
+class MedicationHistory(HistoryBaseModel):
+    """Metadata options"""
+
+    schedule = models.DateTimeField(
+        verbose_name=_('Schedule'),
+        null=True,
+        blank=True
+    )
+
+    observation = models.CharField(
+        verbose_name=_('Observation'),
+        max_length=200,
+        null=True,
+        blank=True
+    )
+
+    medicine = models.ManyToManyField(
+        to=Medicine,
+        verbose_name=_('Medicines')
+    )
+
+    patient = models.ForeignKey(
+        to=Patient,
+        verbose_name=_('Patient'),
+        on_delete=models.CASCADE,
+    )
+
+    nursing_professional = models.ForeignKey(
+        to=NursingProfessional,
+        verbose_name=_('Nursing Professional'),
+        on_delete=models.CASCADE
+    )
+
+    medication = models.ForeignKey(
+        verbose_name=_('Medication'),
+        to=Medication,
+        on_delete=models.CASCADE
+    )
+
+    class Meta:
+        """Metadata options"""
+        verbose_name = _('Medication History')
+        verbose_name_plural = _('Medication Histories')
+        ordering = ('-is_active', '-schedule',)
 
     def __str__(self):
         return str(self.schedule)
