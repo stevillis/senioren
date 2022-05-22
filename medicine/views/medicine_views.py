@@ -17,7 +17,13 @@ def get_cleaned_data(form: MedicineForm) -> Tuple:
     expiration_date = form.cleaned_data['expiration_date']
     stock_qty = form.cleaned_data['stock_qty']
 
-    return name, description, batch, expiration_date, stock_qty
+    return (
+        name,
+        description,
+        batch,
+        expiration_date,
+        stock_qty
+    )
 
 
 def list_medicines(request: WSGIRequest) -> HttpResponse:
@@ -26,7 +32,12 @@ def list_medicines(request: WSGIRequest) -> HttpResponse:
         'model': Medicine,
         'medicines': medicines
     }
-    return render(request, 'templates/medicine/list_medicines.html', context)
+
+    return render(
+        request=request,
+        template_name='templates/medicine/list_medicines.html',
+        context=context
+    )
 
 
 def medicine_detail(request: WSGIRequest, pk: int) -> HttpResponse:
@@ -34,15 +45,25 @@ def medicine_detail(request: WSGIRequest, pk: int) -> HttpResponse:
     context = {
         'medicine': found_medicine,
     }
-    return render(request, 'templates/medicine/medicine_detail.html', context)
+
+    return render(
+        request=request,
+        template_name='templates/medicine/medicine_detail.html',
+        context=context
+    )
 
 
 def create_medicine(request: WSGIRequest) -> HttpResponse:
     if request.method == 'POST':
         form = MedicineForm(request.POST)
         if form.is_valid():
-            name, description, batch, expiration_date, stock_qty = get_cleaned_data(
-                form)
+            (
+                name,
+                description,
+                batch,
+                expiration_date,
+                stock_qty
+            ) = get_cleaned_data(form)
             new_medicine = medicine.Medicine(
                 name=name,
                 description=description,
@@ -57,6 +78,7 @@ def create_medicine(request: WSGIRequest) -> HttpResponse:
                 deactivated_by=None,
             )
             medicine_service.create_medicine(new_medicine)
+
             return redirect('medicine:medicine-list')
     else:
         form = MedicineForm()
@@ -64,7 +86,12 @@ def create_medicine(request: WSGIRequest) -> HttpResponse:
         'form': form,
         'is_edit': False,
     }
-    return render(request, 'templates/medicine/form_medicine.html', context)
+
+    return render(
+        request=request,
+        template_name='templates/medicine/form_medicine.html',
+        context=context
+    )
 
 
 def update_medicine(request: WSGIRequest, pk: int) -> HttpResponse:
@@ -75,8 +102,13 @@ def update_medicine(request: WSGIRequest, pk: int) -> HttpResponse:
     form = MedicineForm(request.POST or None, instance=old_medicine)
     if request.method == 'POST':
         if form.is_valid():
-            name, description, batch, expiration_date, stock_qty = get_cleaned_data(
-                form)
+            (
+                name,
+                description,
+                batch,
+                expiration_date,
+                stock_qty
+            ) = get_cleaned_data(form)
             new_medicine = medicine.Medicine(
                 name=name,
                 description=description,
@@ -91,12 +123,19 @@ def update_medicine(request: WSGIRequest, pk: int) -> HttpResponse:
                 deactivated_by=old_medicine.deactivated_by,
             )
             medicine_service.update_medicine(old_medicine, new_medicine)
+
             return redirect('medicine:medicine-list')
+
     context = {
         'form': form,
         'is_edit': True,
     }
-    return render(request, 'templates/medicine/form_medicine.html', context)
+
+    return render(
+        request=request,
+        template_name='templates/medicine/form_medicine.html',
+        context=context
+    )
 
 
 def deactivate_medicine(request: WSGIRequest, pk: int) -> HttpResponse:
@@ -105,11 +144,18 @@ def deactivate_medicine(request: WSGIRequest, pk: int) -> HttpResponse:
         user = request.user
         found_medicine.updated_by = user
         medicine_service.deactivate_medicine(found_medicine, user)
+
         return redirect('medicine:medicine-list')
+
     context = {
         'medicine': found_medicine,
     }
-    return render(request, "templates/medicine/deactivate_medicine.html", context)
+
+    return render(
+        request=request,
+        template_name="templates/medicine/deactivate_medicine.html",
+        context=context
+    )
 
 
 class MedicineListView(ServerSideDatatableView):

@@ -1,5 +1,15 @@
 class NursingProfessional:
-    def __init__(self, name, coren, created_at, updated_at, created_by, updated_by, is_active, deactivated_by):
+    def __init__(
+        self,
+        name,
+        coren,
+        created_at,
+        updated_at,
+        created_by,
+        updated_by,
+        is_active,
+        deactivated_by
+    ):
         self.__name = name
         self.__coren = coren
         self.__created_at = created_at

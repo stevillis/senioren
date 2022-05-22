@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load custom_tags %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Medication Register' %}
+{% endblock title %}
+
+{% block custom_css %}
+    {# Include FontAwesome; required for icon display #}
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
+{% endblock custom_css %}
+
+{% block content_title %}
+    {% if is_edit %}{% trans 'Edit' %}{% else %}{% trans 'Register' %}{% endif %} {% trans 'Medication' %}
+{% endblock content_title %}
+
+{% block content %}
+    <form method="post" autocomplete="off" id="form-crud"
+          class="d-flex flex-column justify-content-center align-items-center box-shadow-whisper rounded rounded-3 mb-4">
+        {% csrf_token %}
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.schedule.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.schedule.id_for_label }}">
+                {{ form.schedule.label }} {% if form.schedule.field.required %}<span>*</span> {% endif %}
+            </label>
+            {% if form.schedule.errors %}
+                {{ form.schedule | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.schedule.errors|striptags }}</small>
+            {% else %}
+                {{ form.schedule | add_class:'form-control' }}
+            {% endif %}
+        </div>
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.observation.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.observation.id_for_label }}">
+                {{ form.observation.label }} {% if form.observation.field.required %}<span>*</span> {% endif %}
+            </label>
+            {% if form.observation.errors %}
+                {{ form.observation | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.observation.errors|striptags }}</small>
+            {% else %}
+                {{ form.observation | add_class:'form-control' }}
+            {% endif %}
+        </div>
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.medicine.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.medicine.id_for_label }}">
+                {{ form.medicine.label }} {% if form.medicine.field.required %}<span>*</span> {% endif %}
+            </label>
+            <br>
+            {% if form.medicine.errors %}
+                {{ form.medicine | add_class:'is-invalid' }}
+                <small class="text-danger">{{ form.medicine.errors|striptags }}</small>
+            {% else %}
+                {% for checkbox in form.medicine %}
+                    <div class="checkbox-row">
+                        <label>
+                            {{ checkbox.tag }} {{ checkbox.choice_label }}
+                        </label>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.patient.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.patient.id_for_label }}">
+                {{ form.patient.label }} {% if form.patient.field.required %}<span>*</span> {% endif %}
+            </label>
+            {% if form.patient.errors %}
+                {{ form.patient | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.patient.errors|striptags }}</small>
+            {% else %}
+                {{ form.patient | add_class:'form-control' }}
+            {% endif %}
+        </div>
+        <div class="form-group col-md-10 col-lg-8 col-xl-6 pt-4">
+            <label class="control-label {% if form.nursing_professional.field.required %}font-weight-bold{% endif %}"
+                   for="{{ form.nursing_professional.id_for_label }}">
+                {{ form.nursing_professional.label }} {% if form.nursing_professional.field.required %}
+                <span>*</span> {% endif %}
+            </label>
+            {% if form.nursing_professional.errors %}
+                {{ form.nursing_professional | add_class:'form-control is-invalid' }}
+                <small class="text-danger">{{ form.nursing_professional.errors|striptags }}</small>
+            {% else %}
+                {{ form.nursing_professional | add_class:'form-control' }}
+            {% endif %}
+        </div>
+
+        <div class="my-4 text-center">
+            <ul class="list-inline m-0">
+                <li class="list-inline-item">
+                    <a href="{% url 'medicine:medication-list' %}">
+                        {% include 'utils/forms/form_cancel_btn.html' %}
+                    </a>
+                </li>
+                {% include 'utils/forms/form_save_btn.html' %}
+            </ul>
+        </div>
+    </form>
+{% endblock content %}
+
+{% block custom_script %}
+    {# Django Tempus Dominus assets are included in `{{ form.media }}` #}
+    {{ form.media }}
+
+    <script type="text/javascript" src="{% static 'js/form-search-foreign-key.js' %}"></script>
+{% endblock custom_script %}
+

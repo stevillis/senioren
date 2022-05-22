@@ -34,7 +34,12 @@ def list_medical_evaluations(request: WSGIRequest) -> HttpResponse:
         'model': MedicalEvaluation,
         'medical_evaluations': medical_evaluations
     }
-    return render(request, 'templates/medical_evaluation/list_medical_evaluations.html', context)
+
+    return render(
+        request=request,
+        template_name='templates/medical_evaluation/list_medical_evaluations.html',
+        context=context
+    )
 
 
 def medical_evaluation_detail(request: WSGIRequest, pk: int) -> HttpResponse:
@@ -43,7 +48,12 @@ def medical_evaluation_detail(request: WSGIRequest, pk: int) -> HttpResponse:
     context = {
         'medical_evaluation': found_medical_evaluation,
     }
-    return render(request, 'templates/medical_evaluation/medical_evaluation_detail.html', context)
+
+    return render(
+        request=request,
+        template_name='templates/medical_evaluation/medical_evaluation_detail.html',
+        context=context
+    )
 
 
 def create_medical_evaluation(request: WSGIRequest) -> HttpResponse:
@@ -74,7 +84,9 @@ def create_medical_evaluation(request: WSGIRequest) -> HttpResponse:
                 deactivated_by=None,
             )
             medical_evaluation_service.create_medical_evaluation(
-                new_medical_evaluation)
+                new_medical_evaluation
+            )
+
             return redirect('medicine:medical-evaluation-list')
     else:
         form = MedicalEvaluationForm()
@@ -82,15 +94,21 @@ def create_medical_evaluation(request: WSGIRequest) -> HttpResponse:
         'form': form,
         'is_edit': False,
     }
-    return render(request, 'templates/medical_evaluation/form_medical_evaluation.html', context)
+
+    return render(
+        request=request,
+        template_name='templates/medical_evaluation/form_medical_evaluation.html',
+        context=context
+    )
 
 
 def update_medical_evaluation(request: WSGIRequest, pk: int) -> HttpResponse:
     old_medical_evaluation = medical_evaluation_service.get_medical_evaluation_by_id(
-        pk)
-    # old_medical_evaluation.birth_date = old_medical_evaluation.birth_date.strftime("%Y-%m-%d")
+        pk
+    )
     form = MedicalEvaluationForm(
-        request.POST or None, instance=old_medical_evaluation)
+        request.POST or None, instance=old_medical_evaluation
+    )
     if request.method == 'POST':
         if form.is_valid():
             (
@@ -118,27 +136,42 @@ def update_medical_evaluation(request: WSGIRequest, pk: int) -> HttpResponse:
             )
             medical_evaluation_service.update_medical_evaluation(
                 old_medical_evaluation, new_medical_evaluation)
+
             return redirect('medicine:medical-evaluation-list')
+
     context = {
         'form': form,
         'is_edit': True,
     }
-    return render(request, 'templates/medical_evaluation/form_medical_evaluation.html', context)
+
+    return render(
+        request=request,
+        template_name='templates/medical_evaluation/form_medical_evaluation.html',
+        context=context
+    )
 
 
 def deactivate_medical_evaluation(request: WSGIRequest, pk: int) -> HttpResponse:
     found_medical_evaluation = medical_evaluation_service.get_medical_evaluation_by_id(
-        pk)
+        pk
+    )
     if request.method == 'POST':
         user = request.user
         found_medical_evaluation.updated_by = user
         medical_evaluation_service.deactivate_medical_evaluation(
             found_medical_evaluation, user)
+
         return redirect('medicine:medical-evaluation-list')
+
     context = {
         'medical_evaluation': found_medical_evaluation,
     }
-    return render(request, "templates/medical_evaluation/deactivate_medical_evaluation.html", context)
+
+    return render(
+        request=request,
+        template_name="templates/medical_evaluation/deactivate_medical_evaluation.html",
+        context=context
+    )
 
 
 class MedicalEvaluationListView(ServerSideDatatableView):

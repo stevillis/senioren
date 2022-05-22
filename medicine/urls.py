@@ -6,6 +6,9 @@ from .views.medical_evaluation_views import (MedicalEvaluationListView,
                                              list_medical_evaluations,
                                              medical_evaluation_detail,
                                              update_medical_evaluation)
+from .views.medication_views import (MedicationListView, create_medication,
+                                     deactivate_medication, list_medications,
+                                     medication_detail, update_medication)
 from .views.medicine_views import (MedicineListView, create_medicine,
                                    deactivate_medicine, list_medicines,
                                    medicine_detail, update_medicine)
@@ -27,6 +30,7 @@ prefix_medicine_url = 'medicine'
 prefix_patient_url = 'patient'
 prefix_nursing_professional_url = 'nursing-professional'
 prefix_medical_evaluation_url = 'medical-evaluation'
+prefix_medication_url = 'medication'
 
 urlpatterns = [
     # Medicine
@@ -153,5 +157,33 @@ urlpatterns = [
         route=f'{prefix_medical_evaluation_url}/data/',
         view=MedicalEvaluationListView.as_view(),
         name='medical-evaluation-data'
+    ),
+
+    # Medication
+    path(
+        route=f'{prefix_medication_url}/list/',
+        view=list_medications,
+        name='medication-list'),
+    path(
+        route=f'{prefix_medication_url}/detail/<int:pk>/',
+        view=medication_detail,
+        name='medication-detail'),
+    path(
+        route=f'{prefix_medication_url}/create/',
+        view=create_medication,
+        name='medication-create'),
+    path(
+        route=f'{prefix_medication_url}/update/<int:pk>/',
+        view=update_medication,
+        name='medication-update'),
+    path(
+        route=f'{prefix_medication_url}/deactivate/<int:pk>/',
+        view=deactivate_medication,
+        name='medication-deactivate'
+    ),
+    path(
+        route=f'{prefix_medication_url}/data/',
+        view=MedicationListView.as_view(),
+        name='medication-data'
     ),
 ]

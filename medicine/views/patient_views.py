@@ -44,7 +44,12 @@ def list_patients(request: WSGIRequest) -> HttpResponse:
         'model': Patient,
         'patients': patients
     }
-    return render(request, 'templates/patient/list_patients.html', context)
+
+    return render(
+        request=request,
+        template_name='templates/patient/list_patients.html',
+        context=context
+    )
 
 
 def patient_detail(request: WSGIRequest, pk: int) -> HttpResponse:
@@ -52,7 +57,12 @@ def patient_detail(request: WSGIRequest, pk: int) -> HttpResponse:
     context = {
         'patient': found_patient,
     }
-    return render(request, 'templates/patient/patient_detail.html', context)
+
+    return render(
+        request=request,
+        template_name='templates/patient/patient_detail.html',
+        context=context
+    )
 
 
 def create_patient(request: WSGIRequest) -> HttpResponse:
@@ -89,6 +99,7 @@ def create_patient(request: WSGIRequest) -> HttpResponse:
                 deactivated_by=None,
             )
             patient_service.create_patient(new_patient)
+
             return redirect('medicine:patient-list')
     else:
         form = PatientForm()
@@ -96,7 +107,12 @@ def create_patient(request: WSGIRequest) -> HttpResponse:
         'form': form,
         'is_edit': False,
     }
-    return render(request, 'templates/patient/form_patient.html', context)
+
+    return render(
+        request=request,
+        template_name='templates/patient/form_patient.html',
+        context=context
+    )
 
 
 def update_patient(request: WSGIRequest, pk: int) -> HttpResponse:
@@ -138,12 +154,19 @@ def update_patient(request: WSGIRequest, pk: int) -> HttpResponse:
                 deactivated_by=old_patient.deactivated_by,
             )
             patient_service.update_patient(old_patient, new_patient)
+
             return redirect('medicine:patient-list')
+
     context = {
         'form': form,
         'is_edit': True,
     }
-    return render(request, 'templates/patient/form_patient.html', context)
+
+    return render(
+        request=request,
+        template_name='templates/patient/form_patient.html',
+        context=context
+    )
 
 
 def deactivate_patient(request: WSGIRequest, pk: int) -> HttpResponse:
@@ -152,11 +175,16 @@ def deactivate_patient(request: WSGIRequest, pk: int) -> HttpResponse:
         user = request.user
         found_patient.updated_by = user
         patient_service.deactivate_patient(found_patient, user)
+
         return redirect('medicine:patient-list')
     context = {
         'patient': found_patient,
     }
-    return render(request, "templates/patient/deactivate_patient.html", context)
+    return render(
+        request=request,
+        template_name="templates/patient/deactivate_patient.html",
+        context=context
+    )
 
 
 class PatientListView(ServerSideDatatableView):

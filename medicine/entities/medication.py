@@ -1,23 +1,23 @@
-class Medicine:
+class Medication:
     def __init__(
-        self,
-        name,
-        description,
-        batch,
-        expiration_date,
-        stock_qty,
-        created_at,
-        updated_at,
-        created_by,
-        updated_by,
-        is_active,
-        deactivated_by
+            self,
+            schedule,
+            observation,
+            medicine,
+            patient,
+            nursing_professional,
+            created_at,
+            updated_at,
+            created_by,
+            updated_by,
+            is_active,
+            deactivated_by
     ):
-        self.__name = name
-        self.__description = description
-        self.__batch = batch
-        self.__expiration_date = expiration_date
-        self.__stock_qty = stock_qty
+        self.__schedule = schedule
+        self.__observation = observation
+        self.__medicine = medicine
+        self.__patient = patient
+        self.__nursing_professional = nursing_professional
         self.__created_at = created_at
         self.__updated_at = updated_at
         self.__created_by = created_by
@@ -26,44 +26,44 @@ class Medicine:
         self.__deactivated_by = deactivated_by
 
     @property
-    def name(self):
-        return self.__name
+    def schedule(self):
+        return self.__schedule
 
-    @name.setter
-    def name(self, name):
-        self.__name = name
-
-    @property
-    def description(self):
-        return self.__description
-
-    @description.setter
-    def description(self, description):
-        self.__description = description
+    @schedule.setter
+    def schedule(self, schedule):
+        self.__schedule = schedule
 
     @property
-    def batch(self):
-        return self.__batch
+    def observation(self):
+        return self.__observation
 
-    @batch.setter
-    def batch(self, batch):
-        self.__batch = batch
-
-    @property
-    def expiration_date(self):
-        return self.__expiration_date
-
-    @expiration_date.setter
-    def expiration_date(self, expiration_date):
-        self.__expiration_date = expiration_date
+    @observation.setter
+    def observation(self, observation):
+        self.__observation = observation
 
     @property
-    def stock_qty(self):
-        return self.__stock_qty
+    def medicine(self):
+        return self.__medicine
 
-    @stock_qty.setter
-    def stock_qty(self, stock_qty):
-        self.__stock_qty = stock_qty
+    @medicine.setter
+    def medicine(self, medicine):
+        self.__medicine = medicine
+
+    @property
+    def patient(self):
+        return self.__patient
+
+    @patient.setter
+    def patient(self, patient):
+        self.__patient = patient
+
+    @property
+    def nursing_professional(self):
+        return self.__nursing_professional
+
+    @nursing_professional.setter
+    def nursing_professional(self, nursing_professional):
+        self.__nursing_professional = nursing_professional
 
     @property
     def created_at(self):
@@ -114,4 +114,4 @@ class Medicine:
         self.__deactivated_by = deactivated_by
 
     def __str__(self):
-        return f'{self.__name}, {self.__created_at}'
+        return f'{self.__schedule}, {self.__created_at}'

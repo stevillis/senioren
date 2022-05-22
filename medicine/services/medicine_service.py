@@ -10,7 +10,7 @@ def get_medicine_none():
 
 
 def get_all_medicines():
-    return Medicine.active_manager.all().order_by('name', '-created_at')
+    return Medicine.active_manager.all()
 
 
 def list_medicines(request):
