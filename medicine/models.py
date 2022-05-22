@@ -375,7 +375,7 @@ class Medication(BaseModel):
         blank=True
     )
 
-    medicine = models.ManyToManyField(
+    medicines = models.ManyToManyField(
         Medicine,
         verbose_name=_('Medicines')
     )
@@ -665,7 +665,7 @@ class MedicationHistory(HistoryBaseModel):
         blank=True
     )
 
-    medicine = models.ManyToManyField(
+    medicines = models.ManyToManyField(
         to=Medicine,
         verbose_name=_('Medicines')
     )

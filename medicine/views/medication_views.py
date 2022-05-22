@@ -13,14 +13,14 @@ from medicine.services import medication_service
 def get_cleaned_data(form: MedicationForm) -> Tuple:
     schedule = form.cleaned_data['schedule']
     observation = form.cleaned_data['observation']
-    medicine = form.cleaned_data['medicine']
+    medicines = form.cleaned_data['medicines']
     patient = form.cleaned_data['patient']
     nursing_professional = form.cleaned_data['nursing_professional']
 
     return (
         schedule,
         observation,
-        medicine,
+        medicines,
         patient,
         nursing_professional,
     )
@@ -62,7 +62,7 @@ def create_medication(request: WSGIRequest) -> HttpResponse:
             (
                 schedule,
                 observation,
-                medicine,
+                medicines,
                 patient,
                 nursing_professional,
             ) = get_cleaned_data(form)
@@ -70,7 +70,7 @@ def create_medication(request: WSGIRequest) -> HttpResponse:
             new_medication = medication.Medication(
                 schedule=schedule,
                 observation=observation,
-                medicine=medicine,
+                medicines=medicines,
                 patient=patient,
                 nursing_professional=nursing_professional,
                 created_at=None,
@@ -111,7 +111,7 @@ def update_medication(request: WSGIRequest, pk: int) -> HttpResponse:
             (
                 schedule,
                 observation,
-                medicine,
+                medicines,
                 patient,
                 nursing_professional,
             ) = get_cleaned_data(form)
@@ -119,7 +119,7 @@ def update_medication(request: WSGIRequest, pk: int) -> HttpResponse:
             new_medication = medication.Medication(
                 schedule=schedule,
                 observation=observation,
-                medicine=medicine,
+                medicines=medicines,
                 patient=patient,
                 nursing_professional=nursing_professional,
                 created_at=old_medication.created_at,

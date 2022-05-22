@@ -29,8 +29,8 @@ def create_medication(medication):
         is_active=medication.is_active,
     )
 
-    for medicine in medication.medicine.all():
-        created_medication.medicine.add(medicine)
+    for medicine in medication.medicines.all():
+        created_medication.medicines.add(medicine)
     created_medication.save()
 
     create_medication_history(created_medication, insert=True)
@@ -43,9 +43,9 @@ def update_medication(old_medication, new_medication):
     old_medication.nursing_professional = new_medication.nursing_professional
     old_medication.updated_by = new_medication.updated_by
 
-    old_medication.medicine.clear()
-    for medicine in new_medication.medicine:
-        old_medication.medicine.add(medicine)
+    old_medication.medicines.clear()
+    for medicine in new_medication.medicines:
+        old_medication.medicines.add(medicine)
 
     old_medication.save(force_update=True)
     create_medication_history(old_medication)

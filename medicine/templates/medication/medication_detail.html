@@ -40,9 +40,9 @@
             <div class="row mb-3">
                 <h5 class="card-title">
                         <span class="font-weight-bold">
-                            {{ medication|get_verbose_name:'medicine' }}:
+                            {{ medication|get_verbose_name:'medicines' }}:
                         </span>
-                    {% for medicine in medication.medicine.all %}
+                    {% for medicine in medication.medicines.all %}
                         {% if forloop.last %}
                             {{ medicine.name }}
                         {% else %}
