@@ -1,6 +1,8 @@
 from typing import Tuple
 
 from dal import autocomplete
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -21,6 +23,7 @@ def get_cleaned_data(form: NursingProfessionalForm) -> Tuple:
     )
 
 
+@login_required
 def list_nursing_professionals(request: WSGIRequest) -> HttpResponse:
     nursing_professionals = nursing_professional_service.list_nursing_professionals()
     context = {
@@ -35,6 +38,7 @@ def list_nursing_professionals(request: WSGIRequest) -> HttpResponse:
     )
 
 
+@login_required
 def nursing_professional_detail(request: WSGIRequest, pk: int) -> HttpResponse:
     found_nursing_professional = nursing_professional_service.get_nursing_professional_by_id(
         pk
@@ -50,6 +54,7 @@ def nursing_professional_detail(request: WSGIRequest, pk: int) -> HttpResponse:
     )
 
 
+@login_required
 def create_nursing_professional(request: WSGIRequest) -> HttpResponse:
     if request.method == 'POST':
         form = NursingProfessionalForm(request.POST)
@@ -84,6 +89,7 @@ def create_nursing_professional(request: WSGIRequest) -> HttpResponse:
     )
 
 
+@login_required
 def update_nursing_professional(request: WSGIRequest, pk: int) -> HttpResponse:
     old_nursing_professional = nursing_professional_service.get_nursing_professional_by_id(
         pk
@@ -124,6 +130,7 @@ def update_nursing_professional(request: WSGIRequest, pk: int) -> HttpResponse:
     )
 
 
+@login_required
 def deactivate_nursing_professional(request: WSGIRequest, pk: int) -> HttpResponse:
     found_nursing_professional = nursing_professional_service.get_nursing_professional_by_id(
         pk
@@ -147,7 +154,7 @@ def deactivate_nursing_professional(request: WSGIRequest, pk: int) -> HttpRespon
     )
 
 
-class NursingProfessionalListView(ServerSideDatatableView):
+class NursingProfessionalListView(LoginRequiredMixin, ServerSideDatatableView):
     queryset = nursing_professional_service.get_all_nursing_professionals()
     model = NursingProfessional
     columns = [
@@ -157,7 +164,7 @@ class NursingProfessionalListView(ServerSideDatatableView):
     ]
 
 
-class NursingProfessionalAutocomplete(autocomplete.Select2QuerySetView):
+class NursingProfessionalAutocompleteView(LoginRequiredMixin, autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated:
             return nursing_professional_service.get_nursing_professional_none()

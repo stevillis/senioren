@@ -1,5 +1,7 @@
 from typing import Tuple
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -26,6 +28,7 @@ def get_cleaned_data(form: MedicineForm) -> Tuple:
     )
 
 
+@login_required
 def list_medicines(request: WSGIRequest) -> HttpResponse:
     medicines = medicine_service.list_medicines(request)
     context = {
@@ -40,6 +43,7 @@ def list_medicines(request: WSGIRequest) -> HttpResponse:
     )
 
 
+@login_required
 def medicine_detail(request: WSGIRequest, pk: int) -> HttpResponse:
     found_medicine = medicine_service.get_medicine_by_id(pk)
     context = {
@@ -53,6 +57,7 @@ def medicine_detail(request: WSGIRequest, pk: int) -> HttpResponse:
     )
 
 
+@login_required
 def create_medicine(request: WSGIRequest) -> HttpResponse:
     if request.method == 'POST':
         form = MedicineForm(request.POST)
@@ -94,6 +99,7 @@ def create_medicine(request: WSGIRequest) -> HttpResponse:
     )
 
 
+@login_required
 def update_medicine(request: WSGIRequest, pk: int) -> HttpResponse:
     old_medicine = medicine_service.get_medicine_by_id(pk)
     old_medicine.expiration_date = old_medicine.expiration_date.strftime(
@@ -138,6 +144,7 @@ def update_medicine(request: WSGIRequest, pk: int) -> HttpResponse:
     )
 
 
+@login_required
 def deactivate_medicine(request: WSGIRequest, pk: int) -> HttpResponse:
     found_medicine = medicine_service.get_medicine_by_id(pk)
     if request.method == 'POST':
@@ -158,7 +165,7 @@ def deactivate_medicine(request: WSGIRequest, pk: int) -> HttpResponse:
     )
 
 
-class MedicineListView(ServerSideDatatableView):
+class MedicineListView(LoginRequiredMixin, ServerSideDatatableView):
     queryset = medicine_service.get_all_medicines()
     model = Medicine
     columns = [

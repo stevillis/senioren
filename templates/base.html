@@ -127,12 +127,17 @@
 
                 <!-- Topbar Navbar -->
                 {% if user.is_superuser %}
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="d-flex align-items-center navbar-nav ml-auto">
                         <!-- Nav Item - Messages -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a href="{% url 'admin:index' %}"
                                class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                 Admin
+                            </a>
+                        </li>
+                        <li class="nav-item no-arrow ml-3 mr-1">
+                            <a href="{% url 'logout' %}" class="text-danger">
+                                <i class="fas fa-fw fa-sign-out-alt"></i>
                             </a>
                         </li>
                     </ul>

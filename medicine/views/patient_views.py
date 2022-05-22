@@ -1,6 +1,8 @@
 from typing import Tuple
 
 from dal import autocomplete
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -38,6 +40,7 @@ def get_cleaned_data(form: PatientForm) -> Tuple:
     )
 
 
+@login_required
 def list_patients(request: WSGIRequest) -> HttpResponse:
     patients = patient_service.list_patients()
     context = {
@@ -52,6 +55,7 @@ def list_patients(request: WSGIRequest) -> HttpResponse:
     )
 
 
+@login_required
 def patient_detail(request: WSGIRequest, pk: int) -> HttpResponse:
     found_patient = patient_service.get_patient_by_id(pk)
     context = {
@@ -65,6 +69,7 @@ def patient_detail(request: WSGIRequest, pk: int) -> HttpResponse:
     )
 
 
+@login_required
 def create_patient(request: WSGIRequest) -> HttpResponse:
     if request.method == 'POST':
         form = PatientForm(clean_masked_inputs_form(request))
@@ -115,6 +120,7 @@ def create_patient(request: WSGIRequest) -> HttpResponse:
     )
 
 
+@login_required
 def update_patient(request: WSGIRequest, pk: int) -> HttpResponse:
     old_patient = patient_service.get_patient_by_id(pk)
     old_patient.birth_date = old_patient.birth_date.strftime("%Y-%m-%d")
@@ -169,6 +175,7 @@ def update_patient(request: WSGIRequest, pk: int) -> HttpResponse:
     )
 
 
+@login_required
 def deactivate_patient(request: WSGIRequest, pk: int) -> HttpResponse:
     found_patient = patient_service.get_patient_by_id(pk)
     if request.method == 'POST':
@@ -187,7 +194,7 @@ def deactivate_patient(request: WSGIRequest, pk: int) -> HttpResponse:
     )
 
 
-class PatientListView(ServerSideDatatableView):
+class PatientListView(LoginRequiredMixin, ServerSideDatatableView):
     queryset = patient_service.get_all_patients()
     model = Patient
     columns = [
@@ -199,7 +206,7 @@ class PatientListView(ServerSideDatatableView):
     ]
 
 
-class PatientAutocomplete(autocomplete.Select2QuerySetView):
+class PatientAutocompleteView(LoginRequiredMixin, autocomplete.Select2QuerySetView):
     def get_queryset(self):
         if not self.request.user.is_authenticated:
             return patient_service.get_patient_none()
