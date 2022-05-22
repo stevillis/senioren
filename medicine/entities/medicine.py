@@ -1,8 +1,18 @@
 class Medicine:
-    def __init__(self, name, description, batch, expiration_date, stock_qty,
-                 created_at, updated_at, created_by, updated_by, is_active,
-                 deactivated_by
-                 ):
+    def __init__(
+        self,
+        name,
+        description,
+        batch,
+        expiration_date,
+        stock_qty,
+        created_at,
+        updated_at,
+        created_by,
+        updated_by,
+        is_active,
+        deactivated_by
+    ):
         self.__name = name
         self.__description = description
         self.__batch = batch

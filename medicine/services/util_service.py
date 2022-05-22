@@ -1,7 +1,7 @@
 from typing import Tuple, Type
 
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.signing import BadSignature, loads
+from django.core.signing import BadSignature
 from django.db.models import Model
 from django.http import Http404
 from django.utils.translation import gettext_lazy as _

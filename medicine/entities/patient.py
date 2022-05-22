@@ -1,8 +1,23 @@
 class Patient:
-    def __init__(self, name, social_name, cpf, rg, birth_date, marital_status,
-                 place_of_birth, gender, phone, observation, created_at, updated_at,
-                 created_by, updated_by, is_active, deactivated_by
-                 ):
+    def __init__(
+        self,
+        name,
+        social_name,
+        cpf,
+        rg,
+        birth_date,
+        marital_status,
+        place_of_birth,
+        gender,
+        phone,
+        observation,
+        created_at,
+        updated_at,
+        created_by,
+        updated_by,
+        is_active,
+        deactivated_by
+    ):
         self.__name = name
         self.__social_name = social_name
         self.__cpf = cpf
