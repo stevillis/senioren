@@ -12,14 +12,12 @@ from .views.medication_views import (MedicationListView, create_medication,
 from .views.medicine_views import (MedicineListView, create_medicine,
                                    deactivate_medicine, list_medicines,
                                    medicine_detail, update_medicine)
-from .views.nursing_professional_views import (NursingProfessionalAutocomplete,
-                                               NursingProfessionalListView,
-                                               create_nursing_professional,
-                                               deactivate_nursing_professional,
-                                               list_nursing_professionals,
-                                               nursing_professional_detail,
-                                               update_nursing_professional)
-from .views.patient_views import (PatientAutocomplete, PatientListView,
+from .views.nursing_professional_views import (
+    NursingProfessionalAutocompleteView, NursingProfessionalListView,
+    create_nursing_professional, deactivate_nursing_professional,
+    list_nursing_professionals, nursing_professional_detail,
+    update_nursing_professional)
+from .views.patient_views import (PatientAutocompleteView, PatientListView,
                                   create_patient, deactivate_patient,
                                   list_patients, patient_detail,
                                   update_patient)
@@ -94,7 +92,7 @@ urlpatterns = [
     ),
     path(
         route=f'{prefix_patient_url}/autocomplete/',
-        view=PatientAutocomplete.as_view(),
+        view=PatientAutocompleteView.as_view(),
         name='patient-autocomplete'
     ),
 
@@ -127,7 +125,7 @@ urlpatterns = [
     ),
     path(
         route=f'{prefix_nursing_professional_url}/autocomplete/',
-        view=NursingProfessionalAutocomplete.as_view(),
+        view=NursingProfessionalAutocompleteView.as_view(),
         name='nursing-professional-autocomplete'
     ),
 

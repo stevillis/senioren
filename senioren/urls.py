@@ -17,10 +17,17 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.i18n import JavaScriptCatalog
 from medicine.views.index_views import index
+from user.views import login, logout
 
 urlpatterns = [
+    path('login/', login, name='login'),
+    path('logout/', logout, name='logout'),
+
     path('', index, name='index'),
+
     path('admin/', admin.site.urls, name='admin'),
+
     path('medicines/', include('medicine.urls', namespace='medicine')),
+
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
 ]

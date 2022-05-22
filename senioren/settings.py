@@ -147,6 +147,7 @@ LANGUAGES = (
 )
 
 LOCALE_PATHS = (
+    os.path.join(BASE_DIR, '/locale'),
     os.path.join(BASE_DIR, '/medicine/locale'),
 )
 
@@ -173,6 +174,7 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user.CustomUser'
+LOGIN_URL = '/login/'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
