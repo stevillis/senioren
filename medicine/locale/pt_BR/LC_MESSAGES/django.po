@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-19 03:03-0400\n"
-"PO-Revision-Date: 2022-05-19 03:04-0400\n"
+"POT-Creation-Date: 2022-05-21 22:54-0400\n"
+"PO-Revision-Date: 2022-05-21 22:56-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -18,23 +18,30 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: .\medicine\admin.py:136 .\medicine\admin.py:157 .\medicine\admin.py:269
-#: .\medicine\admin.py:286 .\medicine\admin.py:484 .\medicine\admin.py:501
-#: .\medicine\models.py:297 .\medicine\models.py:343 .\medicine\models.py:391
-#: .\medicine\models.py:628
+#: .\medicine\admin.py:139 .\medicine\admin.py:160 .\medicine\admin.py:312
+#: .\medicine\admin.py:329 .\medicine\admin.py:545 .\medicine\admin.py:562
+#: .\medicine\admin.py:615 .\medicine\admin.py:632 .\medicine\models.py:297
+#: .\medicine\models.py:343 .\medicine\models.py:391 .\medicine\models.py:631
+#: .\medicine\models.py:681
 #: .\medicine\templates\nursing_professional\form_nursing_professional.html:11
 msgid "Nursing Professional"
 msgstr "Enfermeiro"
 
-#: .\medicine\admin.py:147 .\medicine\admin.py:281 .\medicine\admin.py:496
-#: .\medicine\models.py:268 .\medicine\models.py:337 .\medicine\models.py:385
+#: .\medicine\admin.py:150 .\medicine\admin.py:324 .\medicine\admin.py:557
+#: .\medicine\admin.py:627 .\medicine\models.py:268 .\medicine\models.py:337
+#: .\medicine\models.py:385 .\medicine\models.py:675
 #: .\medicine\templates\patient\form_patient.html:11
 msgid "Patient"
 msgstr "Paciente"
 
-#: .\medicine\admin.py:152 .\medicine\models.py:208 .\medicine\models.py:482
+#: .\medicine\admin.py:155 .\medicine\models.py:208 .\medicine\models.py:485
 msgid "CPF"
 msgstr "CPF"
+
+#: .\medicine\admin.py:638 .\medicine\models.py:182
+#: .\medicine\templates\medicine\form_medicine.html:11
+msgid "Medicine"
+msgstr "Medicamento"
 
 #: .\medicine\models.py:8
 msgid "Married"
@@ -89,64 +96,60 @@ msgid "Deactivated by"
 msgstr "Desativado por"
 
 #: .\medicine\models.py:144 .\medicine\models.py:194 .\medicine\models.py:280
-#: .\medicine\models.py:414 .\medicine\models.py:468 .\medicine\models.py:558
+#: .\medicine\models.py:417 .\medicine\models.py:471 .\medicine\models.py:561
 msgid "Name"
 msgstr "Nome"
 
-#: .\medicine\models.py:151 .\medicine\models.py:421
+#: .\medicine\models.py:151 .\medicine\models.py:424
 msgid "Description"
 msgstr "Descrição"
 
-#: .\medicine\models.py:158 .\medicine\models.py:428
+#: .\medicine\models.py:158 .\medicine\models.py:431
 msgid "Batch"
 msgstr "Lote"
 
-#: .\medicine\models.py:165 .\medicine\models.py:435
+#: .\medicine\models.py:165 .\medicine\models.py:438
 msgid "Expiration date"
 msgstr "Data de vencimento"
 
-#: .\medicine\models.py:171 .\medicine\models.py:441
+#: .\medicine\models.py:171 .\medicine\models.py:444
 msgid "Stock quantity"
 msgstr "Quantidade em estoque"
 
-#: .\medicine\models.py:182 .\medicine\templates\medicine\form_medicine.html:11
-msgid "Medicine"
-msgstr "Medicamento"
-
-#: .\medicine\models.py:183 .\medicine\models.py:380
+#: .\medicine\models.py:183 .\medicine\models.py:380 .\medicine\models.py:670
 msgid "Medicines"
 msgstr "Medicamentos"
 
-#: .\medicine\models.py:201 .\medicine\models.py:475
+#: .\medicine\models.py:201 .\medicine\models.py:478
 msgid "Social Name"
 msgstr "Nome Social"
 
-#: .\medicine\models.py:215 .\medicine\models.py:489
+#: .\medicine\models.py:215 .\medicine\models.py:492
 msgid "RG"
 msgstr "RG"
 
-#: .\medicine\models.py:222 .\medicine\models.py:496
+#: .\medicine\models.py:222 .\medicine\models.py:499
 msgid "Birth Date"
 msgstr "Data de Nascimento"
 
-#: .\medicine\models.py:228 .\medicine\models.py:502
+#: .\medicine\models.py:228 .\medicine\models.py:505
 msgid "Marital Status"
 msgstr "Estado Civil"
 
-#: .\medicine\models.py:235 .\medicine\models.py:509
+#: .\medicine\models.py:235 .\medicine\models.py:512
 msgid "Place of Birth"
 msgstr "Naturalidade"
 
-#: .\medicine\models.py:243 .\medicine\models.py:517
+#: .\medicine\models.py:243 .\medicine\models.py:520
 msgid "Gender"
 msgstr "Gênero"
 
-#: .\medicine\models.py:250 .\medicine\models.py:524
+#: .\medicine\models.py:250 .\medicine\models.py:527
 msgid "Phone"
 msgstr "Telefone"
 
 #: .\medicine\models.py:257 .\medicine\models.py:330 .\medicine\models.py:372
-#: .\medicine\models.py:531 .\medicine\models.py:613
+#: .\medicine\models.py:534 .\medicine\models.py:616 .\medicine\models.py:662
 msgid "Observation"
 msgstr "Observação"
 
@@ -154,7 +157,7 @@ msgstr "Observação"
 msgid "Patients"
 msgstr "Pacientes"
 
-#: .\medicine\models.py:286 .\medicine\models.py:565
+#: .\medicine\models.py:286 .\medicine\models.py:568
 msgid "COREN"
 msgstr "COREN"
 
@@ -162,19 +165,20 @@ msgstr "COREN"
 msgid "Nursing Professionals"
 msgstr "Enfermeiros"
 
-#: .\medicine\models.py:309 .\medicine\models.py:365 .\medicine\models.py:592
+#: .\medicine\models.py:309 .\medicine\models.py:365 .\medicine\models.py:595
+#: .\medicine\models.py:656
 msgid "Schedule"
 msgstr "Horário"
 
-#: .\medicine\models.py:316 .\medicine\models.py:599
+#: .\medicine\models.py:316 .\medicine\models.py:602
 msgid "Heart pressure"
 msgstr "Pressão"
 
-#: .\medicine\models.py:323 .\medicine\models.py:606
+#: .\medicine\models.py:323 .\medicine\models.py:609
 msgid "Glucose"
 msgstr "Glicemia"
 
-#: .\medicine\models.py:353 .\medicine\models.py:634
+#: .\medicine\models.py:353 .\medicine\models.py:637
 #: .\medicine\templates\medical_evaluation\form_medical_evaluation.html:16
 msgid "Medical Evaluation"
 msgstr "Avaliação Médica"
@@ -183,45 +187,54 @@ msgstr "Avaliação Médica"
 msgid "Medical Evaluations"
 msgstr "Avaliações Médicas"
 
-#: .\medicine\models.py:397
+#: .\medicine\models.py:400 .\medicine\models.py:686
+#: .\medicine\templates\medication\form_medication.html:16
 msgid "Medication"
 msgstr "Medicação"
 
-#: .\medicine\models.py:398
+#: .\medicine\models.py:401
 msgid "Medications"
 msgstr "Medicações"
 
-#: .\medicine\models.py:456
+#: .\medicine\models.py:459
 msgid "Medicine History"
 msgstr "Histórico de Medicamento"
 
-#: .\medicine\models.py:457
+#: .\medicine\models.py:460
 msgid "Medicine Histories"
 msgstr "Históricos de Medicamento"
 
-#: .\medicine\models.py:546
+#: .\medicine\models.py:549
 msgid "Patient History"
 msgstr "Histórico de Paciente"
 
-#: .\medicine\models.py:547
+#: .\medicine\models.py:550
 msgid "Patient Histories"
 msgstr "Históricos de Paciente"
 
-#: .\medicine\models.py:580
+#: .\medicine\models.py:583
 msgid "Nursing Professional History"
 msgstr "Histórico de Enfermeiro"
 
-#: .\medicine\models.py:581
+#: .\medicine\models.py:584
 msgid "Nursing Professional Histories"
 msgstr "Históricos de Enfermeiro"
 
-#: .\medicine\models.py:641
+#: .\medicine\models.py:644
 msgid "Medical Evaluation History"
 msgstr "Histórico de Avaliações Médicas"
 
-#: .\medicine\models.py:642
+#: .\medicine\models.py:645
 msgid "Medical Evaluations Histories"
 msgstr "Históricos Avaliações Médicas"
+
+#: .\medicine\models.py:693
+msgid "Medication History"
+msgstr "Histórico de Medicação"
+
+#: .\medicine\models.py:694
+msgid "Medication Histories"
+msgstr "Históricos de Medicações"
 
 #: .\medicine\services\util_service.py:14
 msgid "not found"
@@ -234,6 +247,8 @@ msgstr "Desativar Avaliação Médica"
 
 #: .\medicine\templates\medical_evaluation\deactivate_medical_evaluation.html:19
 #: .\medicine\templates\medical_evaluation\medical_evaluation_detail.html:19
+#: .\medicine\templates\medication\deactivate_medication.html:19
+#: .\medicine\templates\medication\medication_detail.html:19
 #: .\medicine\templates\medicine\deactivate_medicine.html:19
 #: .\medicine\templates\medicine\medicine_detail.html:19
 #: .\medicine\templates\nursing_professional\deactivate_nursing_professional.html:19
@@ -250,6 +265,7 @@ msgid "Medical Evaluation Register"
 msgstr "Cadastrar Avaliações Médicas"
 
 #: .\medicine\templates\medical_evaluation\form_medical_evaluation.html:16
+#: .\medicine\templates\medication\form_medication.html:16
 #: .\medicine\templates\medicine\form_medicine.html:11
 #: .\medicine\templates\nursing_professional\form_nursing_professional.html:11
 #: .\medicine\templates\patient\form_patient.html:11
@@ -257,6 +273,7 @@ msgid "Edit"
 msgstr "Editar"
 
 #: .\medicine\templates\medical_evaluation\form_medical_evaluation.html:16
+#: .\medicine\templates\medication\form_medication.html:16
 #: .\medicine\templates\medicine\form_medicine.html:11
 #: .\medicine\templates\nursing_professional\form_nursing_professional.html:11
 #: .\medicine\templates\patient\form_patient.html:11
@@ -264,6 +281,7 @@ msgid "Register"
 msgstr "Cadastrar"
 
 #: .\medicine\templates\medical_evaluation\list_medical_evaluations.html:17
+#: .\medicine\templates\medication\list_medications.html:17
 #: .\medicine\templates\medicine\list_medicines.html:17
 #: .\medicine\templates\nursing_professional\list_nursing_professionals.html:18
 #: .\medicine\templates\patient\list_patients.html:17
@@ -274,6 +292,22 @@ msgstr "Cadastrar"
 #: .\medicine\templates\medical_evaluation\medical_evaluation_detail.html:10
 msgid "Medical Evaluation Detail"
 msgstr "Visualizar Avaliação Médica"
+
+#: .\medicine\templates\medication\deactivate_medication.html:6
+#: .\medicine\templates\medication\deactivate_medication.html:10
+msgid "Deactivate Medication"
+msgstr "Desativar Medicação"
+
+#: .\medicine\templates\medication\form_medication.html:7
+#: .\medicine\templates\medication\list_medications.html:8
+#: .\medicine\templates\medication\list_medications.html:12
+msgid "Medication Register"
+msgstr "Registro de Medicação"
+
+#: .\medicine\templates\medication\medication_detail.html:6
+#: .\medicine\templates\medication\medication_detail.html:10
+msgid "Medication Detail"
+msgstr "Visualizar Medicação"
 
 #: .\medicine\templates\medicine\deactivate_medicine.html:6
 #: .\medicine\templates\medicine\deactivate_medicine.html:10

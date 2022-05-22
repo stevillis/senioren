@@ -3,7 +3,7 @@ class Medication:
             self,
             schedule,
             observation,
-            medicine,
+            medicines,
             patient,
             nursing_professional,
             created_at,
@@ -15,7 +15,7 @@ class Medication:
     ):
         self.__schedule = schedule
         self.__observation = observation
-        self.__medicine = medicine
+        self.__medicines = medicines
         self.__patient = patient
         self.__nursing_professional = nursing_professional
         self.__created_at = created_at
@@ -42,12 +42,12 @@ class Medication:
         self.__observation = observation
 
     @property
-    def medicine(self):
-        return self.__medicine
+    def medicines(self):
+        return self.__medicines
 
-    @medicine.setter
-    def medicine(self, medicine):
-        self.__medicine = medicine
+    @medicines.setter
+    def medicines(self, medicines):
+        self.__medicines = medicines
 
     @property
     def patient(self):

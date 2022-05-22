@@ -18,16 +18,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: .\static\js\grid-datatables.js:179
+#: .\static\js\grid-datatables.js:139
+#: .\static\js\grid-datatables.js:214
+#: .\static\js\grid-datatables.js:276
+#: .\static\js\grid-datatables.js:349
+#: .\static\js\grid-datatables.js:420
 msgid "Edit"
 msgstr "Editar"
 
-#: .\static\js\grid-datatables.js:143
-#: .\static\js\grid-datatables.js:233
-#: .\static\js\grid-datatables.js:310
+#: .\static\js\grid-datatables.js:157
+#: .\static\js\grid-datatables.js:232
+#: .\static\js\grid-datatables.js:294
+#: .\static\js\grid-datatables.js:367
+#: .\static\js\grid-datatables.js:438
 msgid "Deactivate"
 msgstr "Desativar"
-
-#: .\static\js\grid-datatables.js:213
-msgid "History"
-msgstr "Histórico"
