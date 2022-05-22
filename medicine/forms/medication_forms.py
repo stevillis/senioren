@@ -31,7 +31,7 @@ class MedicationForm(forms.ModelForm):
         )
     )
 
-    medicine = CustomMMCF(
+    medicines = CustomMMCF(
         queryset=get_all_medicines(),
         widget=forms.CheckboxSelectMultiple
     )
@@ -52,7 +52,7 @@ class MedicationForm(forms.ModelForm):
         fields = [
             'schedule',
             'observation',
-            'medicine',
+            'medicines',
             'patient',
             'nursing_professional',
         ]

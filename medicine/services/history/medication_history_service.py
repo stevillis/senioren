@@ -18,6 +18,6 @@ def create_medication_history(medication: Medication, insert: bool = False) -> N
         medication=medication,
     )
 
-    for medicine in medication.medicine.all():
-        created_history.medicine.add(medicine)
+    for medicine in medication.medicines.all():
+        created_history.medicines.add(medicine)
     created_history.save()
