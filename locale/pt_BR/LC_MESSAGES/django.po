@@ -1,0 +1,140 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-22 03:31-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\senioren\settings.py:145
+msgid "Portuguese"
+msgstr "Português"
+
+#: .\senioren\settings.py:146
+msgid "English"
+msgstr "Inglês"
+
+#: .\templates\base.html:65
+msgid "Records"
+msgstr "Cadastros"
+
+#: .\templates\base.html:71
+msgid "Medications"
+msgstr "Medicações"
+
+#: .\templates\base.html:79
+msgid "Medical Evaluations"
+msgstr "Avaliações Médicas"
+
+#: .\templates\base.html:87
+msgid "Medicines"
+msgstr "Medicamentos"
+
+#: .\templates\base.html:95
+msgid "Patients"
+msgstr "Pacientes"
+
+#: .\templates\base.html:103
+msgid "Nursing Professionals"
+msgstr "Enfermeiros"
+
+#: .\templates\base.html:162
+msgid "made by"
+msgstr "feito por"
+
+#: .\templates\utils\forms\form_back_btn.html:3
+#: .\templates\utils\forms\form_back_btn.html:4
+msgid "Back"
+msgstr "Voltar"
+
+#: .\templates\utils\forms\form_cancel_btn.html:4
+#: .\templates\utils\forms\form_cancel_btn.html:5
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: .\templates\utils\forms\form_deactivate_btn.html:5
+#: .\templates\utils\forms\form_deactivate_btn.html:6
+#: .\templates\utils\tables\thead_actions.html:4
+msgid "Deactivate"
+msgstr "Desativar"
+
+#: .\templates\utils\forms\form_save_btn.html:5
+#: .\templates\utils\forms\form_save_btn.html:6
+msgid "Save"
+msgstr "Salvar"
+
+#: .\templates\utils\tables\thead_actions.html:3
+msgid "Edit"
+msgstr "Editar"
+
+#: .\user\admin.py:41 .\user\forms.py:27
+msgid "Password"
+msgstr "Senha"
+
+#: .\user\admin.py:43
+msgid ""
+"Raw passwords are not stored, so there is no way to see this user’s "
+"password, but you can change the password using <a href=\"{}\">this form</a>."
+msgstr "Senhas brutas não são armazenadas, então não há como visualizar a senha desse usuário, porém você pode mudar a senha usando este <a href=\"{}\">formulário</a>."
+
+#: .\user\admin.py:68
+msgid "Personal info"
+msgstr "Informações Pessoais"
+
+#: .\user\admin.py:69
+msgid "Permissions"
+msgstr "Permissões do usuário"
+
+#: .\user\admin.py:72
+msgid "Important dates"
+msgstr "Datas importantes"
+
+#: .\user\forms.py:13 .\user\models.py:21
+msgid "Email"
+msgstr "Email"
+
+#: .\user\models.py:14
+msgid "Name"
+msgstr "Nome"
+
+#: .\user\models.py:28
+msgid "Staff status"
+msgstr "Membro da Equipe"
+
+#: .\user\models.py:30
+msgid "Designates whether the user can log into this admin site."
+msgstr "Indica que usuário consegue acessar este site de administração."
+
+#: .\user\models.py:34
+msgid "Active"
+msgstr "Ativo"
+
+#: .\user\models.py:37
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr "Indica que o usuário será tratado como ativo. Ao invés de excluir contas de usuário, desmarque isso."
+
+#: .\user\models.py:43
+msgid "Date joined"
+msgstr "Data de registro"
+
+#: .\user\models.py:57
+msgid "User"
+msgstr "Usuário"
+
+#: .\user\models.py:58
+msgid "Users"
+msgstr "Usuários"
