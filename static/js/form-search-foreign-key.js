@@ -18,6 +18,7 @@ function findForeignKey(form, model) {
 
 (function ($) {
   $("#form-crud").click(function () {
+    findForeignKey(this, "medicine");
     findForeignKey(this, "patient");
     findForeignKey(this, "nursing_professional");
   });

@@ -3,11 +3,14 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
 from medicine.models import (MedicalEvaluation, MedicalEvaluationHistory,
-                             Medication, Medicine, MedicineHistory,
-                             NursingProfessional, NursingProfessionalHistory,
-                             Patient, PatientHistory)
+                             Medication, MedicationHistory, Medicine,
+                             MedicineHistory, NursingProfessional,
+                             NursingProfessionalHistory, Patient,
+                             PatientHistory)
 from medicine.services.history.medical_evaluation_history_service import \
     create_medical_evaluation_history
+from medicine.services.history.medication_history_service import \
+    create_medication_history
 from medicine.services.history.medicine_history_service import \
     create_medicine_history
 from medicine.services.history.nursing_professional_history_service import \
@@ -171,6 +174,19 @@ class MedicalEvaluationAdmin(admin.ModelAdmin):
         else:
             create_medical_evaluation_history(obj, insert=True)
 
+    def _delete_model(self, request, obj):
+        obj.is_active = False
+        obj.deactivated_by = request.user
+        obj.save()
+        create_medical_evaluation_history(obj)
+
+    def delete_queryset(self, request, queryset):
+        for obj in queryset:
+            self._delete_model(request, obj)
+
+    def delete_model(self, request, obj):
+        self._delete_model(request, obj)
+
 
 @admin.register(Patient)
 class PatientAdmin(admin.ModelAdmin):
@@ -220,6 +236,19 @@ class PatientAdmin(admin.ModelAdmin):
         else:
             create_patient_history(obj, insert=True)
 
+    def _delete_model(self, request, obj):
+        obj.is_active = False
+        obj.deactivated_by = request.user
+        obj.save()
+        create_patient_history(obj)
+
+    def delete_queryset(self, request, queryset):
+        for obj in queryset:
+            self._delete_model(request, obj)
+
+    def delete_model(self, request, obj):
+        self._delete_model(request, obj)
+
 
 @admin.register(NursingProfessional)
 class NursingProfessionalAdmin(admin.ModelAdmin):
@@ -243,6 +272,19 @@ class NursingProfessionalAdmin(admin.ModelAdmin):
         else:
             create_nursing_professional_history(obj, insert=True)
 
+    def _delete_model(self, request, obj):
+        obj.is_active = False
+        obj.deactivated_by = request.user
+        obj.save()
+        create_nursing_professional_history(obj)
+
+    def delete_queryset(self, request, queryset):
+        for obj in queryset:
+            self._delete_model(request, obj)
+
+    def delete_model(self, request, obj):
+        self._delete_model(request, obj)
+
 
 @admin.register(Medication)
 class MedicationAdmin(admin.ModelAdmin):
@@ -261,6 +303,7 @@ class MedicationAdmin(admin.ModelAdmin):
         'get_nursing_professional_name',
         'schedule',
         'observation',
+        'is_active',
     )
 
     list_filter = [
@@ -294,6 +337,24 @@ class MedicationAdmin(admin.ModelAdmin):
         if change:
             obj = set_updated_by(request, obj)
         super().save_model(request, obj, form, change)
+
+        if change:
+            create_medication_history(obj)
+        else:
+            create_medication_history(obj, insert=True)
+
+    def _delete_model(self, request, obj):
+        obj.is_active = False
+        obj.deactivated_by = request.user
+        obj.save()
+        create_medication_history(obj)
+
+    def delete_queryset(self, request, queryset):
+        for obj in queryset:
+            self._delete_model(request, obj)
+
+    def delete_model(self, request, obj):
+        self._delete_model(request, obj)
 
 
 """
@@ -521,6 +582,81 @@ class MedicalEvaluationHistoryAdmin(admin.ModelAdmin):
 
     def get_actions(self, request):
         actions = super(MedicalEvaluationHistoryAdmin,
+                        self).get_actions(request)
+        return remove_delete_actions(actions)
+
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+        return super().change_view(request, object_id, form_url, extra_context=dict(show_delete=False))
+
+
+@admin.register(MedicationHistory)
+class MedicationHistoryAdmin(admin.ModelAdmin):
+    """Medication History Model for Django Admin"""
+
+    fields = [
+        'schedule',
+        'observation',
+        'nursing_professional',
+        'patient',
+        'medicine',
+    ] + BASE_FIELDS
+
+    list_display = (
+        'schedule',
+        'observation',
+        'get_patient_name',
+        'get_nursing_professional_name',
+        'get_medicine_name',
+    )
+
+    list_filter = [
+        (
+            'nursing_professional__name',
+            custom_titled_filter(_('Nursing Professional'))
+        ),
+        ('schedule', DateRangeFilter)
+    ]
+
+    search_fields = (
+        'nursing_professional__name',
+        'patient__name',
+        'medicine__name',
+        'observation',
+    )
+
+    @admin.display(description=_('Patient'), ordering='patient__name')
+    def get_patient_name(self, obj):
+        """Get Patient name for list_display"""
+        return obj.patient.name
+
+    @admin.display(description=_('Nursing Professional'),
+                   ordering='nursing_professional__name')
+    def get_nursing_professional_name(self, obj):
+        """Get Nursing Professional name for list_display"""
+        return obj.nursing_professional.name
+
+    @admin.display(description=_('Medicine'), ordering='medicine__name')
+    def get_medicine_name(self, obj):
+        """Get Medicine name for list_display"""
+        return obj.medicine.name
+
+    def save_model(self, request, obj, form, change):
+        obj = set_created_by(request, obj)
+        if change:
+            obj = set_updated_by(request, obj)
+        super().save_model(request, obj, form, change)
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return request.user.is_superuser
+
+    def get_actions(self, request):
+        actions = super(MedicationHistoryAdmin,
                         self).get_actions(request)
         return remove_delete_actions(actions)
 

@@ -63,6 +63,7 @@ function handleTableResizeEvent(tableName) {
     case "gridPatient":
     case "gridNursingProfessional":
     case "gridMedicalEvaluation":
+    case "gridMedication":
       addOrRemoveScroll(gridWrapper, 600);
       break;
   }
@@ -167,24 +168,6 @@ function initDataTable(grids) {
                     `;
                   },
                 },
-                {
-                  searchable: false,
-                  orderable: false,
-                  render: function (data, type, row, meta) {
-                    const historyMsg = gettext("History");
-                    return `
-                      <td>
-                        <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
-                          title="${historyMsg}">
-                            <a href="#" class="btn btn-info btn-xs"
-                              data-title="${historyMsg}" aria-label="${historyMsg}">
-                                <span class="fa fa-history"></span>
-                            </a>
-                        </p>
-                    </td>
-                    `;
-                  },
-                },
               ],
               language: {
                 url: pathName,
@@ -260,24 +243,6 @@ function initDataTable(grids) {
                     `;
                   },
                 },
-                {
-                  searchable: false,
-                  orderable: false,
-                  render: function (data, type, row, meta) {
-                    const historyMsg = gettext("History");
-                    return `
-                      <td>
-                        <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
-                          title="${historyMsg}">
-                            <a href="#" class="btn btn-info btn-xs"
-                              data-title="${historyMsg}" aria-label="${historyMsg}">
-                                <span class="fa fa-history"></span>
-                            </a>
-                        </p>
-                    </td>
-                    `;
-                  },
-                },
               ],
               language: {
                 url: pathName,
@@ -334,24 +299,6 @@ function initDataTable(grids) {
                             <a href="/medicines/nursing-professional/deactivate/${row[0]}/" class="btn btn-danger btn-xs"
                               data-title="${deactivateMsg}" aria-label="${deactivateMsg}">
                                 <span class="fa fa-trash"></span>
-                            </a>
-                        </p>
-                    </td>
-                    `;
-                  },
-                },
-                {
-                  searchable: false,
-                  orderable: false,
-                  render: function (data, type, row, meta) {
-                    const historyMsg = gettext("History");
-                    return `
-                      <td>
-                        <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
-                          title="${historyMsg}">
-                            <a href="#" class="btn btn-info btn-xs"
-                              data-title="${historyMsg}" aria-label="${historyMsg}">
-                                <span class="fa fa-history"></span>
                             </a>
                         </p>
                     </td>
@@ -431,18 +378,71 @@ function initDataTable(grids) {
                     `;
                   },
                 },
+              ],
+              language: {
+                url: pathName,
+              },
+              searching: true,
+              responsive: true,
+            });
+          });
+          addTableResizeEvent(gridName);
+          break;
+        case "gridMedication":
+          $(document).ready(function () {
+            const host = document.location.origin;
+            $(`#${gridName}`).DataTable({
+              serverSide: true,
+              sAjaxSource: `${host}/medicines/medication/data/`,
+              order: [[1, "desc"]],
+              columns: [
+                {
+                  name: "schedule",
+                  data: 1,
+                  render: function (data, type, row, meta) {
+                    const date = `${row[1]}`;
+                    return `${formatDateTime(new Date(date))}`;
+                  },
+                },
+                {
+                  name: "patient",
+                  data: 2,
+                  render: function (data, type, row, meta) {
+                    return `<a href="/medicines/medication/detail/${row[0]}/">${data}</a>`;
+                  },
+                },
+                // {name: "medicine", data: 2},
+                { name: "nursing_professional", data: 3 },
                 {
                   searchable: false,
                   orderable: false,
                   render: function (data, type, row, meta) {
-                    const historyMsg = gettext("History");
+                    const editMsg = gettext("Edit");
                     return `
                       <td>
                         <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
-                          title="${historyMsg}">
-                            <a href="#" class="btn btn-info btn-xs"
-                              data-title="${historyMsg}" aria-label="${historyMsg}">
-                                <span class="fa fa-history"></span>
+                          title="${editMsg}">
+                            <a href="/medicines/medication/update/${row[0]}/" class="btn btn-warning btn-xs"
+                              data-title="${editMsg}" aria-label="${editMsg}">
+                                <span class="fa fa-edit"></span>
+                            </a>
+                        </p>
+                    </td>
+                    `;
+                  },
+                },
+                {
+                  searchable: false,
+                  orderable: false,
+                  render: function (data, type, row, meta) {
+                    const deactivateMsg = gettext("Deactivate");
+                    return `
+                      <td>
+                        <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
+                          title="${deactivateMsg}">
+                            <a href="/medicines/medication/deactivate/${row[0]}/" class="btn btn-danger btn-xs"
+                              data-title="${deactivateMsg}" aria-label="${deactivateMsg}">
+                                <span class="fa fa-trash"></span>
                             </a>
                         </p>
                     </td>
@@ -470,6 +470,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     "gridPatient",
     "gridNursingProfessional",
     "gridMedicalEvaluation",
+    "gridMedication",
   ];
 
   initDataTable(grids);

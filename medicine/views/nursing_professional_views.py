@@ -27,16 +27,27 @@ def list_nursing_professionals(request: WSGIRequest) -> HttpResponse:
         'model': NursingProfessional,
         'nursing_professionals': nursing_professionals
     }
-    return render(request, 'templates/nursing_professional/list_nursing_professionals.html', context)
+
+    return render(
+        request=request,
+        template_name='templates/nursing_professional/list_nursing_professionals.html',
+        context=context
+    )
 
 
 def nursing_professional_detail(request: WSGIRequest, pk: int) -> HttpResponse:
     found_nursing_professional = nursing_professional_service.get_nursing_professional_by_id(
-        pk)
+        pk
+    )
     context = {
         'nursing_professional': found_nursing_professional,
     }
-    return render(request, 'templates/nursing_professional/nursing_professional_detail.html', context)
+
+    return render(
+        request=request,
+        template_name='templates/nursing_professional/nursing_professional_detail.html',
+        context=context
+    )
 
 
 def create_nursing_professional(request: WSGIRequest) -> HttpResponse:
@@ -55,7 +66,9 @@ def create_nursing_professional(request: WSGIRequest) -> HttpResponse:
                 deactivated_by=None,
             )
             nursing_professional_service.create_nursing_professional(
-                new_nursing_professional)
+                new_nursing_professional
+            )
+
             return redirect('medicine:nursing-professional-list')
     else:
         form = NursingProfessionalForm()
@@ -63,14 +76,22 @@ def create_nursing_professional(request: WSGIRequest) -> HttpResponse:
         'form': form,
         'is_edit': False,
     }
-    return render(request, 'templates/nursing_professional/form_nursing_professional.html', context)
+
+    return render(
+        request=request,
+        template_name='templates/nursing_professional/form_nursing_professional.html',
+        context=context
+    )
 
 
 def update_nursing_professional(request: WSGIRequest, pk: int) -> HttpResponse:
     old_nursing_professional = nursing_professional_service.get_nursing_professional_by_id(
-        pk)
+        pk
+    )
     form = NursingProfessionalForm(
-        request.POST or None, instance=old_nursing_professional)
+        request.POST or None,
+        instance=old_nursing_professional
+    )
     if request.method == 'POST':
         if form.is_valid():
             name, coren = get_cleaned_data(form)
@@ -85,28 +106,45 @@ def update_nursing_professional(request: WSGIRequest, pk: int) -> HttpResponse:
                 deactivated_by=old_nursing_professional.deactivated_by,
             )
             nursing_professional_service.update_nursing_professional(
-                old_nursing_professional, new_nursing_professional)
+                old_nursing_professional,
+                new_nursing_professional
+            )
+
             return redirect('medicine:nursing-professional-list')
+
     context = {
         'form': form,
         'is_edit': True,
     }
-    return render(request, 'templates/nursing_professional/form_nursing_professional.html', context)
+
+    return render(
+        request=request,
+        template_name='templates/nursing_professional/form_nursing_professional.html',
+        context=context
+    )
 
 
 def deactivate_nursing_professional(request: WSGIRequest, pk: int) -> HttpResponse:
     found_nursing_professional = nursing_professional_service.get_nursing_professional_by_id(
-        pk)
+        pk
+    )
     if request.method == 'POST':
         user = request.user
         found_nursing_professional.updated_by = user
         nursing_professional_service.deactivate_nursing_professional(
             found_nursing_professional, user)
+
         return redirect('medicine:nursing-professional-list')
+
     context = {
         'nursing_professional': found_nursing_professional,
     }
-    return render(request, "templates/nursing_professional/deactivate_nursing_professional.html", context)
+
+    return render(
+        request=request,
+        template_name="templates/nursing_professional/deactivate_nursing_professional.html",
+        context=context
+    )
 
 
 class NursingProfessionalListView(ServerSideDatatableView):

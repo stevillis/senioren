@@ -1,6 +1,19 @@
 class MedicalEvaluation:
-    def __init__(self, schedule, heart_pressure, glucose, observation, patient, nursing_professional, created_at, updated_at, created_by, updated_by,
-                 is_active, deactivated_by):
+    def __init__(
+            self,
+            schedule,
+            heart_pressure,
+            glucose,
+            observation,
+            patient,
+            nursing_professional,
+            created_at,
+            updated_at,
+            created_by,
+            updated_by,
+            is_active,
+            deactivated_by
+    ):
         self.__schedule = schedule
         self.__heart_pressure = heart_pressure
         self.__glucose = glucose

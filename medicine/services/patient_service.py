@@ -8,7 +8,7 @@ def get_patient_none():
 
 
 def get_all_patients():
-    return Patient.active_manager.all().order_by('name', '-created_at')
+    return Patient.active_manager.all()
 
 
 def list_patients():

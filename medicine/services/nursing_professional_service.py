@@ -9,7 +9,7 @@ def get_nursing_professional_none():
 
 
 def get_all_nursing_professionals():
-    return NursingProfessional.active_manager.all().order_by('name', '-created_at')
+    return NursingProfessional.active_manager.all()
 
 
 def list_nursing_professionals():

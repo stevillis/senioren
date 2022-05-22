@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load custom_tags %}
+
+{% block title %}
+    {% trans 'Medication Detail' %}
+{% endblock title %}
+
+{% block content_title %}
+    {% trans 'Medication Detail' %}
+{% endblock content_title %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <div class="row mb-3">
+                <h5 class="card-title">
+                    <span class="font-weight-bold">
+                        {% trans 'Code' %}:
+                    </span>
+                    {{ medication.id }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5 class="card-title">
+                        <span class="font-weight-bold">
+                            {{ medication|get_verbose_name:'schedule' }}:
+                        </span>
+                    {{ medication.schedule|date:"d/m/Y" }} {{ medication.schedule|time:"H:i:s" }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5 class="card-title">
+                        <span class="font-weight-bold">
+                            {{ medication|get_verbose_name:'observation' }}:
+                        </span>
+                    {{ medication.observation }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5 class="card-title">
+                        <span class="font-weight-bold">
+                            {{ medication|get_verbose_name:'medicine' }}:
+                        </span>
+                    {% for medicine in medication.medicine.all %}
+                        {% if forloop.last %}
+                            {{ medicine.name }}
+                        {% else %}
+                            {{ medicine.name }},
+                        {% endif %}
+                    {% endfor %}
+
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5 class="card-title">
+                        <span class="font-weight-bold">
+                            {{ medication|get_verbose_name:'patient' }}:
+                        </span>
+                    {{ medication.patient }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5 class="card-title">
+                        <span class="font-weight-bold">
+                            {{ medication|get_verbose_name:'nursing_professional' }}:
+                        </span>
+                    {{ medication.nursing_professional }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5>
+                        <span class="font-weight-bold">
+                            {{ medication|get_verbose_name:'created_by' }}:
+                        </span>
+                    {{ medication.created_by|default_if_none:"" }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5>
+                        <span class="font-weight-bold">
+                            {{ medication|get_verbose_name:'created_at' }}:
+                        </span>
+                    {{ medication.created_at|date:"d/m/Y" }} {{ medication.created_at|time:"H:i:s" }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5>
+                    <span class="font-weight-bold">
+                        {{ medication|get_verbose_name:'updated_by' }}:
+                    </span>
+                    {{ medication.updated_by|default_if_none:"" }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5>
+                    <span class="font-weight-bold">
+                        {{ medication|get_verbose_name:'updated_at' }}:
+                    </span>
+                    {{ medication.updated_at|date:"d/m/Y" }} {{ medication.updated_at|time:"H:i:s" }}
+                </h5>
+            </div>
+            <div class="row mb-3">
+                <h5>
+                    <span class="font-weight-bold">
+                        {{ medication|get_verbose_name:'is_active' }}:
+                    </span>
+                    {% if medication.is_active %}
+                        {% include 'utils/icons/icon_check_circle.html' %}
+                    {% else %}
+                        {% include 'utils/icons/icon_times_circle.html' %}
+                    {% endif %}
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="my-4 text-center">
+        <a href="{% url 'medicine:medication-list' %}">
+            {% include 'utils/forms/form_back_btn.html' %}
+        </a>
+    </div>
+{% endblock content %}

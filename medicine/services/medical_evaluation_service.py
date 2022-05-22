@@ -9,7 +9,7 @@ def get_medical_evaluation_none():
 
 
 def get_all_medical_evaluations():
-    return MedicalEvaluation.active_manager.all().order_by('-schedule', '-created_at')
+    return MedicalEvaluation.active_manager.all()
 
 
 def list_medical_evaluations():
