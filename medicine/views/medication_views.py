@@ -1,5 +1,7 @@
 from typing import Tuple
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -26,6 +28,7 @@ def get_cleaned_data(form: MedicationForm) -> Tuple:
     )
 
 
+@login_required
 def list_medications(request: WSGIRequest) -> HttpResponse:
     medications = medication_service.list_medications()
     context = {
@@ -40,6 +43,7 @@ def list_medications(request: WSGIRequest) -> HttpResponse:
     )
 
 
+@login_required
 def medication_detail(request: WSGIRequest, pk: int) -> HttpResponse:
     found_medication = medication_service.get_medication_by_id(
         pk
@@ -55,6 +59,7 @@ def medication_detail(request: WSGIRequest, pk: int) -> HttpResponse:
     )
 
 
+@login_required
 def create_medication(request: WSGIRequest) -> HttpResponse:
     if request.method == 'POST':
         form = MedicationForm(request.POST)
@@ -98,6 +103,7 @@ def create_medication(request: WSGIRequest) -> HttpResponse:
     )
 
 
+@login_required
 def update_medication(request: WSGIRequest, pk: int) -> HttpResponse:
     old_medication = medication_service.get_medication_by_id(
         pk
@@ -147,6 +153,7 @@ def update_medication(request: WSGIRequest, pk: int) -> HttpResponse:
     )
 
 
+@login_required
 def deactivate_medication(request: WSGIRequest, pk: int) -> HttpResponse:
     found_medication = medication_service.get_medication_by_id(
         pk
@@ -170,7 +177,7 @@ def deactivate_medication(request: WSGIRequest, pk: int) -> HttpResponse:
     )
 
 
-class MedicationListView(ServerSideDatatableView):
+class MedicationListView(LoginRequiredMixin, ServerSideDatatableView):
     queryset = medication_service.get_all_medications()
     model = Medication
     columns = [

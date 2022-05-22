@@ -1,5 +1,7 @@
 from typing import Tuple
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -28,6 +30,7 @@ def get_cleaned_data(form: MedicalEvaluationForm) -> Tuple:
     )
 
 
+@login_required()
 def list_medical_evaluations(request: WSGIRequest) -> HttpResponse:
     medical_evaluations = medical_evaluation_service.list_medical_evaluations()
     context = {
@@ -42,6 +45,7 @@ def list_medical_evaluations(request: WSGIRequest) -> HttpResponse:
     )
 
 
+@login_required()
 def medical_evaluation_detail(request: WSGIRequest, pk: int) -> HttpResponse:
     found_medical_evaluation = medical_evaluation_service.get_medical_evaluation_by_id(
         pk)
@@ -56,6 +60,7 @@ def medical_evaluation_detail(request: WSGIRequest, pk: int) -> HttpResponse:
     )
 
 
+@login_required()
 def create_medical_evaluation(request: WSGIRequest) -> HttpResponse:
     if request.method == 'POST':
         form = MedicalEvaluationForm(request.POST)
@@ -102,6 +107,7 @@ def create_medical_evaluation(request: WSGIRequest) -> HttpResponse:
     )
 
 
+@login_required()
 def update_medical_evaluation(request: WSGIRequest, pk: int) -> HttpResponse:
     old_medical_evaluation = medical_evaluation_service.get_medical_evaluation_by_id(
         pk
@@ -151,6 +157,7 @@ def update_medical_evaluation(request: WSGIRequest, pk: int) -> HttpResponse:
     )
 
 
+@login_required()
 def deactivate_medical_evaluation(request: WSGIRequest, pk: int) -> HttpResponse:
     found_medical_evaluation = medical_evaluation_service.get_medical_evaluation_by_id(
         pk
@@ -174,7 +181,7 @@ def deactivate_medical_evaluation(request: WSGIRequest, pk: int) -> HttpResponse
     )
 
 
-class MedicalEvaluationListView(ServerSideDatatableView):
+class MedicalEvaluationListView(LoginRequiredMixin, ServerSideDatatableView):
     queryset = medical_evaluation_service.get_all_medical_evaluations()
     model = MedicalEvaluation
     columns = [
