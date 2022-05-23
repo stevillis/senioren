@@ -1,9 +1,138 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load custom_tags %}
 
-{% block title %} 
-	Senioren - Sistema de Administração de Medicamentos
-{% endblock %} 
+{% block title %}
+Senioren - Sistema de Administração de Medicamentos
+{% endblock %}
+
+{% block content_title %}
+{% trans 'Dashboard' %}
+{% endblock content_title %}
 
 {% block content %}
+<div class="row">
+    <!-- Applied Medications (Today) -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            {% trans 'Applied Medications (Today)' %}
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{ medications_today }}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-fw fa-pills fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Applied Medications (Week) -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            {% trans 'Applied Medications (Week)' %}
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{ medications_this_week }}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-fw fa-pills fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Medical Evaluations (Today) -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            {% trans 'Medical Evaluations (Today)' %}
+                        </div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                    {{ medical_evaluations_today }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-fw fa-clinic-medical fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Medical Evaluations (Week) -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            {% trans 'Medical Evaluations (Week)' %}
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{ medical_evaluations_this_week }}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-fw fa-clinic-medical fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h2 class="h4 mb-0 text-gray-800">
+                {% trans 'Medications' %}
+            </h2>
+        </div>
+    </div>
+</div>
+
+<!-- Medications -->
+<div class="row">
+    <div class="col-12">
+        <table id="gridMedication" class="table table-striped table-bordered" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>{{ model|get_verbose_name:'schedule' }}</th>
+                    <th>{{ model|get_verbose_name:'patient' }}</th>
+                    <th>{{ model|get_verbose_name:'nursing_professional' }}</th>
+                    {% include 'utils/tables/thead_actions.html' %}
+                </tr>
+            </thead>
+
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}
+
+{% block custom_script %}
+<!-- Datatable initialization -->
+<script src="{% static 'js/grid-datatables.js' %}"></script>
+{% endblock custom_script %}
