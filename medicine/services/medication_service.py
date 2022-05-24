@@ -1,25 +1,27 @@
-from ..models import Medication
-from .history.medication_history_service import create_medication_history
-from .util_service import get_object_by_id_or_404
+from django.db.models import F
+from medicine.models import Medication
+from medicine.services.history.medication_history_service import \
+    create_medication_history
+from medicine.services.util_service import get_object_by_id_or_404
 
 
 def get_medication_none():
+    """Returns an empty Medication"""
     return Medication.objects.none()
 
 
 def get_all_medications():
+    """Returns all active Medications"""
     return Medication.active_manager.all()
 
 
-def list_medications():
-    return get_all_medications()
-
-
 def get_medication_by_id(pk):
+    """Return the Medication filtered by the given id."""
     return get_object_by_id_or_404(Medication, pk)
 
 
 def create_medication(medication):
+    """Creates a Medication on the database."""
     created_medication = Medication.objects.create(
         schedule=medication.schedule,
         observation=medication.observation,
@@ -30,6 +32,12 @@ def create_medication(medication):
     )
 
     for medicine in medication.medicines.all():
+        # Decrease sotck_qty of selected medicines
+        medicine.stock_qty = F('stock_qty') - 1
+        medicine.save()
+        medicine.refresh_from_db()
+
+        # Associate selected medicines to medication
         created_medication.medicines.add(medicine)
     created_medication.save()
 
@@ -37,6 +45,7 @@ def create_medication(medication):
 
 
 def update_medication(old_medication, new_medication):
+    """Upadtes a Medication with the new given values."""
     old_medication.schedule = new_medication.schedule
     old_medication.observation = new_medication.observation
     old_medication.patient = new_medication.patient
@@ -52,6 +61,7 @@ def update_medication(old_medication, new_medication):
 
 
 def deactivate_medication(medication, user):
+    """Deactivate a Medication logically."""
     medication.is_active = False
     medication.deactivated_by = user
     medication.save(force_update=True)

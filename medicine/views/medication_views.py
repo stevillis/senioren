@@ -30,7 +30,7 @@ def get_cleaned_data(form: MedicationForm) -> Tuple:
 
 @login_required
 def list_medications(request: WSGIRequest) -> HttpResponse:
-    medications = medication_service.list_medications()
+    medications = medication_service.get_all_medications()
     context = {
         'model': Medication,
         'medications': medications
