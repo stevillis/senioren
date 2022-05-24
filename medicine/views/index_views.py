@@ -11,20 +11,16 @@ from medicine.services import medication_service
 
 
 def _get_amount_created_today(model: Tuple[Medication, MedicalEvaluation]) -> int:
-    today = datetime.date.today()
-
     return model.active_manager.filter(
-        created_at__startswith=today
+        created_at__startswith=datetime.date.today()
+
     ).count()
 
 
 def _get_amount_created_week(model: Tuple[Medication, MedicalEvaluation]) -> int:
-    today = datetime.date.today()
-    week_timedelta = datetime.timedelta(7)
-
     return model.active_manager.filter(
-        created_at__startswith=today,
-        created_at__gte=F('created_at') - week_timedelta,
+        created_at__lte=datetime.datetime.now(),
+        created_at__gte=F('created_at') - datetime.timedelta(7),
     ).count()
 
 
@@ -41,7 +37,7 @@ def index(request: WSGIRequest) -> HttpResponse:
     medical_evaluations_today = _get_amount_created_today(MedicalEvaluation)
     medical_evaluations_this_week = _get_amount_created_week(MedicalEvaluation)
 
-    medications = medication_service.list_medications()
+    medications = medication_service.get_all_medications()
 
     context = {
         'medications_today': medications_today,
