@@ -1,8 +1,8 @@
 import medicine.filters as filters
-
-from ..models import Medicine
-from .history.medicine_history_service import create_medicine_history
-from .util_service import get_object_by_id_or_404
+from medicine.models import Medicine
+from medicine.services.history.medicine_history_service import \
+    create_medicine_history
+from medicine.services.util_service import get_object_by_id_or_404
 
 
 def get_medicine_none():
@@ -24,6 +24,10 @@ def list_medicines(request):
 
 def get_medicine_by_id(pk):
     return get_object_by_id_or_404(Medicine, pk)
+
+
+def get_medicines_with_stock():
+    return Medicine.active_manager.filter(stock_qty__gt=0)
 
 
 def create_medicine(medicine):
