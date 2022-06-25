@@ -15,7 +15,6 @@ from pathlib import Path
 
 import django_heroku
 import dotenv
-from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -141,6 +140,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'pt-br'
 
+'''
+# Disable auto translation.
 LANGUAGES = (
     ('pt-BR', _('Portuguese')),
     ('en', _('English')),
@@ -149,7 +150,9 @@ LANGUAGES = (
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, '/locale'),
     os.path.join(BASE_DIR, '/medicine/locale'),
+    os.path.join(BASE_DIR, '/user/locale'),
 )
+'''
 
 TIME_ZONE = 'America/Cuiaba'
 
