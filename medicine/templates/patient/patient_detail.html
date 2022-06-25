@@ -1,13 +1,12 @@
 {% extends "base.html" %}
-{% load i18n %}
 {% load custom_tags %}
 
 {% block title %}
-    {% trans 'Patient Detail' %}
+    Visualizar Paciente
 {% endblock title %}
 
 {% block content_title %}
-    {% trans 'Patient Detail' %}
+    Visualizar Paciente
 {% endblock content_title %}
 
 {% block content %}
@@ -15,129 +14,129 @@
         <div class="card-body">
             <div class="row mb-3">
                 <h5 class="card-title">
-                    <span class="font-weight-bold">
-                        {% trans 'Code' %}:
-                    </span>
+                <span class="font-weight-bold">
+                    Código:
+                </span>
                     {{ patient.id }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5 class="card-title">
-                        <span class="font-weight-bold">
-                            {{ patient|get_verbose_name:'name' }}:
-                        </span>
+                <span class="font-weight-bold">
+                    {{ patient|get_verbose_name:'name' }}:
+                </span>
                     {{ patient.name }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5 class="card-title">
-                        <span class="font-weight-bold">
-                            {{ patient|get_verbose_name:'social_name' }}:
-                        </span>
+                <span class="font-weight-bold">
+                    {{ patient|get_verbose_name:'social_name' }}:
+                </span>
                     {{ patient.social_name }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5 class="card-title">
-                        <span class="font-weight-bold">
-                            {{ patient|get_verbose_name:'cpf' }}:
-                        </span>
+                <span class="font-weight-bold">
+                    {{ patient|get_verbose_name:'cpf' }}:
+                </span>
                     {{ patient.cpf }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5 class="card-title">
-                        <span class="font-weight-bold">
-                            {{ patient|get_verbose_name:'rg' }}:
-                        </span>
+                <span class="font-weight-bold">
+                    {{ patient|get_verbose_name:'rg' }}:
+                </span>
                     {{ patient.rg }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5 class="card-title">
-                        <span class="font-weight-bold">
-                            {{ patient|get_verbose_name:'birth_date' }}:
-                        </span>
+                <span class="font-weight-bold">
+                    {{ patient|get_verbose_name:'birth_date' }}:
+                </span>
                     {{ patient.birth_date }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5 class="card-title">
-                        <span class="font-weight-bold">
-                            {{ patient|get_verbose_name:'marital_status' }}:
-                        </span>
+                <span class="font-weight-bold">
+                    {{ patient|get_verbose_name:'marital_status' }}:
+                </span>
                     {{ patient.get_marital_status_display }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5 class="card-title">
-                        <span class="font-weight-bold">
-                            {{ patient|get_verbose_name:'place_of_birth' }}:
-                        </span>
+                <span class="font-weight-bold">
+                    {{ patient|get_verbose_name:'place_of_birth' }}:
+                </span>
                     {{ patient.place_of_birth }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5 class="card-title">
-                        <span class="font-weight-bold">
-                            {{ patient|get_verbose_name:'gender' }}:
-                        </span>
+                <span class="font-weight-bold">
+                    {{ patient|get_verbose_name:'gender' }}:
+                </span>
                     {{ patient.get_gender_display|default_if_none:'' }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5 class="card-title">
-                        <span class="font-weight-bold">
-                            {{ patient|get_verbose_name:'phone' }}:
-                        </span>
+                <span class="font-weight-bold">
+                    {{ patient|get_verbose_name:'phone' }}:
+                </span>
                     {{ patient.phone }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5 class="card-title">
-                        <span class="font-weight-bold">
-                            {{ patient|get_verbose_name:'observation' }}:
-                        </span>
+                <span class="font-weight-bold">
+                    {{ patient|get_verbose_name:'observation' }}:
+                </span>
                     {{ patient.observation }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5>
-                        <span class="font-weight-bold">
-                            {{ patient|get_verbose_name:'created_by' }}:
-                        </span>
+                <span class="font-weight-bold">
+                    {{ patient|get_verbose_name:'created_by' }}:
+                </span>
                     {{ patient.created_by|default_if_none:"" }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5>
-                        <span class="font-weight-bold">
-                            {{ patient|get_verbose_name:'created_at' }}:
-                        </span>
+                <span class="font-weight-bold">
+                    {{ patient|get_verbose_name:'created_at' }}:
+                </span>
                     {{ patient.created_at|date:"d/m/Y" }} {{ patient.created_at|time:"H:i:s" }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5>
-                    <span class="font-weight-bold">
-                        {{ patient|get_verbose_name:'updated_by' }}:
-                    </span>
+                <span class="font-weight-bold">
+                    {{ patient|get_verbose_name:'updated_by' }}:
+                </span>
                     {{ patient.updated_by|default_if_none:"" }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5>
-                    <span class="font-weight-bold">
-                        {{ patient|get_verbose_name:'updated_at' }}:
-                    </span>
+                <span class="font-weight-bold">
+                    {{ patient|get_verbose_name:'updated_at' }}:
+                </span>
                     {{ patient.updated_at|date:"d/m/Y" }} {{ patient.updated_at|time:"H:i:s" }}
                 </h5>
             </div>
             <div class="row mb-3">
                 <h5>
-                    <span class="font-weight-bold">
-                        {{ patient|get_verbose_name:'is_active' }}:
-                    </span>
+                <span class="font-weight-bold">
+                    {{ patient|get_verbose_name:'is_active' }}:
+                </span>
                     {% if patient.is_active %}
                         {% include 'utils/icons/icon_check_circle.html' %}
                     {% else %}

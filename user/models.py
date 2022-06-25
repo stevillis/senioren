@@ -2,7 +2,6 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import gettext_lazy as _
 
 from .managers import CustomUserManager
 
@@ -11,36 +10,33 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     """CustomUser Model"""
 
     name = models.CharField(
-        verbose_name=_('Name'),
+        verbose_name='Nome',
         max_length=80,
         null=False,
         blank=False
     )
 
     email = models.EmailField(
-        verbose_name=_('Email'),
+        verbose_name='Email',
         unique=True,
         null=False,
         blank=False
     )
 
     is_staff = models.BooleanField(
-        verbose_name=_('Staff status'),
+        verbose_name='Membro da equipe',
         default=False,
-        help_text=_('Designates whether the user can log into this admin site.')
+        help_text='Indica que usuário consegue acessar este site de administração.'
     )
 
     is_active = models.BooleanField(
-        verbose_name=_('Active'),
+        verbose_name='Ativo',
         default=True,
-        help_text=_(
-            'Designates whether this user should be treated as active. '
-            'Unselect this instead of deleting accounts.'
-        ),
+        help_text='Indica que o usuário será tratado como ativo. Ao invés de excluir contas de usuário, desmarque isso.',
     )
 
     date_joined = models.DateTimeField(
-        verbose_name=_('Date joined'),
+        verbose_name='Data de registro',
         default=timezone.now
     )
 
@@ -54,5 +50,5 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         """Metadata options"""
-        verbose_name = _('User')
-        verbose_name_plural = _('Users')
+        verbose_name = 'Usuário'
+        verbose_name_plural = 'Usuários'

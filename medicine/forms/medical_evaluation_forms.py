@@ -12,6 +12,7 @@ class MedicalEvaluationForm(forms.ModelForm):
     """MedicalEvaluation form."""
 
     schedule = forms.DateTimeField(
+        label=MedicalEvaluation._meta.get_field('schedule').verbose_name,
         input_formats=['%d-%m-%Y %H:%M:%S'],
         widget=DateTimePicker(
             options={
@@ -26,11 +27,15 @@ class MedicalEvaluationForm(forms.ModelForm):
     )
 
     patient = forms.ModelChoiceField(
+        label=MedicalEvaluation._meta.get_field('patient').verbose_name,
         queryset=get_all_patients(),
         widget=autocomplete.ModelSelect2(url='medicine:patient-autocomplete')
     )
 
     nursing_professional = forms.ModelChoiceField(
+        label=MedicalEvaluation._meta.get_field(
+            'nursing_professional'
+        ).verbose_name,
         queryset=get_all_nursing_professionals(),
         widget=autocomplete.ModelSelect2(
             url='medicine:nursing-professional-autocomplete')

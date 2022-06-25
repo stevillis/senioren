@@ -1,14 +1,13 @@
 {% extends "base.html" %}
 {% load custom_tags %}
 {% load static %}
-{% load i18n %}
 
 {% block title %}
-    {% trans 'Patient Register' %}
+    Cadastrar Paciente
 {% endblock title %}
 
 {% block content_title %}
-    {% if is_edit %}{% trans 'Edit' %}{% else %}{% trans 'Register' %}{% endif %} {% trans 'Patient' %}
+    {% if is_edit %}Editar{% else %}Cadastrar{% endif %} Paciente
 {% endblock content_title %}
 
 {% block content %}
@@ -148,4 +147,3 @@
         </div>
     </form>
 {% endblock content %}
-

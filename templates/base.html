@@ -1,8 +1,9 @@
 {% load static %}
-{% load i18n %}
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -21,8 +22,9 @@
 
     <!-- Custom fonts for this template-->
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css"/>
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-          rel="stylesheet"/>
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet"/>
 
     <!-- Custom styles for this template-->
     <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet"/>
@@ -43,7 +45,8 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'index' %}">
             <div class="sidebar-brand-icon">
-                <img src="{% static 'img/brand/apple-touch-icon.png' %}" alt="Senioren brand" width="64" height="64"/>
+                <img src="{% static 'img/brand/apple-touch-icon.png' %}" alt="Senioren brand" width="64"
+                     height="64"/>
             </div>
         </a>
 
@@ -62,13 +65,13 @@
         <hr class="sidebar-divider"/>
 
         <!-- Heading -->
-        <div class="sidebar-heading">{% trans 'Records' %}</div>
+        <div class="sidebar-heading">Cadastros</div>
 
-        <!-- Nav Item - Medications -->
+        <!-- Nav Item - Medicações -->
         <li class="nav-item text-center">
             <a class="nav-link collapsed" href="{% url 'medicine:medication-list' %}">
                 <i class="fas fa-fw fa-file-medical"></i>
-                <span>{% trans 'Medications' %}</span>
+                <span>Medicações</span>
             </a>
         </li>
 
@@ -76,7 +79,7 @@
         <li class="nav-item text-center">
             <a class="nav-link collapsed" href="{% url 'medicine:medical-evaluation-list' %}">
                 <i class="fas fa-fw fa-clinic-medical"></i>
-                <span>{% trans 'Medical Evaluations' %}</span>
+                <span>Avaliações Médicas</span>
             </a>
         </li>
 
@@ -84,7 +87,7 @@
         <li class="nav-item text-center">
             <a class="nav-link collapsed" href="{% url 'medicine:medicine-list' %}">
                 <i class="fas fa-fw fa-pills"></i>
-                <span>{% trans 'Medicines' %}</span>
+                <span>Medicamentos</span>
             </a>
         </li>
 
@@ -92,7 +95,7 @@
         <li class="nav-item text-center">
             <a class="nav-link collapsed" href="{% url 'medicine:patient-list' %}">
                 <i class="fas fa-fw fa-hospital-user"></i>
-                <span>{% trans 'Patients' %}</span>
+                <span>Pacientes</span>
             </a>
         </li>
 
@@ -100,7 +103,7 @@
         <li class="nav-item text-center">
             <a class="nav-link collapsed" href="{% url 'medicine:nursing-professional-list' %}">
                 <i class="fas fa-fw fa-user-nurse"></i>
-                <span>{% trans 'Nursing Professionals' %}</span>
+                <span>Profissionais de Enfermagem</span>
             </a>
         </li>
 
@@ -164,7 +167,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Senioren - {% trans 'made by' %} Stévillis Sousa, 2022</span>
+                    <span>Senioren - desenvolvido por Stévillis Sousa, 2022</span>
                 </div>
             </div>
         </footer>
@@ -204,4 +207,5 @@
 
 {% endblock custom_script %}
 </body>
+
 </html>
