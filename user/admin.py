@@ -4,14 +4,19 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import (AdminPasswordChangeForm,
                                        ReadOnlyPasswordHashField)
 from django.core.exceptions import ValidationError
-from django.utils.translation import gettext_lazy as _
 
 from .models import CustomUser
 
 
 class UserCreationForm(forms.ModelForm):
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    password1 = forms.CharField(
+        label='Senha',
+        widget=forms.PasswordInput
+    )
+    password2 = forms.CharField(
+        label='Confirmação de Senha',
+        widget=forms.PasswordInput
+    )
 
     class Meta:
         model = CustomUser
@@ -38,12 +43,10 @@ class UserCreationForm(forms.ModelForm):
 
 class UserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField(
-        label=_("Password"),
-        help_text=_(
-            'Raw passwords are not stored, so there is no way to see this '
-            'user’s password, but you can change the password using '
-            '<a href="{}">this form</a>.'
-        ),
+        label='Senha',
+        help_text='Senhas brutas não são armazenadas, então não há como visualizar '
+        ' a senha desse usuário, porém você pode mudar a senha usando esse '
+        '<a href="{}" >formulário</a>.',
     )
 
     class Meta:
@@ -57,7 +60,8 @@ class UserChangeForm(forms.ModelForm):
             password.help_text = password.help_text.format('../password/')
         user_permissions = self.fields.get('user_permissions')
         if user_permissions:
-            user_permissions.queryset = user_permissions.queryset.select_related('content_type')
+            user_permissions.queryset = user_permissions.queryset.select_related(
+                'content_type')
 
 
 class UserAdmin(BaseUserAdmin):
@@ -65,11 +69,11 @@ class UserAdmin(BaseUserAdmin):
     change_user_password_template = 'admin/auth/user/change_password.html'
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        (_('Personal info'), {'fields': ('name',)}),
-        (_('Permissions'), {
+        ('Informações pessoais', {'fields': ('name',)}),
+        ('Permissões', {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
         }),
-        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+        ('Datas importantes', {'fields': ('last_login', 'date_joined')}),
     )
     add_fieldsets = (
         (None, {

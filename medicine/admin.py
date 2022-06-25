@@ -1,6 +1,5 @@
 from daterangefilter.filters import DateRangeFilter
 from django.contrib import admin
-from django.utils.translation import gettext_lazy as _
 
 from medicine.models import (MedicalEvaluation, MedicalEvaluationHistory,
                              Medication, MedicationHistory, Medicine,
@@ -136,7 +135,7 @@ class MedicalEvaluationAdmin(admin.ModelAdmin):
     list_filter = [
         (
             'nursing_professional__name',
-            custom_titled_filter(_('Nursing Professional'))
+            custom_titled_filter('Profissional de Enfermagem')
         ),
         ('schedule', DateRangeFilter),
     ]
@@ -147,17 +146,17 @@ class MedicalEvaluationAdmin(admin.ModelAdmin):
         'patient__cpf',
     )
 
-    @admin.display(description=_('Patient'), ordering='patient__name')
+    @admin.display(description='Paciente', ordering='patient__name')
     def get_patient_name(self, obj):
         """Get Patient name for list_display"""
         return obj.patient.name
 
-    @admin.display(description=_('CPF'), ordering='patient__cpf')
+    @admin.display(description='CPF', ordering='patient__cpf')
     def get_patient_cpf(self, obj):
         """Get Patient cpf for list_display"""
         return obj.patient.cpf
 
-    @admin.display(description=_('Nursing Professional'),
+    @admin.display(description='Profissional de Enfermagem',
                    ordering='nursing_professional__name')
     def get_nursing_professional_name(self, obj):
         """Get Nursing Professional name for list_display"""
@@ -309,7 +308,7 @@ class MedicationAdmin(admin.ModelAdmin):
     list_filter = [
         (
             'nursing_professional__name',
-            custom_titled_filter(_('Nursing Professional'))
+            custom_titled_filter('Profissional de Enfermagem')
         ),
         ('schedule', DateRangeFilter)
     ]
@@ -321,12 +320,12 @@ class MedicationAdmin(admin.ModelAdmin):
         'observation',
     )
 
-    @admin.display(description=_('Patient'), ordering='patient__name')
+    @admin.display(description='Paciente', ordering='patient__name')
     def get_patient_name(self, obj):
         """Get Patient name for list_display"""
         return obj.patient.name
 
-    @admin.display(description=_('Nursing Professional'),
+    @admin.display(description='Profissional de Enfermagem',
                    ordering='nursing_professional__name')
     def get_nursing_professional_name(self, obj):
         """Get Nursing Professional name for list_display"""
@@ -542,7 +541,7 @@ class MedicalEvaluationHistoryAdmin(admin.ModelAdmin):
     list_filter = [
         (
             'nursing_professional__name',
-            custom_titled_filter(_('Nursing Professional'))
+            custom_titled_filter('Profissional de Enfermagem')
         ),
         ('schedule', DateRangeFilter)
     ]
@@ -554,12 +553,12 @@ class MedicalEvaluationHistoryAdmin(admin.ModelAdmin):
         'observation',
     )
 
-    @admin.display(description=_('Patient'), ordering='patient__name')
+    @admin.display(description='Paciente', ordering='patient__name')
     def get_patient_name(self, obj):
         """Get Patient name for list_display"""
         return obj.patient.name
 
-    @admin.display(description=_('Nursing Professional'),
+    @admin.display(description='Profissional de Enfermagem',
                    ordering='nursing_professional__name')
     def get_nursing_professional_name(self, obj):
         """Get Nursing Professional name for list_display"""
@@ -612,7 +611,7 @@ class MedicationHistoryAdmin(admin.ModelAdmin):
     list_filter = [
         (
             'nursing_professional__name',
-            custom_titled_filter(_('Nursing Professional'))
+            custom_titled_filter('Profissional de Enfermagem')
         ),
         ('schedule', DateRangeFilter)
     ]
@@ -624,18 +623,18 @@ class MedicationHistoryAdmin(admin.ModelAdmin):
         'observation',
     )
 
-    @admin.display(description=_('Patient'), ordering='patient__name')
+    @admin.display(description='Paciente', ordering='patient__name')
     def get_patient_name(self, obj):
         """Get Patient name for list_display"""
         return obj.patient.name
 
-    @admin.display(description=_('Nursing Professional'),
+    @admin.display(description='Profissional de Enfermagem',
                    ordering='nursing_professional__name')
     def get_nursing_professional_name(self, obj):
         """Get Nursing Professional name for list_display"""
         return obj.nursing_professional.name
 
-    @admin.display(description=_('Medicine'), ordering='medicine__name')
+    @admin.display(description='Medicamento', ordering='medicine__name')
     def get_medicine_name(self, obj):
         """Get Medicine name for list_display"""
         return obj.medicine.name

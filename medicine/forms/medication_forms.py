@@ -1,6 +1,5 @@
 from dal import autocomplete
 from django import forms
-from django.utils.translation import gettext_lazy as _
 from tempus_dominus.widgets import DateTimePicker
 
 from ..models import Medication
@@ -60,7 +59,7 @@ class MedicationForm(forms.ModelForm):
         if medicines:
             for medicine in medicines:
                 if not medicine.stock_qty > 0:
-                    msg = _('Stock for medicine is empty')
+                    msg = 'Estoque de Medicamento vazio'
                     error_msg = f'{msg} - id: {medicine.id}'
 
                     self.add_error('medicines', error_msg)

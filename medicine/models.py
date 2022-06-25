@@ -1,15 +1,14 @@
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import gettext_lazy as _
 from user.models import CustomUser
 
 from medicine.managers import ActiveManager
 
-MARITAL_STATUS_MARRIED_CHOICE = (1, _('Married'))
-MARITAL_STATUS_WIDOWED_CHOICE = (2, _('Widowed'))
-MARITAL_STATUS_SEPARATED_CHOICE = (3, _('Separated'))
-MARITAL_STATUS_DIVORCED_CHOICE = (4, _('Divorced'))
-MARITAL_STATUS_SINGLE_CHOICE = (5, _('Single'))
+MARITAL_STATUS_MARRIED_CHOICE = (1, 'Casado(a)')
+MARITAL_STATUS_WIDOWED_CHOICE = (2, 'Viúvo(a)')
+MARITAL_STATUS_SEPARATED_CHOICE = (3, 'Separado(a)')
+MARITAL_STATUS_DIVORCED_CHOICE = (4, 'Divorciado(a)')
+MARITAL_STATUS_SINGLE_CHOICE = (5, 'Solteiro(a)')
 MARITAL_STATUS_CHOICES = (
     MARITAL_STATUS_MARRIED_CHOICE,
     MARITAL_STATUS_WIDOWED_CHOICE,
@@ -18,8 +17,8 @@ MARITAL_STATUS_CHOICES = (
     MARITAL_STATUS_SINGLE_CHOICE,
 )
 
-GENDER_MALE_CHOICE = ('M', _('Male'))
-GENDER_FEMALE_CHOICE = ('F', _('Female'))
+GENDER_MALE_CHOICE = ('M', 'Masculino')
+GENDER_FEMALE_CHOICE = ('F', 'Feminino')
 GENDER_OTHER_CHOICE = ('', '')
 GENDER_CHOICES = (
     GENDER_OTHER_CHOICE,
@@ -32,18 +31,18 @@ class BaseModel(models.Model):
     """Define common fields used by other Models by inheritance"""
 
     created_at = models.DateTimeField(
-        verbose_name=_('Created at'),
+        verbose_name='Criado em',
         auto_now_add=True
     )
 
     updated_at = models.DateTimeField(
-        verbose_name=_('Updated at'),
+        verbose_name='Atualizado em',
         auto_now=True
     )
 
     created_by = models.ForeignKey(
         CustomUser,
-        verbose_name=_('Created by'),
+        verbose_name='Criado por',
         related_name='%(app_label)s_%(class)s_related_created_by',
         null=True,
         blank=True,
@@ -52,7 +51,7 @@ class BaseModel(models.Model):
 
     updated_by = models.ForeignKey(
         CustomUser,
-        verbose_name=_('Updated by'),
+        verbose_name='Atualizado por',
         related_name='%(app_label)s_%(class)s_related_updated_by',
         null=True,
         blank=True,
@@ -60,13 +59,13 @@ class BaseModel(models.Model):
     )
 
     is_active = models.BooleanField(
-        verbose_name=_('Active'),
+        verbose_name='Ativo',
         default=True
     )
 
     deactivated_by = models.ForeignKey(
         CustomUser,
-        verbose_name=_('Deactivated by'),
+        verbose_name='Inativado por',
         related_name='%(app_label)s_%(class)s_related_deactivated_by',
         null=True,
         blank=True,
@@ -82,20 +81,20 @@ class HistoryBaseModel(models.Model):
     """Define common fields used by other History Models by inheritance"""
 
     created_at = models.DateTimeField(
-        verbose_name=_('Created at'),
+        verbose_name='Criado em',
         null=False,
         blank=False,
     )
 
     updated_at = models.DateTimeField(
-        verbose_name=_('Updated at'),
+        verbose_name='Atualizado em',
         null=True,
         blank=True,
     )
 
     created_by = models.ForeignKey(
         CustomUser,
-        verbose_name=_('Created by'),
+        verbose_name='Criado por',
         on_delete=models.CASCADE,
         related_name='%(app_label)s_%(class)s_related_created_by',
         null=True,
@@ -104,7 +103,7 @@ class HistoryBaseModel(models.Model):
 
     updated_by = models.ForeignKey(
         CustomUser,
-        verbose_name=_('Updated by'),
+        verbose_name='Atualizado por',
         on_delete=models.CASCADE,
         related_name='%(app_label)s_%(class)s_related_updated_by',
         null=True,
@@ -112,7 +111,7 @@ class HistoryBaseModel(models.Model):
     )
 
     is_active = models.BooleanField(
-        verbose_name=_('Active'),
+        verbose_name='Ativo',
         null=True,
         blank=True,
         default=True,
@@ -120,7 +119,7 @@ class HistoryBaseModel(models.Model):
 
     deactivated_by = models.ForeignKey(
         CustomUser,
-        verbose_name=_('Deactivated by'),
+        verbose_name='Inativado por',
         related_name='%(app_label)s_%(class)s_related_deactivated_by',
         null=True,
         blank=True,
@@ -141,34 +140,34 @@ class Medicine(BaseModel):
     """Medicine Model"""
 
     name = models.CharField(
-        verbose_name=_('Name'),
+        verbose_name='Nome',
         max_length=80,
         null=False,
         blank=False
     )
 
     description = models.CharField(
-        verbose_name=_('Description'),
+        verbose_name='Descrição',
         max_length=100,
         null=False,
         blank=True
     )
 
     batch = models.CharField(
-        verbose_name=_('Batch'),
+        verbose_name='Lote',
         max_length=20,
         null=False,
         blank=True
     )
 
     expiration_date = models.DateField(
-        verbose_name=_('Expiration date'),
+        verbose_name='Data de vencimento',
         null=False,
         blank=False
     )
 
     stock_qty = models.IntegerField(
-        verbose_name=_('Stock quantity'),
+        verbose_name='Quantidade em estoque',
         null=False,
         blank=False,
         default=0
@@ -179,8 +178,8 @@ class Medicine(BaseModel):
 
     class Meta:
         """Metadata options"""
-        verbose_name = _('Medicine')
-        verbose_name_plural = _('Medicines')
+        verbose_name = 'Medicamento'
+        verbose_name_plural = 'Medicamentos'
         ordering = ('-is_active', 'name',)
 
     def __str__(self):  # pylint: disable=invalid-str-returned
@@ -191,48 +190,48 @@ class Patient(BaseModel):
     """Patient Model"""
 
     name = models.CharField(
-        verbose_name=_('Name'),
+        verbose_name='Nome',
         max_length=80,
         null=False,
         blank=False
     )
 
     social_name = models.CharField(
-        verbose_name=_('Social Name'),
+        verbose_name='Nome Social',
         max_length=80,
         null=False,
         blank=True
     )
 
     cpf = models.CharField(
-        verbose_name=_('CPF'),
+        verbose_name='CPF',
         max_length=11,
         null=False,
         blank=False
     )
 
     rg = models.CharField(
-        verbose_name=_('RG'),
+        verbose_name='RG',
         max_length=20,
         null=False,
         blank=False
     )
 
     birth_date = models.DateField(
-        verbose_name=_('Birth Date'),
+        verbose_name='Data de Nascimento',
         null=False,
         blank=False
     )
 
     marital_status = models.IntegerField(
-        verbose_name=_('Marital Status'),
+        verbose_name='Estado Civil',
         choices=MARITAL_STATUS_CHOICES,
         null=False,
         blank=False
     )
 
     place_of_birth = models.CharField(
-        verbose_name=_('Place of Birth'),
+        verbose_name='Naturalidade',
         max_length=80,
         null=False,
         blank=True
@@ -240,21 +239,21 @@ class Patient(BaseModel):
 
     gender = models.CharField(
         max_length=2,
-        verbose_name=_('Gender'),
+        verbose_name='Sexo',
         choices=GENDER_CHOICES,
         null=False,
         blank=True
     )
 
     phone = models.CharField(
-        verbose_name=_('Phone'),
+        verbose_name='Telefone',
         max_length=20,
         null=False,
         blank=True
     )
 
     observation = models.CharField(
-        verbose_name=_('Observation'),
+        verbose_name='Observação',
         max_length=200,
         null=False,
         blank=True
@@ -265,25 +264,28 @@ class Patient(BaseModel):
 
     class Meta:
         """Metadata options"""
-        verbose_name = _('Patient')
-        verbose_name_plural = _('Patients')
+        verbose_name = 'Paciente'
+        verbose_name_plural = 'Pacientes'
         ordering = ('-is_active', 'name',)
 
-    def __str__(self):  # pylint: disable=invalid-str-returned
-        return self.name
+    def __str__(self):
+        return f'{self.name}'
+
+    def __repr__(self):
+        return f'Pacient(name={self.name})'
 
 
 class NursingProfessional(BaseModel):
     """NursingProfessional Model"""
 
     name = models.CharField(
-        verbose_name=_('Name'),
+        verbose_name='Nome',
         max_length=80,
         null=False,
         blank=False
     )
     coren = models.CharField(
-        verbose_name=_('COREN'),
+        verbose_name='COREN',
         max_length=20,
         null=False,
         blank=False
@@ -294,53 +296,56 @@ class NursingProfessional(BaseModel):
 
     class Meta:
         """Metadata options"""
-        verbose_name = _('Nursing Professional')
-        verbose_name_plural = _('Nursing Professionals')
+        verbose_name = 'Profissional de Enfermagem'
+        verbose_name_plural = 'Profissionais de Enfermagem'
         ordering = ('-is_active', 'name',)
 
-    def __str__(self):  # pylint: disable=invalid-str-returned
-        return self.name
+    def __str__(self):
+        return f'{self.name}'
+
+    def __repr__(self):
+        return f'NursingProfessional(name={self.name})'
 
 
 class MedicalEvaluation(BaseModel):
     """MedicalEvaluation Model"""
 
     schedule = models.DateTimeField(
-        verbose_name=_('Schedule'),
+        verbose_name='Horário',
         null=False,
         blank=False,
         default=timezone.now
     )
 
     heart_pressure = models.CharField(
-        verbose_name=_('Heart pressure'),
+        verbose_name='Pressão Arterial',
         max_length=20,
         null=False,
         blank=False
     )
 
     glucose = models.CharField(
-        verbose_name=_('Glucose'),
+        verbose_name='Glicose',
         max_length=20,
         null=False,
         blank=False
     )
 
     observation = models.CharField(
-        verbose_name=_('Observation'),
+        verbose_name='Observação',
         max_length=200,
         null=False,
         blank=True
     )
 
     patient = models.ForeignKey(
-        verbose_name=_('Patient'),
+        verbose_name='Paciente',
         to=Patient,
         on_delete=models.CASCADE,
     )
 
     nursing_professional = models.ForeignKey(
-        verbose_name=_('Nursing Professional'),
+        verbose_name='Profissional de Enfermagem',
         to=NursingProfessional,
         on_delete=models.CASCADE,
     )
@@ -350,8 +355,8 @@ class MedicalEvaluation(BaseModel):
 
     class Meta:
         """Metadata options"""
-        verbose_name = _('Medical Evaluation')
-        verbose_name_plural = _('Medical Evaluations')
+        verbose_name = 'Avaliação Médica'
+        verbose_name_plural = 'Avaliações Médicas'
         ordering = ('-is_active', '-schedule',)
 
     def __str__(self):
@@ -362,14 +367,14 @@ class Medication(BaseModel):
     """Metadata options"""
 
     schedule = models.DateTimeField(
-        verbose_name=_('Schedule'),
+        verbose_name='Horário',
         null=False,
         blank=False,
         default=timezone.now
     )
 
     observation = models.CharField(
-        verbose_name=_('Observation'),
+        verbose_name='Observação',
         max_length=200,
         null=False,
         blank=True
@@ -377,18 +382,18 @@ class Medication(BaseModel):
 
     medicines = models.ManyToManyField(
         Medicine,
-        verbose_name=_('Medicines')
+        verbose_name='Medicamentos'
     )
 
     patient = models.ForeignKey(
         Patient,
-        verbose_name=_('Patient'),
+        verbose_name='Paciente',
         on_delete=models.CASCADE
     )
 
     nursing_professional = models.ForeignKey(
         NursingProfessional,
-        verbose_name=_('Nursing Professional'),
+        verbose_name='Profissional de Enfermagem',
         on_delete=models.CASCADE
     )
 
@@ -397,8 +402,8 @@ class Medication(BaseModel):
 
     class Meta:
         """Metadata options"""
-        verbose_name = _('Medication')
-        verbose_name_plural = _('Medications')
+        verbose_name = 'Medicação'
+        verbose_name_plural = 'Medicações'
         ordering = ('-is_active', '-schedule',)
 
     def __str__(self):
@@ -414,34 +419,34 @@ class MedicineHistory(HistoryBaseModel):
     """Medicine History Model"""
 
     name = models.CharField(
-        verbose_name=_('Name'),
+        verbose_name='Nome',
         max_length=80,
         null=True,
         blank=True
     )
 
     description = models.CharField(
-        verbose_name=_('Description'),
+        verbose_name='Descrição',
         max_length=100,
         null=True,
         blank=True
     )
 
     batch = models.CharField(
-        verbose_name=_('Batch'),
+        verbose_name='Lote',
         max_length=20,
         null=True,
         blank=True
     )
 
     expiration_date = models.DateField(
-        verbose_name=_('Expiration date'),
+        verbose_name='Data de vencimento',
         null=True,
         blank=True
     )
 
     stock_qty = models.IntegerField(
-        verbose_name=_('Stock quantity'),
+        verbose_name='Quantidade em estoque',
         null=True,
         blank=True,
         default=0
@@ -456,60 +461,63 @@ class MedicineHistory(HistoryBaseModel):
 
     class Meta:
         """Metadata options"""
-        verbose_name = _('Medicine History')
-        verbose_name_plural = _('Medicine Histories')
+        verbose_name = 'Histórico de Medicamento'
+        verbose_name_plural = 'Históricos de Medicamento'
         ordering = ('-id',)
 
-    def __str__(self):  # pylint: disable=invalid-str-returned
-        return self.name
+    def __str__(self):
+        return f'{self.name}'
+
+    def __repr__(self):
+        return f'MedicineHistory(name={self.name})'
 
 
 class PatientHistory(HistoryBaseModel):
     """Patient History Model"""
 
     name = models.CharField(
-        verbose_name=_('Name'),
+        verbose_name='Nome',
         max_length=80,
         null=True,
         blank=True
     )
 
     social_name = models.CharField(
-        verbose_name=_('Social Name'),
+        verbose_name='Nome Social',
         max_length=80,
         null=True,
         blank=True
     )
 
     cpf = models.CharField(
-        verbose_name=_('CPF'),
+        verbose_name='CPF',
         max_length=11,
         null=True,
         blank=True
     )
 
     rg = models.CharField(
-        verbose_name=_('RG'),
+        verbose_name='RG',
         max_length=20,
         null=True,
         blank=True
     )
 
     birth_date = models.DateField(
-        verbose_name=_('Birth Date'),
+        verbose_name='Data de Nascimento',
         null=True,
         blank=True
     )
 
     marital_status = models.IntegerField(
-        verbose_name=_('Marital Status'),
+        verbose_name='Estado Civil',
         choices=MARITAL_STATUS_CHOICES,
         null=True,
         blank=True
     )
 
     place_of_birth = models.CharField(
-        verbose_name=_('Place of Birth'),
+        verbose_name='Naturalidade',
         max_length=80,
         null=True,
         blank=True
@@ -517,21 +525,21 @@ class PatientHistory(HistoryBaseModel):
 
     gender = models.CharField(
         max_length=2,
-        verbose_name=_('Gender'),
+        verbose_name='Sexo',
         choices=GENDER_CHOICES,
         null=True,
         blank=True
     )
 
     phone = models.CharField(
-        verbose_name=_('Phone'),
+        verbose_name='Telefone',
         max_length=20,
         null=True,
         blank=True
     )
 
     observation = models.CharField(
-        verbose_name=_('Observation'),
+        verbose_name='Observação',
         max_length=200,
         null=True,
         blank=True
@@ -546,26 +554,29 @@ class PatientHistory(HistoryBaseModel):
 
     class Meta:
         """Metadata options"""
-        verbose_name = _('Patient History')
-        verbose_name_plural = _('Patient Histories')
+        verbose_name = 'Histórico de Paciente'
+        verbose_name_plural = 'Históricos de Paciente'
         ordering = ('-id',)
 
-    def __str__(self):  # pylint: disable=invalid-str-returned
-        return self.name
+    def __str__(self):
+        return f'{self.name}'
+
+    def __repr__(self):
+        return f'PatientHistory(name={self.name})'
 
 
 class NursingProfessionalHistory(HistoryBaseModel):
     """Nursing Professional Model"""
 
     name = models.CharField(
-        verbose_name=_('Name'),
+        verbose_name='Nome',
         max_length=80,
         null=True,
         blank=True
     )
 
     coren = models.CharField(
-        verbose_name=_('COREN'),
+        verbose_name='COREN',
         max_length=20,
         null=True,
         blank=True
@@ -580,40 +591,43 @@ class NursingProfessionalHistory(HistoryBaseModel):
 
     class Meta:
         """Metadata options"""
-        verbose_name = _('Nursing Professional History')
-        verbose_name_plural = _('Nursing Professional Histories')
+        verbose_name = 'Histórico de Profissional de Enfermagem'
+        verbose_name_plural = 'Históricos de Profissional de Enfermagem'
         ordering = ('-id',)
 
-    def __str__(self):  # pylint: disable=invalid-str-returned
-        return self.name
+    def __str__(self):
+        return f'{self.name}'
+
+    def __repr__(self):
+        return f'NursingProfessionalHistory(name={self.name})'
 
 
 class MedicalEvaluationHistory(HistoryBaseModel):
     """MedicalEvaluationHistory Model"""
 
     schedule = models.DateTimeField(
-        verbose_name=_('Schedule'),
+        verbose_name='Horário',
         null=True,
         blank=True,
         default=timezone.now
     )
 
     heart_pressure = models.CharField(
-        verbose_name=_('Heart pressure'),
+        verbose_name='Pressão Arterial',
         max_length=20,
         null=True,
         blank=True
     )
 
     glucose = models.CharField(
-        verbose_name=_('Glucose'),
+        verbose_name='Glicose',
         max_length=20,
         null=True,
         blank=True
     )
 
     observation = models.CharField(
-        verbose_name=_('Observation'),
+        verbose_name='Observação',
         max_length=200,
         null=True,
         blank=True
@@ -628,21 +642,21 @@ class MedicalEvaluationHistory(HistoryBaseModel):
     )
 
     nursing_professional = models.ForeignKey(
-        verbose_name=_('Nursing Professional'),
+        verbose_name='Profissional de Enfermagem',
         to=NursingProfessional,
         on_delete=models.CASCADE
     )
 
     medical_evaluation = models.ForeignKey(
-        verbose_name=_('Medical Evaluation'),
+        verbose_name='Avaliação Médica',
         to=MedicalEvaluation,
         on_delete=models.CASCADE
     )
 
     class Meta:
         """Metadata options"""
-        verbose_name = _('Medical Evaluation History')
-        verbose_name_plural = _('Medical Evaluations Histories')
+        verbose_name = 'Histórico de Avaliação Médica'
+        verbose_name_plural = 'Históricos de Avaliação Médica'
         ordering = ('-id',)
 
     def __str__(self):
@@ -653,13 +667,13 @@ class MedicationHistory(HistoryBaseModel):
     """Metadata options"""
 
     schedule = models.DateTimeField(
-        verbose_name=_('Schedule'),
+        verbose_name='Horário',
         null=True,
         blank=True
     )
 
     observation = models.CharField(
-        verbose_name=_('Observation'),
+        verbose_name='Observação',
         max_length=200,
         null=True,
         blank=True
@@ -667,31 +681,31 @@ class MedicationHistory(HistoryBaseModel):
 
     medicines = models.ManyToManyField(
         to=Medicine,
-        verbose_name=_('Medicines')
+        verbose_name='Medicamentos'
     )
 
     patient = models.ForeignKey(
         to=Patient,
-        verbose_name=_('Patient'),
+        verbose_name='Paciente',
         on_delete=models.CASCADE,
     )
 
     nursing_professional = models.ForeignKey(
         to=NursingProfessional,
-        verbose_name=_('Nursing Professional'),
+        verbose_name='Profissional de Enfermagem',
         on_delete=models.CASCADE
     )
 
     medication = models.ForeignKey(
-        verbose_name=_('Medication'),
+        verbose_name='Medicação',
         to=Medication,
         on_delete=models.CASCADE
     )
 
     class Meta:
         """Metadata options"""
-        verbose_name = _('Medication History')
-        verbose_name_plural = _('Medication Histories')
+        verbose_name = 'Histórico de Medicação'
+        verbose_name_plural = 'Históricos de Medicação'
         ordering = ('-is_active', '-schedule',)
 
     def __str__(self):

@@ -1,20 +1,18 @@
 {% extends "base.html" %}
-
-{% load i18n %}
 {% load custom_tags %}
 {% load static %}
 
 {% block title %}
-    {% trans 'Patient Register' %}
+    Cadastrar Paciente
 {% endblock title %}
 
 {% block content_title %}
-    {% trans 'Patient Register' %}
+    Cadastrar Paciente
 {% endblock content_title %}
 
 {% block content %}
     <div class="my-4">
-        <a class="btn btn-small btn-primary" href="{% url 'medicine:patient-create' %}">{% trans 'Insert' %}</a>
+        <a class="btn btn-small btn-primary" href="{% url 'medicine:patient-create' %}">Cadastrar</a>
     </div>
 
     <table id="gridPatient" class="table table-striped table-bordered" style="width: 100%">

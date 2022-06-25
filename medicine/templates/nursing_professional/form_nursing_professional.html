@@ -1,14 +1,12 @@
 {% extends "base.html" %}
 {% load custom_tags %}
 {% load static %}
-{% load i18n %}
-
 {% block title %}
-    {% trans 'Nursing Professional Register' %}
+    Cadastrar Profissional de Enfermagem
 {% endblock title %}
 
 {% block content_title %}
-    {% if is_edit %}{% trans 'Edit' %}{% else %}{% trans 'Register' %}{% endif %} {% trans 'Nursing Professional' %}
+    {% if is_edit %}Editar{% else %}Cadastrar{% endif %} Profissional de Enfermagem
 {% endblock content_title %}
 
 {% block content %}
@@ -52,4 +50,3 @@
         </div>
     </form>
 {% endblock content %}
-
