@@ -2,11 +2,11 @@ function getGridWrapper(tableName) {
   return document.querySelector(`#${tableName}_wrapper`);
 }
 
-function addOrRemoveScroll(grid, limitWidth) {
+function addOrRemoveScroll(grid, minLimitWidth) {
   const className = "overflow-auto";
-  grid.clientWidth < limitWidth
-    ? grid.classList.add(className)
-    : grid.classList.remove(className);
+  grid.clientWidth < minLimitWidth ?
+    grid.classList.add(className) :
+    grid.classList.remove(className);
 }
 
 function drag(tableName) {
@@ -64,7 +64,7 @@ function handleTableResizeEvent(tableName) {
     case "gridNursingProfessional":
     case "gridMedicalEvaluation":
     case "gridMedication":
-      addOrRemoveScroll(gridWrapper, 600);
+      addOrRemoveScroll(gridWrapper, 768);
       break;
   }
 }
@@ -96,6 +96,9 @@ function initDataTable(grids) {
   // Initialize Datatable according to the grid name
   const pathName = "/static/assets/datatables/pt_br.json";
 
+  const deactivateMsg = "Inativar";
+  const editMsg = "Editar";
+
   grids.forEach((gridName) => {
     const grid = document.querySelector(`#${gridName}`);
 
@@ -107,17 +110,24 @@ function initDataTable(grids) {
             $(`#${gridName}`).DataTable({
               serverSide: true,
               sAjaxSource: `${host}/medicines/medicine/data/`,
-              order: [[1, "asc"]],
-              columns: [
-                {
+              order: [
+                [1, "asc"]
+              ],
+              columns: [{
                   name: "name",
                   data: 1,
                   render: function (data, type, row, meta) {
                     return `<a href="/medicines/medicine/detail/${row[0]}/">${data}</a>`;
                   },
                 },
-                { name: "description", data: 2 },
-                { name: "batch", data: 3 },
+                {
+                  name: "description",
+                  data: 2
+                },
+                {
+                  name: "batch",
+                  data: 3
+                },
                 {
                   name: "expiration_date",
                   data: 4,
@@ -136,7 +146,6 @@ function initDataTable(grids) {
                   searchable: false,
                   orderable: false,
                   render: function (data, type, row, meta) {
-                    const editMsg = gettext("Edit");
                     return `
                       <td>
                         <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
@@ -154,7 +163,6 @@ function initDataTable(grids) {
                   searchable: false,
                   orderable: false,
                   render: function (data, type, row, meta) {
-                    const deactivateMsg = gettext("Deactivate");
                     return `
                       <td>
                         <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
@@ -184,16 +192,20 @@ function initDataTable(grids) {
             $(`#${gridName}`).DataTable({
               serverSide: true,
               sAjaxSource: `${host}/medicines/patient/data/`,
-              order: [[1, "asc"]],
-              columns: [
-                {
+              order: [
+                [1, "asc"]
+              ],
+              columns: [{
                   name: "name",
                   data: 1,
                   render: function (data, type, row, meta) {
                     return `<a href="/medicines/patient/detail/${row[0]}/">${data}</a>`;
                   },
                 },
-                { name: "cpf", data: 2 },
+                {
+                  name: "cpf",
+                  data: 2
+                },
                 {
                   name: "birth_date",
                   data: 3,
@@ -211,7 +223,6 @@ function initDataTable(grids) {
                   searchable: false,
                   orderable: false,
                   render: function (data, type, row, meta) {
-                    const editMsg = gettext("Edit");
                     return `
                       <td>
                         <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
@@ -229,7 +240,6 @@ function initDataTable(grids) {
                   searchable: false,
                   orderable: false,
                   render: function (data, type, row, meta) {
-                    const deactivateMsg = gettext("Deactivate");
                     return `
                       <td>
                         <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
@@ -259,21 +269,24 @@ function initDataTable(grids) {
             $(`#${gridName}`).DataTable({
               serverSide: true,
               sAjaxSource: `${host}/medicines/nursing-professional/data/`,
-              order: [[1, "asc"]],
-              columns: [
-                {
+              order: [
+                [1, "asc"]
+              ],
+              columns: [{
                   name: "name",
                   data: 1,
                   render: function (data, type, row, meta) {
                     return `<a href="/medicines/nursing-professional/detail/${row[0]}/">${data}</a>`;
                   },
                 },
-                { name: "coren", data: 2 },
+                {
+                  name: "coren",
+                  data: 2
+                },
                 {
                   searchable: false,
                   orderable: false,
                   render: function (data, type, row, meta) {
-                    const editMsg = gettext("Edit");
                     return `
                       <td>
                         <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
@@ -291,7 +304,6 @@ function initDataTable(grids) {
                   searchable: false,
                   orderable: false,
                   render: function (data, type, row, meta) {
-                    const deactivateMsg = gettext("Deactivate");
                     return `
                       <td>
                         <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
@@ -321,9 +333,10 @@ function initDataTable(grids) {
             $(`#${gridName}`).DataTable({
               serverSide: true,
               sAjaxSource: `${host}/medicines/medical-evaluation/data/`,
-              order: [[1, "asc"]],
-              columns: [
-                {
+              order: [
+                [1, "asc"]
+              ],
+              columns: [{
                   name: "patient",
                   data: 5,
                   render: function (data, type, row, meta) {
@@ -338,15 +351,26 @@ function initDataTable(grids) {
                     return `${formatDateTime(new Date(date))}`;
                   },
                 },
-                { name: "hurt_pressure", data: 2 },
-                { name: "glucose", data: 3 },
-                { name: "observation", data: 4 },
-                { name: "nursing_professional", data: 6 },
+                {
+                  name: "hurt_pressure",
+                  data: 2
+                },
+                {
+                  name: "glucose",
+                  data: 3
+                },
+                {
+                  name: "observation",
+                  data: 4
+                },
+                {
+                  name: "nursing_professional",
+                  data: 6
+                },
                 {
                   searchable: false,
                   orderable: false,
                   render: function (data, type, row, meta) {
-                    const editMsg = gettext("Edit");
                     return `
                       <td>
                         <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
@@ -364,7 +388,6 @@ function initDataTable(grids) {
                   searchable: false,
                   orderable: false,
                   render: function (data, type, row, meta) {
-                    const deactivateMsg = gettext("Deactivate");
                     return `
                       <td>
                         <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
@@ -394,9 +417,10 @@ function initDataTable(grids) {
             $(`#${gridName}`).DataTable({
               serverSide: true,
               sAjaxSource: `${host}/medicines/medication/data/`,
-              order: [[1, "desc"]],
-              columns: [
-                {
+              order: [
+                [1, "desc"]
+              ],
+              columns: [{
                   name: "schedule",
                   data: 1,
                   render: function (data, type, row, meta) {
@@ -412,12 +436,14 @@ function initDataTable(grids) {
                   },
                 },
                 // {name: "medicine", data: 2},
-                { name: "nursing_professional", data: 3 },
+                {
+                  name: "nursing_professional",
+                  data: 3
+                },
                 {
                   searchable: false,
                   orderable: false,
                   render: function (data, type, row, meta) {
-                    const editMsg = gettext("Edit");
                     return `
                       <td>
                         <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
@@ -435,7 +461,6 @@ function initDataTable(grids) {
                   searchable: false,
                   orderable: false,
                   render: function (data, type, row, meta) {
-                    const deactivateMsg = gettext("Deactivate");
                     return `
                       <td>
                         <p class="d-flex justify-content-center m-auto" data-placement="middle" data-toggle="tooltip"
