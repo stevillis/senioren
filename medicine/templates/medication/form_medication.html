@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 {% load custom_tags %}
 {% load static %}
-{% load i18n %}
 
 {% block title %}
-    {% trans 'Medication Register' %}
+    Cadastrar Medicação
 {% endblock title %}
 
 {% block custom_css %}
@@ -13,7 +12,7 @@
 {% endblock custom_css %}
 
 {% block content_title %}
-    {% if is_edit %}{% trans 'Edit' %}{% else %}{% trans 'Register' %}{% endif %} {% trans 'Medication' %}
+    {% if is_edit %}Editar{% else %}Cadastrar{% endif %} Medicação
 {% endblock content_title %}
 
 {% block content %}
@@ -63,7 +62,7 @@
                         </div>
                     {% endfor %}
                 {% else %}
-                    {% trans 'All Medicines are out of stock.' %}
+                    Estoque de Medicações vazio.
                 {% endif %}
             {% endif %}
         </div>
@@ -112,4 +111,3 @@
 
     <script type="text/javascript" src="{% static 'js/form-search-foreign-key.js' %}"></script>
 {% endblock custom_script %}
-
