@@ -1,4 +1,4 @@
-@startuml context-diagram
+@startuml container-diagram
 !include https://raw.githubusercontent.com/kirchsth/C4-PlantUML/extended/C4_Container.puml
 
 skinparam backgroundColor white
@@ -19,7 +19,7 @@ System_Boundary(sb, "Senioren") {
 
 Rel(administrador, senioren, "Acessa", "HTTP", $tags="relacionamento")
 Rel(usuario, senioren, "Acessa", "HTTP", $tags="relacionamento")
-Rel(senioren, postgres, "Lê e escreve", "psqlODBC")
+Rel(senioren, postgres, "Lê e escreve", "psqlODBC", $tags="relacionamento")
 
 footer Sistema Web para Controle de Medicação de Idosos
 

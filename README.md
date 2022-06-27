@@ -9,7 +9,10 @@ Brasil
 ![Diagrama de Contexto](diagrams/context-diagram.png)
 
 ### Diagrama de Container
-![Diagrama de container](diagrams/container-diagram.png)
+![Diagrama de Container](diagrams/container-diagram.png)
+
+### Diagrama de Component
+![Diagrama de Component](diagrams/component-diagram.png)
 
 
 ## Dev Commands

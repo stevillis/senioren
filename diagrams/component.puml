@@ -1,0 +1,34 @@
+@startuml component-diagram
+!include https://raw.githubusercontent.com/kirchsth/C4-PlantUML/extended/C4_Component.puml
+
+skinparam backgroundColor white
+
+title Diagrama de Component - Senioren
+
+AddRelTag("relacionamento", $textColor="black", $lineColor="black", $lineStyle = DashedLine())
+
+Container_Boundary(web_app, "Aplicação Web") {
+    Component(django_admin, "Django Admin", "Django", "CRUDs do Dashobard, Cadastro de Usuários e Permissões.")    
+    Component(paciente, "Paciente", "Django e Bootstrap", "CRUD de Paciente.")    
+    Component(medicamento, "Medicamento", "Django e Bootstrap", "CRUD de Medicamento.")    
+    Component(avaliacao_medica, "Avaliação Médica", "Django e Bootstrap", "CRUD de Avaliação Médica.")    
+    Component(profissional_enfermagem, "Profissional de Enfermagem", "Django e Bootstrap", "CRUD de Profissional de Enfermagem.")
+    Component(medicacao, "Medicação", "Django e Bootstrap", "CRUD de Medicação.")
+    Component(dashboard, "Dashboard", "Django e Bootstrap", "Estatística de Avaliações Médicas e Medicações Aplicadas Diária e Samanal.")
+}
+
+ComponentDb(postgres, "Banco de Dados", "PostgreSQL", "Armazena informações de Usuários, Pacientes, Medicamentos, Medicações e Profissionais de Enfermagem.")
+
+Rel(web_app, postgres, "Lê e escreve", "psqlODBC", $tags="relacionamento")
+Rel(avaliacao_medica, paciente, "Obtém dados", "Django", $tags="relacionamento")
+Rel(avaliacao_medica, profissional_enfermagem, "Obtém dados", "Django", $tags="relacionamento")
+Rel(medicacao, medicamento, "Obtém dados", "Django", $tags="relacionamento")
+Rel(medicacao, paciente, "Obtém dados", "Django", $tags="relacionamento")
+Rel(medicacao, profissional_enfermagem, "Obtém dados", "Django", $tags="relacionamento")
+Rel(dashboard, medicamento, "Obtém dados", "Django", $tags="relacionamento")
+Rel(dashboard, avaliacao_medica, "Obtém dados", "Django", $tags="relacionamento")
+
+
+footer Sistema Web para Controle de Medicação de Idosos
+
+@enduml
