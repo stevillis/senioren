@@ -8,6 +8,10 @@ Brasil
 ### Diagrama de Contexto
 ![Diagrama de Contexto](diagrams/context-diagram.png)
 
+### Diagrama de Container
+![Diagrama de container](diagrams/container-diagram.png)
+
+
 ## Dev Commands
 
 Comandos utilizados durante o desenvolvimento: [dev_commands.md](docs/dev_commands.md)

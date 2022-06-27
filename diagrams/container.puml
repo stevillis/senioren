@@ -1,0 +1,26 @@
+@startuml context-diagram
+!include https://raw.githubusercontent.com/kirchsth/C4-PlantUML/extended/C4_Container.puml
+
+skinparam backgroundColor white
+
+title Diagrama de Container - Senioren
+
+AddRelTag("relacionamento", $textColor="black", $lineColor="black", $lineStyle = DashedLine())
+
+Person(administrador, "Administrador", "Faz as mesmas operações que um Usuário comum e tem acesso ao Django Admin.")
+Person(usuario, "Usuário", "Acessa o sistema para registrar Medicações e Avaliações Médicas de Idosos.")
+
+System_Boundary(sb, "Senioren") {
+    Container(senioren, "Aplicação Web", "Django e Bootstrap", "Oferece todas as funcionalidades para controle de Medicação de Idosos.")
+    ContainerDb(postgres, "Banco de Dados", "PostgreSQL", "Armazena informações de Usuários, Pacientes, Medicamentos, Medicações e Profissionais de Enfermagem.")
+}
+
+
+
+Rel(administrador, senioren, "Acessa", "HTTP", $tags="relacionamento")
+Rel(usuario, senioren, "Acessa", "HTTP", $tags="relacionamento")
+Rel(senioren, postgres, "Lê e escreve", "psqlODBC")
+
+footer Sistema Web para Controle de Medicação de Idosos
+
+@enduml
