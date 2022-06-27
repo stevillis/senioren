@@ -3,6 +3,11 @@
 Sistema Web para Gerenciamento de Medicação e Sinais Vitais do Lar dos Idosos São Vicente de Paulo - Várzea Grande, MT,
 Brasil
 
-### Dev Instructions
+## Diagramas usando C4 Model
 
-Commands used during development are described in: [DEV_INSTRUCTIONS.md](docs/DEV_INSTRUCTIONS.md)
+### Diagrama de Contexto
+![Diagrama de Contexto](diagrams/context-diagram.png)
+
+## Dev Commands
+
+Comandos utilizados durante o desenvolvimento: [dev_commands.md](docs/dev_commands.md)
