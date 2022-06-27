@@ -1,5 +1,6 @@
+"""Index views"""
+
 import datetime
-from typing import Tuple
 
 from django.contrib.auth.decorators import login_required
 from django.core.handlers.wsgi import WSGIRequest
@@ -10,14 +11,14 @@ from medicine.models import MedicalEvaluation, Medication
 from medicine.services import medication_service
 
 
-def _get_amount_created_today(model: Tuple[Medication, MedicalEvaluation]) -> int:
+def _get_amount_created_today(model: Medication | MedicalEvaluation) -> int:
     return model.active_manager.filter(
         created_at__startswith=datetime.date.today()
 
     ).count()
 
 
-def _get_amount_created_week(model: Tuple[Medication, MedicalEvaluation]) -> int:
+def _get_amount_created_week(model: Medication | MedicalEvaluation) -> int:
     return model.active_manager.filter(
         created_at__lte=datetime.datetime.now(),
         created_at__gte=F('created_at') - datetime.timedelta(7),

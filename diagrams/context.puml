@@ -1,0 +1,20 @@
+@startuml context-diagram
+!include https://raw.githubusercontent.com/kirchsth/C4-PlantUML/extended/C4_Container.puml
+
+skinparam backgroundColor white
+
+title Diagrama de Contexto
+
+AddRelTag("relacionamento", $textColor="black", $lineColor="black", $lineStyle = DashedLine())
+
+Person(administrador, "Administrador", "Faz as mesmas operações que um Usuário comum e tem acesso ao Django Admin.")
+Person(usuario, "Usuário", "Acessa o sistema para registrar Medicações e Avaliações Médicas de Idosos.")
+
+System(senioren, "Senioren", "Permite o Controle de Medicações, Avaliações Médicas, Cadastro Pacientes e Profissionais de Enfermagem.")
+
+Rel(administrador, senioren, "Acessa", "", $tags="relacionamento")
+Rel(usuario, senioren, "Acessa", "", $tags="relacionamento")
+
+footer Sistema Web para Controle de Medicação de Idosos
+
+@enduml
