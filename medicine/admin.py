@@ -292,7 +292,7 @@ class MedicationAdmin(admin.ModelAdmin):
     fields = [
         'nursing_professional',
         'patient',
-        'medicine',
+        'medicines',
         'schedule',
         'observation',
     ] + BASE_FIELDS
@@ -316,7 +316,7 @@ class MedicationAdmin(admin.ModelAdmin):
     search_fields = (
         'nursing_professional__name',
         'patient__name',
-        'medicine__name',
+        'medicines__name',
         'observation',
     )
 
