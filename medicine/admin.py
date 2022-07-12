@@ -316,7 +316,7 @@ class MedicationAdmin(admin.ModelAdmin):
     search_fields = (
         'nursing_professional__name',
         'patient__name',
-        'medicine__name',
+        'medicines__name',
         'observation',
     )
 
