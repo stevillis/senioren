@@ -292,7 +292,7 @@ class MedicationAdmin(admin.ModelAdmin):
     fields = [
         'nursing_professional',
         'patient',
-        'medicine',
+        'medicines',
         'schedule',
         'observation',
     ] + BASE_FIELDS
