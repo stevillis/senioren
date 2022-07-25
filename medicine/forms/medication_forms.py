@@ -23,6 +23,7 @@ class MedicationForm(forms.ModelForm):
     """Medication form."""
 
     schedule = forms.DateTimeField(
+        label=Medication._meta.get_field('schedule').verbose_name,
         input_formats=['%d-%m-%Y %H:%M:%S'],
         widget=DateTimePicker(
             options={
@@ -37,16 +38,19 @@ class MedicationForm(forms.ModelForm):
     )
 
     medicines = CustomMMCF(
+        label=Medication._meta.get_field('medicines').verbose_name,
         queryset=get_medicines_with_stock(),
         widget=forms.CheckboxSelectMultiple
     )
 
     patient = forms.ModelChoiceField(
+        label=Medication._meta.get_field('patient').verbose_name,
         queryset=get_all_patients(),
         widget=autocomplete.ModelSelect2(url='medicine:patient-autocomplete')
     )
 
     nursing_professional = forms.ModelChoiceField(
+        label=Medication._meta.get_field('nursing_professional').verbose_name,
         queryset=get_all_nursing_professionals(),
         widget=autocomplete.ModelSelect2(
             url='medicine:nursing-professional-autocomplete')
