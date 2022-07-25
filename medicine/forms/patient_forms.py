@@ -27,6 +27,7 @@ class PatientForm(forms.ModelForm):
     )
 
     phone = forms.CharField(
+        label=Patient._meta.get_field('phone').verbose_name,
         widget=forms.TextInput(
             attrs={
                 'data-mask': '(00) 00000-0000'
