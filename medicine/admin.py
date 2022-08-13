@@ -526,7 +526,6 @@ class MedicalEvaluationHistoryAdmin(admin.ModelAdmin):
     fields = [
         'nursing_professional',
         'patient',
-        'medicine',
         'schedule',
         'observation',
     ] + BASE_FIELDS
@@ -549,7 +548,6 @@ class MedicalEvaluationHistoryAdmin(admin.ModelAdmin):
     search_fields = (
         'nursing_professional__name',
         'patient__name',
-        'medicine__name',
         'observation',
     )
 
@@ -597,7 +595,7 @@ class MedicationHistoryAdmin(admin.ModelAdmin):
         'observation',
         'nursing_professional',
         'patient',
-        'medicine',
+        'medicines',
     ] + BASE_FIELDS
 
     list_display = (
@@ -637,7 +635,7 @@ class MedicationHistoryAdmin(admin.ModelAdmin):
     @admin.display(description='Medicamento', ordering='medicine__name')
     def get_medicine_name(self, obj):
         """Get Medicine name for list_display"""
-        return obj.medicine.name
+        return obj.medicines.name
 
     def save_model(self, request, obj, form, change):
         obj = set_created_by(request, obj)
